@@ -21,7 +21,7 @@ const build = (name, outDir, { template, js, css }) => {
     description: name,
     author: pkg.author.replace(/ <.*>/, ""),
     image: "icon.svg",
-    name: pkg.name,
+    name: name,
     url: pkg.repository,
     version: pkg.version,
     proofing: false,
