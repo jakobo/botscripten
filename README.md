@@ -30,9 +30,9 @@ The Min version is specifically designed to work with [any html5-compliant parse
 
 1. From the Twine menu, select `Formats`
 2. Then, select the `Add a New Format` tab
-3. Paste `https://cdn.jsdelivr.net/gh/jakobo/chatbook@master/dist/Twine2/Chatbook/format.js`
+3. Paste `https://cdn.jsdelivr.net/gh/jakobo/chatbook@0.0.1/dist/Twine2/Chatbook/format.js`
 4. Click `Add`
-5. Then, `https://cdn.jsdelivr.net/gh/jakobo/chatbook@master/dist/Twine2/ChatbookViewer/format.js`
+5. Then, `https://cdn.jsdelivr.net/gh/jakobo/chatbook@0.0.1/dist/Twine2/ChatbookViewer/format.js`
 6. Click `Add`
 
 Once you've done this, you can either select Chatbook or ChatbookViewer (Interactive) as your default format.
