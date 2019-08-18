@@ -1,6 +1,6 @@
 # Chatbook
 
-**A modified Trialogue/Twine engine specifically for Building, Testing, and Exporting conversations as XML**
+**A modified Trialogue/Twine engine specifically for Building, Testing, and Exporting conversations as Minimal HTML5**
 
 ![Chatbook logo](dist/Twine2/Chatbook/icon.svg)
 
@@ -9,7 +9,9 @@ Chatbook is a chat-style Twine Story Fromat based on [Trialogue](https://github.
 It comes with two distinct flavors: **An XML Output** (Chatbook) for using your twine files in other systems, and **An HTML Output** (ChatbookViewer) For testing/walking through conversations in a pseudo chat interface based on the Trialogue code.
 
 👉 Demo story: [http://htmlpreview.github.io/?https://github.com/jakobo/chatbook/blob/master/examples/onboarding.html](View a sample "onboarding" chat transcript)
-👉 Demo XML: [http://htmlpreview.github.io/?https://github.com/jakobo/chatbook/blob/master/examples/onboarding.xml](The corresponding XML output)
+👉 Demo Html5: [http://htmlpreview.github.io/?https://github.com/jakobo/chatbook/blob/master/examples/onboarding.min.html](The corresponding Minimalist output)
+
+You can then use [any html5-compliant parser](https://en.wikipedia.org/wiki/Comparison_of_HTML_parsers) and extract the contents between `<twine>...</twine>`. If you're staying in the node.js ecosystem, [jsdom](https://www.npmjs.com/package/jsdom) is an excellent choice.
 
 ### Add Chatbook as a Twine Story Format
 
