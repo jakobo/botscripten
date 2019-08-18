@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "description": "A modified Twine (Trialogue) engine specifically for chat conversations",
   "author": "Jakob Heuser <jakob+npm@felocity.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
+  "repository": "github:jakobo/chatbook",
   "main": "index.js",
   "browser": "dist/chatbook.umd.js",
   "scripts": {
