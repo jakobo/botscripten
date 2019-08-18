@@ -1,0 +1,337 @@
+/* Variables */
+
+:root {
+  --navbar-height: 56px;
+  --user-response-panel-height: 110px;
+  --bg-color: #c7bdb5; /*global chat bg color*/
+  --user-color: #417505; /*user name & placeholder avatar bg*/
+  --speaker-color: #888; /*default color for speaker name & placeholder avatar bg*/
+  --sidebar-bg-color: #fff;
+  --navbar-bg-color: #fff;
+  --passage-bg-color: #fff;
+  --passage-text-color: #000;
+}
+
+/* Atomic Utilities */
+
+.bg-color {
+  background-color: var(--bg-color);
+}
+
+.minh-full {
+  min-height: calc(
+    100vh - var(--navbar-height) - var(--user-response-panel-height) - 17px -
+      5px
+  );
+}
+
+.ml--3 {
+  margin-left: -1rem !important;
+}
+
+@media (min-width: 992px) {
+  .w-lg-auto {
+    width: auto !important;
+  }
+}
+
+/* General */
+
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-top: var(--navbar-height);
+  margin-bottom: calc(
+    var(--user-response-panel-height) + 18px + 5px
+  ); /* + height of hint + hr */
+}
+
+/* Offcanvas sidebar */
+
+@media (max-width: 991.98px) {
+  .offcanvas-collapse {
+    z-index: 1100;
+    position: fixed;
+    top: var(--navbar-height); /* Height of navbar */
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: var(--sidebar-bg-color);
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+    transition-property: left, visibility;
+  }
+  .offcanvas-collapse.open {
+    left: 0;
+    visibility: visible;
+  }
+}
+
+/* Nav */
+
+nav.navbar {
+  height: var(--navbar-height);
+  background-color: var(--navbar-bg-color);
+  padding: 0.5rem 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav .nav-title {
+  font-size: 1.5rem;
+  line-height: 40px;
+  margin: 0 auto;
+}
+
+nav .nav-icon {
+  width: 35px;
+}
+
+/* Chat Panel */
+
+.chat-panel {
+  padding-top: 15px;
+}
+
+.chat-passage-wrapper {
+  position: relative;
+  margin: 0.5rem 0;
+}
+
+.chat-passage-wrapper[data-speaker="you"] {
+  text-align: right;
+}
+.chat-passage-wrapper[data-speaker="you"] .chat-passage:before {
+  text-align: right;
+  color: var(--user-color);
+}
+
+.chat-passage {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  margin-left: 35px;
+  background-color: var(--passage-bg-color);
+  max-width: calc(100% - 80px);
+  text-align: left;
+}
+@media (min-width: 576px) {
+  .chat-passage {
+    max-width: calc(100% - 100px);
+  }
+}
+@media (min-width: 768px) {
+  .chat-passage {
+    max-width: calc(100% - 80px);
+  }
+}
+@media (min-width: 992px) {
+  .chat-passage {
+    max-width: calc(100% - 100px);
+  }
+}
+
+.chat-passage:before {
+  content: attr(data-speaker);
+  display: block;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  color: var(--speaker-color);
+}
+
+.chat-passage p {
+  margin: 0;
+}
+
+.chat-passage img {
+  max-width: 100%;
+  max-height: calc(100vh - 2 * var(--user-response-panel-height));
+  padding: 0.25rem 0;
+}
+.chat-passage iframe {
+  max-width: 100%;
+  max-height: calc(100vh - 2 * var(--user-response-panel-height));
+}
+
+.chat-passage figure {
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+}
+
+/* User Response Panel */
+
+.user-response-panel {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+@media (min-width: 992px) {
+  .user-response-panel {
+    max-width: calc(
+      100% / (12 / 6)
+    ); /* 100% / (12/[col width of chat-panel]) */
+    margin: 0 auto;
+  }
+}
+
+.user-response-panel hr {
+  margin: 0;
+  border-top: 5px solid white;
+}
+
+.user-response-hint {
+  font-style: italic;
+  font-size: 0.75rem;
+  text-align: center;
+  height: 18px;
+}
+@media (max-width: 379.98px) {
+  .user-response-hint {
+    font-size: 0.6rem;
+    height: 14px;
+  }
+  body {
+    margin-bottom: calc(
+      var(--user-response-panel-height) + 14px + 5px
+    ); /* + height of hint + hr */
+  }
+  .minh-full {
+    min-height: calc(
+      100vh - var(--navbar-height) - var(--user-response-panel-height) - 14px -
+        5px
+    );
+  }
+}
+@media (max-width: 319.98px) {
+  .user-response-hint {
+    font-size: 0.5rem;
+    height: 12px;
+  }
+  body {
+    margin-bottom: calc(
+      var(--user-response-panel-height) + 12px + 5px
+    ); /* + height of hint + hr */
+  }
+  .minh-full {
+    min-height: calc(
+      100vh - var(--navbar-height) - var(--user-response-panel-height) - 12px -
+        5px
+    );
+  }
+}
+
+.user-reponse-wrapper {
+  height: var(--user-response-panel-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-response-panel .user-response {
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.25rem;
+  background-color: var(--passage-bg-color);
+  color: var(--passage-text-color);
+  border-top: 2px solid transparent;
+  transition: border-color 0.15s ease-in;
+}
+.user-response-panel .user-response:hover {
+  text-decoration: none;
+  border-color: var(--user-color);
+}
+
+/* Passage Avatars */
+
+.chat-passage-wrapper:before {
+  margin-right: 5px;
+  position: absolute;
+  vertical-align: top;
+  content: "";
+  width: 30px;
+  height: 30px;
+  background-size: 30px 30px;
+  border-radius: 15px;
+  background-color: var(--speaker-color);
+}
+.chat-passage-wrapper[data-speaker="you"]:before {
+  display: none;
+}
+.chat-passage-wrapper[data-speaker="you"]:after {
+  margin-left: -30px;
+  position: absolute;
+  vertical-align: top;
+  content: "";
+  width: 30px;
+  height: 30px;
+  background-size: 30px 30px;
+  border-radius: 15px;
+  background-color: var(--user-color);
+}
+.chat-passage[data-speaker="you"] {
+  margin-left: 0;
+  margin-right: 35px;
+}
+
+/* Typing Animation */
+
+div.wave {
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+div.wave .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 2px;
+  background: var(--passage-text-color);
+  animation: wave 1.2s ease-in-out infinite;
+}
+div.wave .dot:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+div.wave .dot:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes wave {
+  0%,
+  50%,
+  100% {
+    transform: initial;
+  }
+
+  25% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Modal */
+
+.modal-dialog {
+  max-width: 420px;
+}
+
+/* 
+ * counter extra padding-right added by BS4 modal
+ * https://stackoverflow.com/questions/32862394/bootstrap-modals-keep-adding-padding-right-to-body-after-closed
+ */
+body.modal-open {
+  padding-right: 0 !important;
+}
+body.modal-open .user-response-panel {
+  padding-right: 15px !important;
+}
+body.modal-open nav.navbar {
+  padding-right: 15px !important;
+}

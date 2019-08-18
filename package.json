@@ -1,0 +1,63 @@
+{
+  "name": "chatbook",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A modified Trialogue/Twine engine specifically for chat conversations",
+  "author": "Jakob Heuser <jakob+npm@felocity.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "browser": "dist/chatbook.umd.js",
+  "scripts": {
+    "dev": "concurrently \"npm:watch\" \"npm:serve\"",
+    "clean": "rm -rf dist/",
+    "watch": "nodemon -L --ignore dist/ --exec yarn build",
+    "build": "yarn clean && yarn build.rollup && yarn build.format && concurrently \"npm:build.test:*\"",
+    "build.rollup": "rollup -c -m inline",
+    "build.format": "node scripts/createTwine",
+    "build.test:onboarding": "yarn tweego -f ChatbookViewer -o ./examples/onboarding.html ./examples/onboarding.twee",
+    "build.test:onboarding.xml": "yarn tweego -f Chatbook -o ./examples/onboarding.min.html ./examples/onboarding.twee",
+    "serve": "nodemon -L --watch build/ --exec node scripts/serve",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tweego": "TWEEGO_PATH=./dist/Twine2 tweego"
+  },
+  "files": [
+    "dist"
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.5.5",
+    "lodash.escape": "^4.0.1",
+    "lodash.template": "^4.5.0",
+    "lodash.unescape": "^4.0.1",
+    "marked": "^0.7.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "7.4.5",
+    "concurrently": "^4.1.1",
+    "extwee": "^1.5.0",
+    "fs-extra": "^8.1.0",
+    "nodemon": "^1.19.1",
+    "rollup": "^1.0.0",
+    "rollup-plugin-babel": "^4.2.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "static-server": "^2.2.1"
+  }
+}
