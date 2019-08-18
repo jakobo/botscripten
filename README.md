@@ -8,8 +8,8 @@ Chatbook is a chat-style [Twine](http://twinery.org) Story Fromat based on [Tria
 
 It comes with two distinct flavors: **A Minimal Output** (Chatbook) for using your twine files in other systems, and **An Interactive Output** (ChatbookViewer) For testing and stepping through conversations in a pseudo chat interface based on the Trialogue code.
 
-👉 Demo: [http://htmlpreview.github.io/?https://github.com/jakobo/chatbook/blob/master/examples/onboarding.html](/examples/onboarding.html) <br>
-📂 Min Version: [http://htmlpreview.github.io/?https://github.com/jakobo/chatbook/blob/master/examples/onboarding.min.html](/examples/onboarding.min.html) <br>
+👉 Demo: [/examples/onboarding.html](http://htmlpreview.github.io/?https://github.com/jakobo/chatbook/blob/master/examples/onboarding.html) <br>
+📂 Min Version: [/examples/onboarding.min.html](http://htmlpreview.github.io/?https://github.com/jakobo/chatbook/blob/master/examples/onboarding.min.html) <br>
 ✏️ View Twee: [/examples/onboarding.twee](/examples/onboarding.twee)
 
 The Min version is specifically designed to work with [any html5-compliant parser](https://en.wikipedia.org/wiki/Comparison_of_HTML_parsers) and extract the contents between `<twine>...</twine>` with minimal bloat. If you're staying in the node.js ecosystem, [jsdom](https://www.npmjs.com/package/jsdom) is an excellent choice. 🎉
