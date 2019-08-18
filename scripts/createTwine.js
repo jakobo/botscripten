@@ -38,6 +38,7 @@ const build = (name, outDir, { template, js, css }) => {
 
 build(
   "ChatbookViewer",
+  "An interactive chat viewer for Chatbook",
   path.resolve(__dirname, "../dist/Twine2/ChatbookViewer"),
   {
     template: path.resolve(__dirname, "../src/template/index.html"),
@@ -46,8 +47,13 @@ build(
   }
 );
 
-build("Chatbook", path.resolve(__dirname, "../dist/Twine2/Chatbook"), {
-  template: path.resolve(__dirname, "../src/template/index.min.html")
-});
+build(
+  "Chatbook",
+  "An export friendly version of Chatbook+Twine",
+  path.resolve(__dirname, "../dist/Twine2/Chatbook"),
+  {
+    template: path.resolve(__dirname, "../src/template/index.min.html")
+  }
+);
 
 console.log("OK");
