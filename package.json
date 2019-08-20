@@ -15,8 +15,8 @@
     "tweego": "TWEEGO_PATH=./dist/Twine2 tweego",
     "serve": "nodemon -L --watch build/ --watch scripts/ --exec node scripts/serve",
     "watch": "nodemon -L --ignore dist/ --exec yarn build",
-    "precommit": "concurrently \"npm:format:*\" && yarn build && yarn test:ci && git add dist/ examples/",
     "____________________": "echo \"The following sub-commands are used to serve the main commands above\"",
+    "husky:precommit": "concurrently \"npm:format:*\" && yarn build && yarn test:ci && git add dist/ examples/",
     "test:interactive": "yarn build && jest",
     "test:ci": "jest",
     "clean:dist": "rm -rf dist/",
@@ -44,7 +44,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run precommit"
+      "pre-commit": "yarn run husky:precommit"
     }
   },
   "dependencies": {
