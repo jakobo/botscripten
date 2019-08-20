@@ -1,15 +1,7 @@
 import unescape from "lodash.unescape";
-
-const TOKEN_ESCAPED_OCTO = "__TOKEN_ESCAPED_BACKSLASH_OCTO__";
-
-const BLOCK_DIRECTIVE = /^###@([\S]+)([\s\S]*?)###/gm;
-const INLINE_DIRECTIVE = /^#@([\S]+)(.*)/g;
-
-const BLOCK_COMMENT = /###[\s\S]*?###/gm;
-const INLINE_COMMENT = /^#.*$/g;
-
-const IS_EXTERNAL_URL = /^\w+:\/\/\/?\w/i;
-const LINK_PATTERN = /\[\[(.*?)\]\]/g;
+import extractDirectives from "../common/extractDirectives";
+import extractLinks from "../common/extractLinks";
+import stripComments from "../common/stripComments";
 
 const findStory = win => {
   if (win && win.story) {
@@ -18,43 +10,11 @@ const findStory = win => {
   return { state: {} };
 };
 
-const escapeOctos = s => s.replace("\\#", TOKEN_ESCAPED_OCTO);
-const restoreOctos = s => s.replace(TOKEN_ESCAPED_OCTO, "#");
-
-const stripComments = s =>
-  s.replace(BLOCK_COMMENT, "").replace(INLINE_COMMENT, "");
-
-const extractDirectives = s => {
-  const directives = [];
-  s.replace(BLOCK_DIRECTIVE, (match, dir, content) => {
-    directives.push({ name: `@${dir}`, content: content.trim() });
-    return "";
-  });
-  s.replace(INLINE_DIRECTIVE, (match, dir, content) => {
-    directives.push({ name: `@${dir}`, content: content.trim() });
-    return "";
-  });
-
-  return directives;
-};
-
 const renderPassage = passage => {
   const source = passage.source;
 
-  let result = source;
-
-  result = escapeOctos(result);
-  const directives = extractDirectives(result);
-  result = stripComments(result);
-  result = restoreOctos(result);
-
-  // strip remaining comments
-  result = result
-    .replace("\\#", TOKEN_ESCAPED_OCTO)
-    .replace(BLOCK_COMMENT, "")
-    .replace(INLINE_COMMENT, "")
-    .replace(TOKEN_ESCAPED_OCTO, "#")
-    .trim();
+  const directives = extractDirectives(source);
+  let result = stripComments(source);
 
   if (passage) {
     // remove links if set previously
@@ -62,45 +22,11 @@ const renderPassage = passage => {
   }
 
   // [[links]]
-  result = result.replace(LINK_PATTERN, (match, t) => {
-    let display = t;
-    let target = t;
-
-    // display|target format
-    const barIndex = t.indexOf("|");
-    const rightArrIndex = t.indexOf("->");
-    const leftArrIndex = t.indexOf("<-");
-
-    switch (true) {
-      case barIndex >= 0:
-        display = t.substr(0, barIndex);
-        target = t.substr(barIndex + 1);
-        break;
-      case rightArrIndex >= 0:
-        display = t.substr(0, rightArrIndex);
-        target = t.substr(rightArrIndex + 2);
-        break;
-      case leftArrIndex >= 0:
-        display = t.substr(leftArrIndex + 2);
-        target = t.substr(0, leftArrIndex);
-        break;
-    }
-
-    // render an external link & stop?
-    if (IS_EXTERNAL_URL.test(target)) {
-      return '<a href="' + target + '" target="_blank">' + display + "</a>";
-    }
-
-    // handle passage
-    if (passage) {
-      passage.links.push({
-        display,
-        target
-      });
-    }
-
-    return ""; // render nothing if it's a twee link
-  });
+  const linkData = extractLinks(result);
+  result = linkData.updated;
+  if (passage) {
+    passage.links = linkData.links;
+  }
 
   // before handling any tags, handle any/all directives
   directives.forEach(d => {
@@ -169,7 +95,7 @@ class Passage {
           if (asDict)
             return {
               ...a,
-              [t]: 1
+              [t]: 1,
             };
 
           return [...a, t];

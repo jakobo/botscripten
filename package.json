@@ -10,9 +10,10 @@
   "browser": "dist/chatbook.umd.js",
   "scripts": {
     "dev": "NODE_ENV=development concurrently -r \"npm:watch\" \"npm:serve\"",
-    "test": "jest",
+    "test": "nodemon -L --ignore dist/ --exec yarn jest",
     "build": "yarn clean && concurrently \"npm:build:*\"",
     "tweego": "TWEEGO_PATH=./dist/Twine2 tweego",
+    "jest": "yarn build && jest",
     "clean": "rm -rf dist/",
     "clean:artifacts": "rm -rf dist/chatbook.*",
     "serve": "nodemon -L --watch build/ --watch scripts/ --exec node scripts/serve",
@@ -20,7 +21,7 @@
     "format": "concurrently \"npm:format:*\"",
     "format:prettier": "pretty-quick --staged",
     "build:twine": "rollup -c -m inline && node scripts/createTwine && yarn clean:artifacts && concurrently -r \"npm:examples:*\"",
-    "build:node": "rm -rf dist/node/* && babel src/node --out-dir dist/node",
+    "build:node": "rm -rf dist/node/* && babel src/node --out-dir dist/npm/node && babel src/common --out-dir dist/npm/common",
     "examples:onboarding": "yarn tweego -f ChatbookViewer -o ./examples/onboarding.html ./examples/onboarding.twee",
     "examples:onboarding.min": "yarn tweego -f Chatbook -o ./examples/onboarding.min.html ./examples/onboarding.twee"
   },
@@ -41,7 +42,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run format"
+      "pre-commit": "yarn run format && yarn build"
     }
   },
   "dependencies": {

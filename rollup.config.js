@@ -19,6 +19,7 @@ export default [
       babel({
         runtimeHelpers: true,
         exclude: ["node_modules/**"],
+        presets: ["@babel/preset-env"], // override node target for browser UMD
       }),
       commonjs(),
     ],

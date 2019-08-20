@@ -1,5 +1,5 @@
 window.storyFormat({
-  name: "TEST_Chatbook",
+  name: "Chatbook",
   description: "An export friendly version of Chatbook+Twine",
   author: "Jakob Heuser",
   image: "icon.svg",
