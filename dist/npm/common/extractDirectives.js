@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true,
+  value: true
 });
 exports.default = void 0;
 const TOKEN_ESCAPED_OCTO = "__TOKEN_ESCAPED_BACKSLASH_OCTO__";
@@ -15,14 +15,14 @@ const extractDirectives = s => {
   s.replace(BLOCK_DIRECTIVE, (match, dir, content) => {
     directives.push({
       name: `@${dir}`,
-      content: content.trim(),
+      content: content.trim()
     });
     return "";
   });
   s.replace(INLINE_DIRECTIVE, (match, dir, content) => {
     directives.push({
       name: `@${dir}`,
-      content: content.trim(),
+      content: content.trim()
     });
     return "";
   });

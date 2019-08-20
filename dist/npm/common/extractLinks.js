@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true,
+  value: true
 });
 exports.default = void 0;
 const IS_EXTERNAL_URL = /^\w+:\/\/\/?\w/i;
@@ -34,20 +34,21 @@ const extractLinks = str => {
         break;
     } // render an external link & stop?
 
+
     if (IS_EXTERNAL_URL.test(target)) {
       return '<a href="' + target + '" target="_blank">' + display + "</a>";
     }
 
     links.push({
       display,
-      target,
+      target
     });
     return ""; // render nothing if it's a twee link
   });
   return {
     links,
     updated,
-    original: str,
+    original: str
   };
 };
 
