@@ -1,11 +1,10 @@
 {
   "name": "chatbook",
-  "private": true,
-  "version": "0.1.0",
-  "description": "A modified Twine (Trialogue) engine specifically for chat conversations",
+  "version": "0.1.1",
+  "description": "A modified Twine engine specifically for chat conversations, based on Trialogue",
   "author": "Jakob Heuser <jakob+npm@felocity.com>",
   "license": "Apache-2.0",
-  "repository": "github:jakobo/chatbook",
+  "repository": "github:aibexhq/chatbook",
   "main": "index.js",
   "browser": "dist/chatbook.umd.js",
   "scripts": {
