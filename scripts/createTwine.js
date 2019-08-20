@@ -3,7 +3,9 @@ const path = require("path");
 const tmpl = require("lodash.template");
 const pkg = require("../package.json");
 
-const build = (name, outDir, { template, js, css }) => {
+const PREFIX = process.env.NODE_ENV === "development" ? "TEST_" : "";
+
+const build = (name, description, outDir, { template, js, css }) => {
   // common
   const svg = path.resolve(__dirname, "../src/template/icon.svg");
   const svgOut = path.resolve(outDir, "./icon.svg");
@@ -18,10 +20,10 @@ const build = (name, outDir, { template, js, css }) => {
   });
 
   const formatData = {
-    description: name,
+    name: `${PREFIX}${name}`,
+    description,
     author: pkg.author.replace(/ <.*>/, ""),
     image: "icon.svg",
-    name: name,
     url: pkg.repository,
     version: pkg.version,
     proofing: false,

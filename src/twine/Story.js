@@ -1,9 +1,5 @@
 import Passage from "./Passage";
 import escape from "lodash.escape";
-import unescape from "lodash.unescape";
-import pkg from "../../package.json";
-
-import { TWEE_TEMPLATE, PASSAGE_TEMPLATE } from "./constants";
 
 const selectPassages = "tw-passagedata";
 const selectCss = '*[type="text/twine-css"]';
@@ -56,62 +52,23 @@ const delay = async (t = 0) => new Promise(resolve => setTimeout(resolve, t));
 const find = (ctx, s) => ctx.querySelector(s);
 const findAll = (ctx, s) => [...ctx.querySelectorAll(s)] || [];
 
-// export a story back to twee format
-const exportTwee = s => {
-  const storyData = find(s.document, "tw-storydata");
-  const passages = findAll(s.document, "tw-passagedata");
-  const story = {
-    title: s.name,
-    ifid: storyData.getAttribute("ifid"),
-    formatVersion: pkg.version,
-    start: s.passages[s.startsAt].id,
-    tags: findAll(s.document, "tw-tag").reduce(
-      (a, t) => ({
-        ...a,
-        [t.getAttribute("name")]: t.getAttribute("color")
-      }),
-      {}
-    ),
-    passages: []
-  }; // our output story
-
-  passages.forEach(p => {
-    // <tw-passagedata pid="1" name="gql references" tags="system prologue" position="25,125" size="200,100">
-    const passage = {
-      name: p.getAttribute("name"),
-      tags: p.getAttribute("tags"),
-      position: p.getAttribute("position"),
-      size: p.getAttribute("size"),
-      contents: unescape(p.innerHTML)
-    };
-    const block = PASSAGE_TEMPLATE({ passage });
-    story.passages.push(block);
-  });
-
-  console.log(TWEE_TEMPLATE({ story }));
-};
-
 /**
  * Standard Twine Format Story Object
  */
 class Story {
-  version = 2;
+  version = 2; // Twine v2
 
   document = null;
   story = null;
   name = "";
-  creator = "";
-  creatorVersion = "";
   startsAt = 0;
-  history = [];
   current = 0;
-  state = {};
+  history = [];
   passages = {};
-  ignoreErrors = false;
-  showDelay = false;
   showPrompt = false;
   errorMessage = "\u26a0 %s";
 
+  directives = {};
   elements = {};
 
   userScripts = [];
@@ -139,8 +96,6 @@ class Story {
     // properties of story node
     this.name = this.story.getAttribute("name") || "";
     this.startsAt = this.story.getAttribute("startnode") || 0;
-    this.creator = this.story.getAttribute("creator");
-    this.creatorVersion = this.story.getAttribute("creator-version");
 
     findAll(this.story, selectPassages).forEach(p => {
       const id = parseInt(p.getAttribute("pid"));
@@ -174,7 +129,9 @@ class Story {
       this.document.body.appendChild(t);
     });
     this.userScripts.forEach(s => {
-      eval(s);
+      // eval is evil, but this is simply how Twine works
+      // eslint-disable-line
+      globalEval(s);
     });
 
     // when you click on a[data-passage] (response link)...
@@ -197,7 +154,6 @@ class Story {
 
       // capture and disable showPrompt feature
       const value = find(this.document, selectActiveInput).value;
-      this.state[this.showPrompt.saveAs] = value;
       this.showPrompt = false;
 
       this.advance(
@@ -378,9 +334,15 @@ class Story {
   prompt = (saveAs, placeholder) => (this.showPrompt = { saveAs, placeholder });
 
   /**
-   * Export the story back into a .twee file
+   * Registers a custom directive for this story
+   * Signature of (directiveContent, outputText, story, passage, next)
    */
-  exportTwee = () => exportTwee(this);
+  directive = (id, cb) => {
+    if (!this.directives[id]) {
+      this.directives[id] = [];
+    }
+    this.directives[id].push(cb);
+  };
 }
 
 export default Story;

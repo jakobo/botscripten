@@ -1,7 +1,7 @@
 {
   "name": "chatbook",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A modified Twine (Trialogue) engine specifically for chat conversations",
   "author": "Jakob Heuser <jakob+npm@felocity.com>",
   "license": "Apache-2.0",
@@ -9,7 +9,7 @@
   "main": "index.js",
   "browser": "dist/chatbook.umd.js",
   "scripts": {
-    "dev": "concurrently \"npm:watch\" \"npm:serve\"",
+    "dev": "NODE_ENV=development concurrently \"npm:watch\" \"npm:serve\"",
     "clean": "rm -rf dist/",
     "watch": "nodemon -L --ignore dist/ --exec yarn build",
     "build": "yarn clean && yarn build.rollup && yarn build.format && concurrently \"npm:build.test:*\"",
@@ -17,7 +17,7 @@
     "build.format": "node scripts/createTwine",
     "build.test:onboarding": "yarn tweego -f ChatbookViewer -o ./examples/onboarding.html ./examples/onboarding.twee",
     "build.test:onboarding.xml": "yarn tweego -f Chatbook -o ./examples/onboarding.min.html ./examples/onboarding.twee",
-    "serve": "nodemon -L --watch build/ --exec node scripts/serve",
+    "serve": "nodemon -L --watch build/ --watch scripts/ --exec node scripts/serve",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tweego": "TWEEGO_PATH=./dist/Twine2 tweego"
   },
@@ -40,8 +40,7 @@
     "@babel/runtime": "^7.5.5",
     "lodash.escape": "^4.0.1",
     "lodash.template": "^4.5.0",
-    "lodash.unescape": "^4.0.1",
-    "marked": "^0.7.0"
+    "lodash.unescape": "^4.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

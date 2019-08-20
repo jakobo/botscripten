@@ -1,9 +1,13 @@
 import unescape from "lodash.unescape";
-import template from "lodash.template";
-import marked from "marked";
 
-const BLOCK_COMMENT = /\/\*.*?\*\//g;
-const INLINE_COMMENT = /^\/\/.*(\r\n?|\n)/g;
+const TOKEN_ESCAPED_OCTO = "__TOKEN_ESCAPED_BACKSLASH_OCTO__";
+
+const BLOCK_DIRECTIVE = /^###@([\S]+)([\s\S]*?)###/gm;
+const INLINE_DIRECTIVE = /^#@([\S]+)(.*)/g;
+
+const BLOCK_COMMENT = /###[\s\S]*?###/gm;
+const INLINE_COMMENT = /^#.*$/g;
+
 const IS_EXTERNAL_URL = /^\w+:\/\/\/?\w/i;
 const LINK_PATTERN = /\[\[(.*?)\]\]/g;
 
@@ -14,25 +18,48 @@ const findStory = win => {
   return { state: {} };
 };
 
-const nomark = s => s;
+const escapeOctos = s => s.replace("\\#", TOKEN_ESCAPED_OCTO);
+const restoreOctos = s => s.replace(TOKEN_ESCAPED_OCTO, "#");
+
+const stripComments = s =>
+  s.replace(BLOCK_COMMENT, "").replace(INLINE_COMMENT, "");
+
+const extractDirectives = s => {
+  const directives = [];
+  s.replace(BLOCK_DIRECTIVE, (match, dir, content) => {
+    directives.push({ name: `@${dir}`, content: content.trim() });
+    return "";
+  });
+  s.replace(INLINE_DIRECTIVE, (match, dir, content) => {
+    directives.push({ name: `@${dir}`, content: content.trim() });
+    return "";
+  });
+
+  return directives;
+};
 
 const renderPassage = passage => {
   const source = passage.source;
-  const story = passage.story;
-  const markup =
-    passage.hasTag("system") || passage.hasTag("no-markdown") ? nomark : marked;
 
-  let result = template(source)({
-    state: story.state
-  });
+  let result = source;
+
+  result = escapeOctos(result);
+  const directives = extractDirectives(result);
+  result = stripComments(result);
+  result = restoreOctos(result);
+
+  // strip remaining comments
+  result = result
+    .replace("\\#", TOKEN_ESCAPED_OCTO)
+    .replace(BLOCK_COMMENT, "")
+    .replace(INLINE_COMMENT, "")
+    .replace(TOKEN_ESCAPED_OCTO, "#")
+    .trim();
 
   if (passage) {
     // remove links if set previously
     passage.links = [];
   }
-
-  // remove comments
-  result = result.replace(BLOCK_COMMENT, "").replace(INLINE_COMMENT, "");
 
   // [[links]]
   result = result.replace(LINK_PATTERN, (match, t) => {
@@ -61,16 +88,32 @@ const renderPassage = passage => {
 
     // render an external link & stop?
     if (IS_EXTERNAL_URL.test(target)) {
-      return '<a href="' + target + '">' + display + "</a>";
+      return '<a href="' + target + '" target="_blank">' + display + "</a>";
     }
 
     // handle passage
     if (passage) {
-      passage.links.push({ display, target });
+      passage.links.push({
+        display,
+        target
+      });
     }
 
     return ""; // render nothing if it's a twee link
   });
+
+  // before handling any tags, handle any/all directives
+  directives.forEach(d => {
+    if (!passage.story.directives[d.name]) return;
+    passage.story.directives[d.name].forEach(run => {
+      result = run(d.content, result, passage, passage.story);
+    });
+  });
+
+  // if system tag, return an empty render set
+  if (passage.hasTag("system")) {
+    return [];
+  }
 
   // if prompt tag is set, notify the story
   if (passage) {
@@ -84,16 +127,11 @@ const renderPassage = passage => {
   // return the array
   if (passage.hasTag("multiline")) {
     result = result.trim();
-    return result.split(/[\r\n]+/g).map(line => markup(line));
-  }
-
-  // if a single item, and the system tag is set, fence the block
-  if (passage.hasTag("system")) {
-    result = `<pre><code>${result.trim()}</code></pre>`;
+    return result.split(/[\r\n]+/g);
   }
 
   // else returns an array of 1
-  return [markup(result)];
+  return [result];
 };
 
 class Passage {

@@ -1,79 +1,83 @@
 :: StoryTitle
-test_script
+onboarding_example
 
 
 :: StoryData
 {
 	"ifid": "DEC7B08C-8D6C-416E-A86D-180A53DBF339",
-	"format": "Chatbook",
+	"format": "ChatbookViewer",
 	"format-version": "0.0.1",
 	"start": "start",
 	"tag-colors": {
 		"auto": "green",
+		"metadata": "blue",
 		"prologue": "blue",
+		"prompt-firstName": "yellow",
 		"speaker-bot": "orange",
-    "no-markdown": "gray",
+		"speaker-system": "purple",
 		"system": "purple"
 	},
 	"zoom": 1
 }
 
 
+:: Story JavaScript [script]
+story.directive("@yaml", function(info, rendered, passage, story) {
+  // "story" and "passage" are the current story & passage respectively
+  console.log("YAML data from " + passage.id);
+  console.log("Directive contained: " + info);
+  return rendered;
+});
+
+
 :: gql references [system prologue] {"position":"25,125","size":"200,100"}
-- ignore:
-    CURRENT_AUTHORIZATION: &CURRENT_AUTHORIZATION |
-      query currentAuthorization {
-        currentUser {
-          id,
-          firstName,
-          authorizations (orderBy: PRIMARY_KEY_ASC) {
-            nodes {
-              providerId,
-              providerEmails
-            }
-          }
-        }
-      }
-- ignore:
-    UPDATE_USER_DATA: &UPDATE_USER_DATA |
-      mutation updateUserData ($input: UpdateUserInput!) {
-        updateUser(input:$input) {
-          user {
-            id
-          }
-        }
-      }
-- ignore:
-    UPDATE_USER_DATA_VARS: &UPDATE_USER_DATA_VARS |
-      {
-        "input": {
-          "id": {{userId}},
-          "patch": {
-            "firstName": "{{firstName}}",
-            "aboutPronoun": "{{aboutPronoun}}",
-            "conjugatedPronoun": "{{conjugatedPronoun}}",
-            "possessivePronoun": "{{possessivePronoun}}",
-            "primaryEmail": "{{email}}"
-          }
-        }
-      }
-- graphql:
-    id: currentAuthorization
-    query: *CURRENT_AUTHORIZATION
-    store:
-      - "currentUser.id": userId
-      - "currentUser.firstName": firstName
-      - "currentUser.authorizations.nodes[0].providerEmails[0]": email
-      - "currentUser.authorizations.nodes[0].providerId": origin
+###@yaml
+CURRENT_AUTHORIZATION: &CURRENT_AUTHORIZATION |
+  query currentAuthorization {
+	currentUser {
+	  id,
+	  firstName,
+	  authorizations (orderBy: PRIMARY_KEY_ASC) {
+		nodes {
+		  providerId,
+		  providerEmails
+		}
+	  }
+	}
+  }
+
+UPDATE_USER_DATA: &UPDATE_USER_DATA |
+  mutation updateUserData ($input: UpdateUserInput!) {
+	updateUser(input:$input) {
+	  user {
+		id
+	  }
+	}
+  }
+
+UPDATE_USER_DATA_VARS: &UPDATE_USER_DATA_VARS |
+  {
+	"input": {
+	  "id": {{userId}},
+	  "patch": {
+		"firstName": "{{firstName}}",
+		"aboutPronoun": "{{aboutPronoun}}",
+		"conjugatedPronoun": "{{conjugatedPronoun}}",
+		"possessivePronoun": "{{possessivePronoun}}",
+		"primaryEmail": "{{email}}"
+	  }
+	}
+  }
+###
 
 
-:: Name Not OK [speaker-bot no-markdown prompt-firstName] {"position":"475,125","size":"100,100"}
+:: Name Not OK [speaker-bot prompt-firstName] {"position":"475,125","size":"100,100"}
 Okay, what name would you like me to use?
 
 [[Confirm Email]]
 
 
-:: Confirm Email [speaker-bot no-markdown multiline] {"position":"475,275","size":"100,100"}
+:: Confirm Email [speaker-bot multiline] {"position":"475,275","size":"100,100"}
 Ok. And the email {{which origin "google-oauth2.+" "Google" "linkedin.+" "LinkedIn" ".*" "your email provider"}} gave me is {{email}}.
 
 You can always update that later.
@@ -91,58 +95,71 @@ How should I refer to you?
 
 
 :: "He" pronouns (he/him) [auto system] {"position":"300,425","size":"100,100"}
-- set: aboutPronoun him
-- set: conjugatedPronoun he
-- set: posessivePronoun his
+#@yaml set: aboutPronoun him
+#@yaml set: conjugatedPronoun he
+#@yaml set: posessivePronoun his
 
 [[Save]]
 
 
 :: "She" pronouns (she/her) [auto system] {"position":"425,425","size":"100,100"}
-- set: aboutPronoun her
-- set: conjugatedPronoun she
-- set: posessivePronoun her
+#@yaml set: aboutPronoun her
+#@yaml set: conjugatedPronoun she
+#@yaml set: posessivePronoun her
 
 [[Save]]
 
 
 :: "They" pronouns (they/them) [auto system] {"position":"550,425","size":"100,100"}
-- set: aboutPronoun them
-- set: conjugatedPronoun they
-- set: posessivePronoun their
+#@yaml set: aboutPronoun them
+#@yaml set: conjugatedPronoun they
+#@yaml set: posessivePronoun their
 
 [[Save]]
 
 
 :: "Ze" pronouns (ze/zir) [auto system] {"position":"675,425","size":"100,100"}
-set: aboutPronoun zir
-set: conjugatedPronoun ze
-set: posessivePronoun zir
+#@yaml set: aboutPronoun zir
+#@yaml set: conjugatedPronoun ze
+#@yaml set: posessivePronoun zir
 
 [[Save]]
 
 
-:: I'd like to be specific [speaker-bot no-markdown auto] {"position":"800,425","size":"100,100"}
+:: I'd like to be specific [speaker-bot auto] {"position":"800,425","size":"100,100"}
 Okay. You can do that in your profile once we're done here.
 
 [[Save]]
 
 
-:: Just use my name [auto system] {"position":"925,425","size":"100,100"}
-- set: aboutPronoun {{firstName}}
-- set: conjugatedPronoun {{firstName}}
-- set: posessivePronoun {{firstName}}
+:: Just use my name [auto speaker-bot] {"position":"925,425","size":"100,100"}
+#@yaml set: aboutPronoun {{firstName}}
+#@yaml set: conjugatedPronoun {{firstName}}
+#@yaml set: posessivePronoun {{firstName}}
 
-[[First Name as Pronoun]]
+No problem
+
+[[Save]]
 
 
-:: Save [speaker-bot no-markdown auto] {"position":"600,725","size":"100,100"}
+:: Save [speaker-bot auto] {"position":"600,725","size":"100,100"}
 That's everything, let me save it for you.
 
 [[Save Action]]
 
 
-:: start [speaker-bot no-markdown multiline] {"position":"300,125","size":"100,100"}
+:: start [speaker-bot multiline] {"position":"300,125","size":"100,100"}
+###@yaml
+- graphql:
+    id: currentAuthorization
+    query: *CURRENT_AUTHORIZATION
+    store:
+      - "currentUser.id": userId
+      - "currentUser.firstName": firstName
+      - "currentUser.authorizations.nodes[0].providerEmails[0]": email
+      - "currentUser.authorizations.nodes[0].providerId": origin
+###
+
 Hey there!
 
 I'm Karl (he/him). The AI ibex of Aibex.
@@ -153,7 +170,28 @@ I asked {{which origin "google-oauth2.+" "Google" "linkedin.+" "LinkedIn" ".*" "
 [[No->Name Not OK]]
 
 
-:: Save Result [speaker-bot no-markdown auto] {"position":"750,875","size":"100,100"}
+:: Next Steps [speaker-bot auto] {"position":"750,875","size":"100,100"}
+Next up, I'd like to walk you through how Aibex works.
+close this, and when you're ready, let's chat about "What Is Aibex"
+
+[[end]]
+
+
+:: end [system] {"position":"925,875","size":"100,100"}
+#@yaml end: true
+
+
+:: Save Action [auto speaker-bot] {"position":"600,875","size":"100,100"}
+###@yaml
+graphql:
+  id: updateUserData
+  query: *UPDATE_USER_DATA
+  variables: *UPDATE_USER_DATA_VARS
+  format: true
+  store:
+    - SUCCESS: updateResult
+###
+
 {{~# if updateResult ~}}
   Great, all saved
   {{~> line ~}}
@@ -163,34 +201,5 @@ I asked {{which origin "google-oauth2.+" "Google" "linkedin.+" "LinkedIn" ".*" "
 {{~/ if ~}}
 
 [[Next Steps]]
-
-
-:: Next Steps [speaker-bot no-markdown auto] {"position":"900,875","size":"100,100"}
-Next up, I'd like to walk you through how Aibex works.
-close this, and when you're ready, let's chat about "What Is Aibex"
-
-[[end]]
-
-
-:: end [system] {"position":"1050,875","size":"100,100"}
-- end: true
-
-
-:: First Name as Pronoun [auto speaker-bot no-markdown] {"position":"925,550","size":"100,100"}
-No problem
-
-[[Save]]
-
-
-:: Save Action [auto system] {"position":"600,875","size":"100,100"}
-- graphql:
-    id: updateUserData
-    query: *UPDATE_USER_DATA
-    variables: *UPDATE_USER_DATA_VARS
-    format: true
-    store:
-      - SUCCESS: updateResult
-
-[[Save Result]]
 
 

@@ -8,7 +8,7 @@ const exampleServer = new StaticServer({
 });
 
 exampleServer.start(() => {
-  console.log("Example Server listening to", server.port);
+  console.log("🌎 Example Server listening to", exampleServer.port);
 });
 
 const distServer = new StaticServer({
@@ -18,5 +18,13 @@ const distServer = new StaticServer({
 });
 
 distServer.start(() => {
-  console.log("Format/Dist Server listening to", server.port);
+  console.log("📦 Format/Dist Server listening to", distServer.port);
+  console.log("Active URLs:");
+  console.log(
+    `  Chatbook @ http://localhost:${distServer.port}/Chatbook/format.js`
+  );
+  console.log(
+    `    Viewer @ http://localhost:${distServer.port}/ChatbookViewer/format.js`
+  );
+  console.log("\nPlease remember to remove these from Twine when done testing");
 });
