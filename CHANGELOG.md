@@ -10,6 +10,10 @@
   - Refactored build scripts and `concurrently` output for a cleaner dev console
   - Added Husky + Prettier for consistent JavaScript formatting
 
+# 0.1.0 (intermediate)
+
+Between 0.1.0 and 0.1.1, the `chatbook` repository was transferred to the `aibexhq` organization. Contributors remained the same.
+
 # 0.1.0
 
 - **Breaking Changes**
