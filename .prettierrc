@@ -1,0 +1,6 @@
+endOfLine: "lf"
+trailingComma: "es5"
+overrides:
+  - files: ".prettierrc"
+    options:
+      parser: "yaml"

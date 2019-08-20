@@ -9,17 +9,20 @@
   "main": "index.js",
   "browser": "dist/chatbook.umd.js",
   "scripts": {
-    "dev": "NODE_ENV=development concurrently \"npm:watch\" \"npm:serve\"",
+    "dev": "NODE_ENV=development concurrently -r \"npm:watch\" \"npm:serve\"",
+    "test": "jest",
+    "build": "yarn clean && concurrently \"npm:build:*\"",
+    "tweego": "TWEEGO_PATH=./dist/Twine2 tweego",
     "clean": "rm -rf dist/",
-    "watch": "nodemon -L --ignore dist/ --exec yarn build",
-    "build": "yarn clean && yarn build.rollup && yarn build.format && concurrently \"npm:build.test:*\"",
-    "build.rollup": "rollup -c -m inline",
-    "build.format": "node scripts/createTwine",
-    "build.test:onboarding": "yarn tweego -f ChatbookViewer -o ./examples/onboarding.html ./examples/onboarding.twee",
-    "build.test:onboarding.xml": "yarn tweego -f Chatbook -o ./examples/onboarding.min.html ./examples/onboarding.twee",
+    "clean:artifacts": "rm -rf dist/chatbook.*",
     "serve": "nodemon -L --watch build/ --watch scripts/ --exec node scripts/serve",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tweego": "TWEEGO_PATH=./dist/Twine2 tweego"
+    "watch": "nodemon -L --ignore dist/ --exec yarn build",
+    "format": "concurrently \"npm:format:*\"",
+    "format:prettier": "pretty-quick --staged",
+    "build:twine": "rollup -c -m inline && node scripts/createTwine && yarn clean:artifacts && concurrently -r \"npm:examples:*\"",
+    "build:node": "rm -rf dist/node/* && babel src/node --out-dir dist/node",
+    "examples:onboarding": "yarn tweego -f ChatbookViewer -o ./examples/onboarding.html ./examples/onboarding.twee",
+    "examples:onboarding.min": "yarn tweego -f Chatbook -o ./examples/onboarding.min.html ./examples/onboarding.twee"
   },
   "files": [
     "dist"
@@ -36,8 +39,15 @@
       "last 1 safari version"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run format"
+    }
+  },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
+    "jest": "^24.9.0",
+    "jsdom": "^15.1.1",
     "lodash.escape": "^4.0.1",
     "lodash.template": "^4.5.0",
     "lodash.unescape": "^4.0.1"
@@ -52,7 +62,10 @@
     "concurrently": "^4.1.1",
     "extwee": "^1.5.0",
     "fs-extra": "^8.1.0",
+    "husky": "^3.0.0",
     "nodemon": "^1.19.1",
+    "prettier": "1.17.0",
+    "pretty-quick": "^1.11.1",
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.2.0",
     "rollup-plugin-commonjs": "^9.2.0",

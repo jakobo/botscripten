@@ -1,4 +1,4 @@
-import Story from "./twine/Story";
+import Story from "./Story";
 
 (win => {
   if (typeof win !== "undefined") {

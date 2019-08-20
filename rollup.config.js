@@ -7,26 +7,20 @@ import pkg from "./package.json";
 export default [
   // browser-friendly UMD build
   {
-    input: "src/main.js",
+    input: "src/twine/index.js",
     output: {
       name: "chatbook",
       file: pkg.browser,
-      format: "umd"
+      format: "umd",
     },
     plugins: [
       json(),
-      resolve(), // so Rollup can find `ms`
+      resolve(),
       babel({
         runtimeHelpers: true,
         exclude: ["node_modules/**"],
-        presets: ["@babel/preset-env"],
-        plugins: [
-          "@babel/plugin-transform-runtime",
-          "@babel/plugin-proposal-object-rest-spread",
-          "@babel/plugin-proposal-class-properties"
-        ]
       }),
-      commonjs() // so Rollup can convert `ms` to an ES module
-    ]
-  }
+      commonjs(),
+    ],
+  },
 ];

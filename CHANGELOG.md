@@ -1,5 +1,15 @@
 # Changelog
 
+# 0.1.1 (in progress)
+
+- **Features**
+  - node.js support. Chatbook now has a simple parser for Chatbook-formated Twine2 files.
+  - Tests now running via `yarn test`. Currently used to validate the parser is working as-intended
+- **Fixes**
+  - Removed `chatbook.umd.js` as it's an intermediate file in the twine build
+  - Refactored build scripts and `concurrently` output for a cleaner dev console
+  - Added Husky + Prettier for consistent JavaScript formatting
+
 # 0.1.0
 
 - **Breaking Changes**
