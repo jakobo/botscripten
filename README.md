@@ -4,7 +4,13 @@
 
 ![Chatbook logo](dist/Twine2/Chatbook/icon.svg)
 
+[![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
+[![Twine Story](https://img.shields.io/badge/StoryFormat-0.1.0-informational)](/dist/Twine2)
+[![npm](https://img.shields.io/npm/v/@aibex/chatbook)](https://www.npmjs.com/package/@aibex/chatbook)
+
 Chatbook is a chat-style [Twine](http://twinery.org) Story Fromat based on [Trialogue](https://github.com/phivk/trialogue) and its predecessors. Unlike other Twine sources, Chatbook is optimized for **an external runtime**. That is, while you can use Chatbook for Interactive Fiction, that's not this story format's intent.
+
+Chatbook is also available as an npm parser, able to handle Passage-specific features found in the Chatbook format. It's available via `npm install @aibex/chatbook` or `yarn add @aibex/chatbook`.
 
 ✅ You want to use [Twine](http://twinery.org) to author complex branching dialogue <br>
 ✅ You want a conversation format (think chatbot) <br>
@@ -19,22 +25,25 @@ If "yes", then Chatbook is worth looking into.
 Chatbook comes with two distinct flavors: **An Interactive Output** (ChatbookViewer) for testing and stepping through conversations in a pseudo chat interface based on the Trialogue code, and **A Minimal Output** (Chatbook) for using your Twine output files in other systems. When developing a rich chatbot conversation, you'll use ChatbookViewer. When you're ready to publish, you'll select the Chatbook format and shed all of the HTML/CSS/JavaScript required for the interactive version.
 
 - [Chatbook](#chatbook)
-  - [🚀 Setup and Your First "Chat"](#%f0%9f%9a%80-setup-and-your-first-%22chat%22)
-    - [Add Chatbook and ChatbookViewer as a Twine Story Formats](#add-chatbook-and-chatbookviewer-as-a-twine-story-formats)
-    - [Create your first chat story](#create-your-first-chat-story)
-  - [🏷 Chatbook Tags](#%f0%9f%8f%b7-chatbook-tags)
-  - [🙈 Comments in Chatbook](#%f0%9f%99%88-comments-in-chatbook)
-  - [🗂 Recipies](#%f0%9f%97%82-recipies)
-    - ["Special" Comments (Directives)](#%22special%22-comments-directives)
-    - [Conditional Branching (cycles, etc)](#conditional-branching-cycles-etc)
-    - [Scripting Directives in ChatbookViewer](#scripting-directives-in-chatbookviewer)
-  - [⚠️ Why would you use Chatbook over <Insert Twine Format>?](#%e2%9a%a0%ef%b8%8f-why-would-you-use-chatbook-over-insert-twine-format)
-  - [Developing on Chatbook](#developing-on-chatbook)
+- [🚀 Setup and Your First "Chat"](#%f0%9f%9a%80-setup-and-your-first-%22chat%22)
+  - [Add Chatbook and ChatbookViewer as a Twine Story Formats](#add-chatbook-and-chatbookviewer-as-a-twine-story-formats)
+  - [Create your first chat story](#create-your-first-chat-story)
+- [🏷 Chatbook Tags](#%f0%9f%8f%b7-chatbook-tags)
+- [🙈 Comments in Chatbook](#%f0%9f%99%88-comments-in-chatbook)
+- [🗂 Recipies](#%f0%9f%97%82-recipies)
+  - ["Special" Comments (Directives)](#%22special%22-comments-directives)
+  - [Conditional Branching (cycles, etc)](#conditional-branching-cycles-etc)
+  - [Scripting Directives in ChatbookViewer](#scripting-directives-in-chatbookviewer)
+- [📖 Node Module Documentation](#%f0%9f%93%96-node-module-documentation)
+- [⚠️ Why would you use Chatbook over <Insert Twine Format>?](#%e2%9a%a0%ef%b8%8f-why-would-you-use-chatbook-over-insert-twine-format)
+- [Developing on Chatbook](#developing-on-chatbook)
+  - [Local Development](#local-development)
   - [Building for Release](#building-for-release)
+- [Acknowledgements](#acknowledgements)
 
-## 🚀 Setup and Your First "Chat"
+# 🚀 Setup and Your First "Chat"
 
-### Add Chatbook and ChatbookViewer as a Twine Story Formats
+## Add Chatbook and ChatbookViewer as a Twine Story Formats
 
 ![add](/docs/add-format.gif)
 
@@ -47,7 +56,7 @@ Chatbook comes with two distinct flavors: **An Interactive Output** (ChatbookVie
 
 Once you've done this, you can either select Chatbook or ChatbookViewer (Interactive) as your default format.
 
-### Create your first chat story
+## Create your first chat story
 
 ![create a chat](/docs/trialogue-create.gif)
 
@@ -63,7 +72,7 @@ Once you've done this, you can either select Chatbook or ChatbookViewer (Interac
    - Speaker tag (e.g. `speaker-bot`)
 4. Hit `Play` to test the result (Using ChatbookViewer)
 
-## 🏷 Chatbook Tags
+# 🏷 Chatbook Tags
 
 Chatbook is designed to work exclusively with Twine's tag system. That means no code in your conversation nodes. This is important because behind the scenes, many other Twine formats convert Passages containing `<% ... %>` into JavaScript code, defeating the goal of portability.
 
@@ -77,7 +86,9 @@ The following tags are supported by ChatbookViewer. It is assumed that anyone co
 | `system`               | Use the `system` tag when you want to tag something as not originating from a speaker. Any output that _would have been generated_ from a `system` node is ignored                                                                                                                                                                                                     |
 | `prompt-*` _(prefix)_  | The `prompt-*` tag presents the user with a text box for input, saved to the remainder of the tag. So a tag of `prompt-firstName` implies that you want to prompt the user for text, which you wish to save as `firstName`. Upon answering the prompt, the first `[[link]]` encountered will be followed to continue the conversation, similar to the `auto` behavior. |
 
-## 🙈 Comments in Chatbook
+To maintain compatibility with the [Twee 3 Specification](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-specification.md), the tags `script` and `stylesheet` will never be used.
+
+# 🙈 Comments in Chatbook
 
 The chatbook story format allows for simple comments. Lines beginning with an octothorpe `#` are removed during the parsing process in ChatbookViewer. These lines are made available in Chatbook should you need to attach meaning to your comments.
 
@@ -104,11 +115,11 @@ backslash like this: \###
 ###
 ```
 
-## 🗂 Recipies
+# 🗂 Recipies
 
 Below are some common challenges & solutions to writing Twine scripts in Chatbook format
 
-### "Special" Comments (Directives)
+## "Special" Comments (Directives)
 
 If you look at the [onboarding example](/examples/onboarding.twee), you'll notice many of the comments contain an `@yaml` statement. While `ChatbookViewer` doesn't care about these items (they're comments after all), any other system parsing the Twine file can read these statements out of the comment blocks.
 
@@ -130,7 +141,7 @@ There is no set definition for directives, as adding a directive to Chatbook wou
 
 For consistency with ChatbookViewer, directives should run when a Passage is parsed, but before any tag behavior (such as `auto` or `speaker-*` are applied) This allows directives to form opinions about the Passage and output during rendering.
 
-### Conditional Branching (cycles, etc)
+## Conditional Branching (cycles, etc)
 
 Since Chatbook does not maintain a concept of state, nor have a way to script items such as cycling or conditional links, you should present **all possible branches** using the `[[link]]` syntax. This will allow you to view all permutations in ChatbookViewer.
 
@@ -148,7 +159,7 @@ advance to labelA or labelB.
 [[labelB -> I am option two]]
 ```
 
-### Scripting Directives in ChatbookViewer
+## Scripting Directives in ChatbookViewer
 
 If you absolutely want to handle Directives in ChatbookViewer, you can do so by selecting `Edit Story JavaScript` in Twine, and registering a handler for your directive. For example, this logs all `@yaml` directives' content to the developer tools console.
 
@@ -162,7 +173,11 @@ story.directive("@yaml", function(info, rendered, passage, story) {
 
 Directives are evaluated after the Passage is parsed, but before any tag behaviors are applied.
 
-## ⚠️ Why would you use Chatbook over <Insert Twine Format>?
+# 📖 Node Module Documentation
+
+Most individuals are interested in writing for the Chatbook format, not consuming it. If you are looking to
+
+# ⚠️ Why would you use Chatbook over <Insert Twine Format>?
 
 First off, every Twine format I've worked with is amazing and super thougtful. If your goal is to create interactive fiction, self-contained tutorials, etc, you should just use Trialogue, Harlowe, or Sugarcube. However, if you're using Twine as a conversation editor (and you are more interested in the `tw-passagedata` blocks and the data structure behind Twine) Chatbook may be for you.
 
@@ -171,7 +186,9 @@ First off, every Twine format I've worked with is amazing and super thougtful. I
 - **Dev Experience** Iterating on Twine templates is hard. A lot of time was spent to make the dev experience as simple as (1) put [tweego](https://www.motoslave.net/tweego/) in your executable path, and (2) type `yarn dev`.
 - **Multiple Formats** Chatbook provides two syncrhonized formats from the same repository. Features in the proofing / html5-min version will also show up simultaneously in the Interactive one.
 
-## Developing on Chatbook
+# Developing on Chatbook
+
+## Local Development
 
 1. Acquire [tweego](https://www.motoslave.net/tweego/) and place it in your development path.
 2. Check out this repository
@@ -194,3 +211,9 @@ As an example, the onboarding document was converted from Twine to Twee using th
 3. Commit all files
 4. Tag the release `git tag -a -m "<message>" x.x.x`
 5. `git push origin master --tags`
+
+# Acknowledgements
+
+Chatbook would not be possible without the amazing work of [Philo van Kemenade](https://github.com/phivk) for imagining Twine as a conversational tool, [M. C. DeMarco](http://mcdemarco.net/tools/scree/paloma/) who reimagined the original "Jonah" format for Twine 2, and [Chris Klimas](https://www.patreon.com/klembot/) creator and current maintainer of Twine.
+
+Chatbook is sponsored by [Aibex](https://www.aibex.com). Love your career.

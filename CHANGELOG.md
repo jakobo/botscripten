@@ -1,6 +1,6 @@
 # Changelog
 
-# 0.1.1 (in progress)
+# StoryFormat 0.1.1 / npm 0.1.1 (in progress)
 
 - **Features**
   - node.js support. Chatbook now has a simple parser for Chatbook-formated Twine2 files.
@@ -9,12 +9,15 @@
   - Removed `chatbook.umd.js` as it's an intermediate file in the twine build
   - Refactored build scripts and `concurrently` output for a cleaner dev console
   - Added Husky + Prettier for consistent JavaScript formatting
+- **Other**
+  - Twine and npm versions have been separated. Updates to the parser should not reqiure people to consider upgrading their StoryFormat within Twine
+  - An Acknowledgements section was added to the readme to specifically thank the prior work that made Chatbook possible. ❤️
 
 # 0.1.0 (intermediate)
 
 Between 0.1.0 and 0.1.1, the `chatbook` repository was transferred to the `aibexhq` organization. Contributors remained the same.
 
-# 0.1.0
+# StoryFormat 0.1.0 / npm 0.1.0
 
 - **Breaking Changes**
   - Comments are migrated from JavaScript style `/* ... */` to using Octothorpes `#` / `###`. This allos us to support Directives.
