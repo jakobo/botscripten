@@ -18,7 +18,7 @@
     "buildAll": "yarn clean:dist && concurrently \"npm:build:*\" && yarn examples",
     "tweego": "TWEEGO_PATH=./dist/Twine2 tweego",
     "ci": "pretty-quick --check && yarn build && jest",
-    "pub": "publish-please",
+    "release": "release-it",
     "____________________": "echo \"The following sub-commands are used to serve the main commands above\"",
     "build:twine": "rollup -c -m inline && node scripts/createTwine && yarn clean:artifacts",
     "build:node": "rm -rf dist/node/* && babel src/node --out-dir dist/npm/node && babel src/common --out-dir dist/npm/common",
@@ -31,8 +31,7 @@
     "examples:onboarding.min": "yarn tweego -f Chatbook -o ./examples/onboarding.min.html ./examples/onboarding.twee",
     "format:prettier": "pretty-quick --staged",
     "husky:precommit": "concurrently \"npm:format:*\" && yarn build && jest",
-    "publish-please": "publish-please",
-    "prepublishOnly": "publish-please guard"
+    "prepublishOnly": "echo \"publish is disabled. Did you mean `yarn release`?\" && exit 1"
   },
   "files": [
     "dist"
@@ -76,7 +75,7 @@
     "nodemon": "^1.19.1",
     "prettier": "1.17.0",
     "pretty-quick": "^1.11.1",
-    "publish-please": "^5.5.1",
+    "release-it": "^12.3.5",
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.2.0",
     "rollup-plugin-commonjs": "^9.2.0",
