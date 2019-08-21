@@ -35,8 +35,12 @@
     "format:prettier": "pretty-quick --staged",
     "husky:precommit": "concurrently \"npm:format:*\" && yarn build && jest"
   },
-  "files": [
-    "dist"
+  "keywords": [
+    "twine",
+    "twinery",
+    "storyformat",
+    "trialogue",
+    "chatbook"
   ],
   "browserslist": {
     "production": [
