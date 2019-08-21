@@ -18,7 +18,7 @@
     "buildAll": "yarn clean:dist && concurrently \"npm:build:*\" && yarn examples",
     "tweego": "TWEEGO_PATH=./dist/Twine2 tweego",
     "ci": "pretty-quick --check && yarn build && jest",
-    "publish": "publish-please",
+    "pub": "publish-please",
     "____________________": "echo \"The following sub-commands are used to serve the main commands above\"",
     "build:twine": "rollup -c -m inline && node scripts/createTwine && yarn clean:artifacts",
     "build:node": "rm -rf dist/node/* && babel src/node --out-dir dist/npm/node && babel src/common --out-dir dist/npm/common",
