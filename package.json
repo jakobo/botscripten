@@ -1,5 +1,5 @@
 {
-  "name": "chatbook",
+  "name": "@aibex/chatbook",
   "version": "0.1.1",
   "description": "A modified Twine engine specifically for chat conversations, based on Trialogue",
   "author": "Jakob Heuser <jakob+npm@felocity.com>",
