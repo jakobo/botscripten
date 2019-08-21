@@ -5,7 +5,7 @@
 ![Chatbook logo](dist/Twine2/Chatbook/icon.svg)
 
 [![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
-[![Twine Story](https://img.shields.io/badge/StoryFormat-0.1.0-informational)](/dist/Twine2)
+[![Story Format Version](https://img.shields.io/badge/StoryFormat-0.1.0-blue)](/dist/Twine2)
 [![npm](https://img.shields.io/npm/v/@aibex/chatbook)](https://www.npmjs.com/package/@aibex/chatbook)
 [![CircleCI](https://circleci.com/gh/aibexhq/chatbook/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/chatbook/tree/master)
 
@@ -26,17 +26,17 @@ If "yes", then Chatbook is worth looking into.
 Chatbook comes with two distinct flavors: **An Interactive Output** (ChatbookViewer) for testing and stepping through conversations in a pseudo chat interface based on the Trialogue code, and **A Minimal Output** (Chatbook) for using your Twine output files in other systems. When developing a rich chatbot conversation, you'll use ChatbookViewer. When you're ready to publish, you'll select the Chatbook format and shed all of the HTML/CSS/JavaScript required for the interactive version.
 
 - [Chatbook](#chatbook)
-- [🚀 Setup and Your First "Chat"](#%f0%9f%9a%80-setup-and-your-first-%22chat%22)
+- [🚀 Setup and Your First "Chat"](#-setup-and-your-first-chat)
   - [Add Chatbook and ChatbookViewer as a Twine Story Formats](#add-chatbook-and-chatbookviewer-as-a-twine-story-formats)
   - [Create your first chat story](#create-your-first-chat-story)
-- [🏷 Chatbook Tags](#%f0%9f%8f%b7-chatbook-tags)
-- [🙈 Comments in Chatbook](#%f0%9f%99%88-comments-in-chatbook)
-- [🗂 Recipies](#%f0%9f%97%82-recipies)
-  - ["Special" Comments (Directives)](#%22special%22-comments-directives)
+- [🏷 Chatbook Tags](#-chatbook-tags)
+- [🙈 Comments in Chatbook](#-comments-in-chatbook)
+- [🗂 Recipies](#-recipies)
+  - ["Special" Comments (Directives)](#special-comments-directives)
   - [Conditional Branching (cycles, etc)](#conditional-branching-cycles-etc)
   - [Scripting Directives in ChatbookViewer](#scripting-directives-in-chatbookviewer)
-- [📖 Node Module Documentation](#%f0%9f%93%96-node-module-documentation)
-- [⚠️ Why would you use Chatbook over <Insert Twine Format>?](#%e2%9a%a0%ef%b8%8f-why-would-you-use-chatbook-over-insert-twine-format)
+- [📖 Node Module Documentation](#-node-module-documentation)
+- [⚠️ Why would you use Chatbook over <Insert Twine Format>?](#️-why-would-you-use-chatbook-over-insert-twine-format)
 - [Developing on Chatbook](#developing-on-chatbook)
   - [Local Development](#local-development)
   - [Building for Release](#building-for-release)
