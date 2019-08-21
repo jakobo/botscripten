@@ -33,7 +33,7 @@
     "examples:onboarding": "yarn tweego -f ChatbookViewer -o ./examples/onboarding.html ./examples/onboarding.twee",
     "examples:onboarding.min": "yarn tweego -f Chatbook -o ./examples/onboarding.min.html ./examples/onboarding.twee",
     "format:prettier": "pretty-quick --staged",
-    "husky:precommit": "concurrently \"npm:format:*\" && yarn build && jest"
+    "husky:precommit": "concurrently \"npm:format:*\" && yarn build && git add dist/ && jest"
   },
   "keywords": [
     "twine",
