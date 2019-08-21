@@ -13,11 +13,12 @@
   "browser": "dist/chatbook.umd.js",
   "scripts": {
     "dev": "NODE_ENV=development concurrently -r \"npm:dev:*\"",
-    "test": "nodemon -L --ignore dist/ --exec yarn test:interactive",
+    "test": "yarn build && jest",
     "build": "yarn clean:dist && concurrently \"npm:build:*\"",
     "buildAll": "yarn clean:dist && concurrently \"npm:build:*\" && yarn examples",
     "tweego": "TWEEGO_PATH=./dist/Twine2 tweego",
     "ci": "pretty-quick --check && yarn build && jest",
+    "publish": "publish-please",
     "____________________": "echo \"The following sub-commands are used to serve the main commands above\"",
     "build:twine": "rollup -c -m inline && node scripts/createTwine && yarn clean:artifacts",
     "build:node": "rm -rf dist/node/* && babel src/node --out-dir dist/npm/node && babel src/common --out-dir dist/npm/common",
@@ -30,7 +31,8 @@
     "examples:onboarding.min": "yarn tweego -f Chatbook -o ./examples/onboarding.min.html ./examples/onboarding.twee",
     "format:prettier": "pretty-quick --staged",
     "husky:precommit": "concurrently \"npm:format:*\" && yarn build && jest && git add dist/ examples/",
-    "test:interactive": "yarn buildAll && jest"
+    "publish-please": "publish-please",
+    "prepublishOnly": "publish-please guard"
   },
   "files": [
     "dist"
@@ -74,6 +76,7 @@
     "nodemon": "^1.19.1",
     "prettier": "1.17.0",
     "pretty-quick": "^1.11.1",
+    "publish-please": "^5.5.1",
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.2.0",
     "rollup-plugin-commonjs": "^9.2.0",

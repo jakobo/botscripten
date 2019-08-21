@@ -1,0 +1,3 @@
+{
+  "publishCommand": "npm publish --access public"
+}
