@@ -128,7 +128,7 @@ These special comments are called **Directives** and they consist of the comment
 ```
 #@yaml
 
-#@party=true
+#@party true
 
 ###@sql
 INSERT INTO winners (name, time) VALUES ('you', NOW())
