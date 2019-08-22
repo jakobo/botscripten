@@ -23,7 +23,7 @@ describe("onboarding.html Parse", () => {
   test("parse() returns an story object with passage objects, tags, and directives", () => {
     const story = parse(html);
     expect(typeof story).toBe("object");
-    expect(story.name).toBe("onboarding_example");
+    expect(story.name).toBe("onboarding");
     expect(story.start).toBe("start");
     expect(story.format).toMatch(/Chatbook/);
     expect(story.passages[story.passageIndex[story.start]]).toMatchObject({

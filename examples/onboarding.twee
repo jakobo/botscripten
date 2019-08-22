@@ -1,12 +1,12 @@
 :: StoryTitle
-onboarding_example
+onboarding
 
 
 :: StoryData
 {
 	"ifid": "DEC7B08C-8D6C-416E-A86D-180A53DBF339",
-	"format": "ChatbookViewer",
-	"format-version": "0.0.1",
+	"format": "TEST_ChatbookViewer",
+	"format-version": "0.1.3",
 	"start": "start",
 	"tag-colors": {
 		"auto": "green",
@@ -21,60 +21,10 @@ onboarding_example
 }
 
 
-:: Story JavaScript [script]
-story.directive("@yaml", function(info, rendered, passage, story) {
-  // "story" and "passage" are the current story & passage respectively
-  console.log("YAML data from " + passage.id);
-  console.log("Directive contained: " + info);
-  return rendered;
-});
-
-
-:: gql references [system prologue] {"position":"25,125","size":"200,100"}
-###@yaml
-CURRENT_AUTHORIZATION: &CURRENT_AUTHORIZATION |
-  query currentAuthorization {
-	currentUser {
-	  id,
-	  firstName,
-	  authorizations (orderBy: PRIMARY_KEY_ASC) {
-		nodes {
-		  providerId,
-		  providerEmails
-		}
-	  }
-	}
-  }
-
-UPDATE_USER_DATA: &UPDATE_USER_DATA |
-  mutation updateUserData ($input: UpdateUserInput!) {
-	updateUser(input:$input) {
-	  user {
-		id
-	  }
-	}
-  }
-
-UPDATE_USER_DATA_VARS: &UPDATE_USER_DATA_VARS |
-  {
-	"input": {
-	  "id": {{userId}},
-	  "patch": {
-		"firstName": "{{firstName}}",
-		"aboutPronoun": "{{aboutPronoun}}",
-		"conjugatedPronoun": "{{conjugatedPronoun}}",
-		"possessivePronoun": "{{possessivePronoun}}",
-		"primaryEmail": "{{email}}"
-	  }
-	}
-  }
-###
-
-
-:: Name Not OK [speaker-bot prompt-firstName] {"position":"475,125","size":"100,100"}
+:: Name Not OK [speaker-bot] {"position":"475,125","size":"100,100"}
 Okay, what name would you like me to use?
 
-[[Confirm Email]]
+[[Enter Name]]
 
 
 :: Confirm Email [speaker-bot multiline] {"position":"475,275","size":"100,100"}
@@ -94,7 +44,7 @@ How should I refer to you?
 [[Just use my name]]
 
 
-:: "He" pronouns (he/him) [auto system] {"position":"300,425","size":"100,100"}
+:: "He" pronouns (he/him) [system] {"position":"300,425","size":"100,100"}
 #@yaml set: aboutPronoun him
 #@yaml set: conjugatedPronoun he
 #@yaml set: posessivePronoun his
@@ -102,7 +52,7 @@ How should I refer to you?
 [[Save]]
 
 
-:: "She" pronouns (she/her) [auto system] {"position":"425,425","size":"100,100"}
+:: "She" pronouns (she/her) [system] {"position":"425,425","size":"100,100"}
 #@yaml set: aboutPronoun her
 #@yaml set: conjugatedPronoun she
 #@yaml set: posessivePronoun her
@@ -110,7 +60,7 @@ How should I refer to you?
 [[Save]]
 
 
-:: "They" pronouns (they/them) [auto system] {"position":"550,425","size":"100,100"}
+:: "They" pronouns (they/them) [system] {"position":"550,425","size":"100,100"}
 #@yaml set: aboutPronoun them
 #@yaml set: conjugatedPronoun they
 #@yaml set: posessivePronoun their
@@ -118,7 +68,7 @@ How should I refer to you?
 [[Save]]
 
 
-:: "Ze" pronouns (ze/zir) [auto system] {"position":"675,425","size":"100,100"}
+:: "Ze" pronouns (ze/zir) [system] {"position":"675,425","size":"100,100"}
 #@yaml set: aboutPronoun zir
 #@yaml set: conjugatedPronoun ze
 #@yaml set: posessivePronoun zir
@@ -126,13 +76,13 @@ How should I refer to you?
 [[Save]]
 
 
-:: I'd like to be specific [speaker-bot auto] {"position":"800,425","size":"100,100"}
+:: I'd like to be specific [speaker-bot] {"position":"800,425","size":"100,100"}
 Okay. You can do that in your profile once we're done here.
 
 [[Save]]
 
 
-:: Just use my name [auto speaker-bot] {"position":"925,425","size":"100,100"}
+:: Just use my name [speaker-bot] {"position":"925,425","size":"100,100"}
 #@yaml set: aboutPronoun {{firstName}}
 #@yaml set: conjugatedPronoun {{firstName}}
 #@yaml set: posessivePronoun {{firstName}}
@@ -142,7 +92,7 @@ No problem
 [[Save]]
 
 
-:: Save [speaker-bot auto] {"position":"600,725","size":"100,100"}
+:: Save [speaker-bot] {"position":"600,725","size":"100,100"}
 That's everything, let me save it for you.
 
 [[Save Action]]
@@ -150,14 +100,26 @@ That's everything, let me save it for you.
 
 :: start [speaker-bot multiline] {"position":"300,125","size":"100,100"}
 ###@yaml
-- graphql:
-    id: currentAuthorization
-    query: *CURRENT_AUTHORIZATION
-    store:
-      - "currentUser.id": userId
-      - "currentUser.firstName": firstName
-      - "currentUser.authorizations.nodes[0].providerEmails[0]": email
-      - "currentUser.authorizations.nodes[0].providerId": origin
+graphql:
+  id: currentAuthorization
+  query: |
+    query currentAuthorization {
+      currentUser {
+        id,
+        firstName,
+        authorizations (orderBy: PRIMARY_KEY_ASC) {
+          nodes {
+            providerId,
+            providerEmails
+          }
+        }
+      }
+    }
+  store:
+    - "currentUser.id": userId
+    - "currentUser.firstName": firstName
+    - "currentUser.authorizations.nodes[0].providerEmails[0]": email
+    - "currentUser.authorizations.nodes[0].providerId": origin
 ###
 
 Hey there!
@@ -170,7 +132,7 @@ I asked {{which origin "google-oauth2.+" "Google" "linkedin.+" "LinkedIn" ".*" "
 [[No->Name Not OK]]
 
 
-:: Next Steps [speaker-bot auto] {"position":"750,875","size":"100,100"}
+:: Next Steps [speaker-bot] {"position":"750,875","size":"100,100"}
 Next up, I'd like to walk you through how Aibex works.
 close this, and when you're ready, let's chat about "What Is Aibex"
 
@@ -181,12 +143,31 @@ close this, and when you're ready, let's chat about "What Is Aibex"
 #@yaml end: true
 
 
-:: Save Action [auto speaker-bot] {"position":"600,875","size":"100,100"}
+:: Save Action [speaker-bot] {"position":"600,875","size":"100,100"}
 ###@yaml
 graphql:
   id: updateUserData
-  query: *UPDATE_USER_DATA
-  variables: *UPDATE_USER_DATA_VARS
+  query: |
+    mutation updateUserData ($input: UpdateUserInput!) {
+      updateUser(input:$input) {
+        user {
+          id
+        }
+      }
+    }
+  variables: |
+    {
+      "input": {
+        "id": {{userId}},
+        "patch": {
+          "firstName": "{{firstName}}",
+          "aboutPronoun": "{{aboutPronoun}}",
+          "conjugatedPronoun": "{{conjugatedPronoun}}",
+          "possessivePronoun": "{{possessivePronoun}}",
+          "primaryEmail": "{{email}}"
+        }
+      }
+    }
   format: true
   store:
     - SUCCESS: updateResult
@@ -201,5 +182,11 @@ graphql:
 {{~/ if ~}}
 
 [[Next Steps]]
+
+
+:: Enter Name [system] {"position":"622,127","size":"100,100"}
+#@prompt firstName
+
+[[Confirm Email]]
 
 

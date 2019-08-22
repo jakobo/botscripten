@@ -5,51 +5,9 @@
   </head>
   <body>
     <twine>
-      <!-- UUID://DEC7B08C-8D6C-416E-A86D-180A53DBF339// --><tw-storydata name="onboarding_example" startnode="11" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="DEC7B08C-8D6C-416E-A86D-180A53DBF339" zoom="1" format="Chatbook" format-version="0.1.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">story.directive("@yaml", function(info, rendered, passage, story) {
-  // "story" and "passage" are the current story & passage respectively
-  console.log("YAML data from " + passage.id);
-  console.log("Directive contained: " + info);
-  return rendered;
-});</script><tw-tag name="metadata" color="blue"></tw-tag><tw-tag name="prologue" color="blue"></tw-tag><tw-tag name="prompt-firstName" color="yellow"></tw-tag><tw-tag name="speaker-bot" color="orange"></tw-tag><tw-tag name="speaker-system" color="purple"></tw-tag><tw-tag name="system" color="purple"></tw-tag><tw-tag name="auto" color="green"></tw-tag><tw-passagedata pid="1" name="gql references" tags="system prologue" position="25,125" size="200,100">###@yaml
-CURRENT_AUTHORIZATION: &amp;CURRENT_AUTHORIZATION |
-  query currentAuthorization {
-	currentUser {
-	  id,
-	  firstName,
-	  authorizations (orderBy: PRIMARY_KEY_ASC) {
-		nodes {
-		  providerId,
-		  providerEmails
-		}
-	  }
-	}
-  }
+      <!-- UUID://DEC7B08C-8D6C-416E-A86D-180A53DBF339// --><tw-storydata name="onboarding" startnode="10" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="DEC7B08C-8D6C-416E-A86D-180A53DBF339" zoom="1" format="TEST_Chatbook" format-version="0.1.3" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="auto" color="green"></tw-tag><tw-tag name="metadata" color="blue"></tw-tag><tw-tag name="prologue" color="blue"></tw-tag><tw-tag name="prompt-firstName" color="yellow"></tw-tag><tw-tag name="speaker-bot" color="orange"></tw-tag><tw-tag name="speaker-system" color="purple"></tw-tag><tw-tag name="system" color="purple"></tw-tag><tw-passagedata pid="1" name="Name Not OK" tags="speaker-bot" position="475,125" size="100,100">Okay, what name would you like me to use?
 
-UPDATE_USER_DATA: &amp;UPDATE_USER_DATA |
-  mutation updateUserData ($input: UpdateUserInput!) {
-	updateUser(input:$input) {
-	  user {
-		id
-	  }
-	}
-  }
-
-UPDATE_USER_DATA_VARS: &amp;UPDATE_USER_DATA_VARS |
-  {
-	&quot;input&quot;: {
-	  &quot;id&quot;: {{userId}},
-	  &quot;patch&quot;: {
-		&quot;firstName&quot;: &quot;{{firstName}}&quot;,
-		&quot;aboutPronoun&quot;: &quot;{{aboutPronoun}}&quot;,
-		&quot;conjugatedPronoun&quot;: &quot;{{conjugatedPronoun}}&quot;,
-		&quot;possessivePronoun&quot;: &quot;{{possessivePronoun}}&quot;,
-		&quot;primaryEmail&quot;: &quot;{{email}}&quot;
-	  }
-	}
-  }
-###</tw-passagedata><tw-passagedata pid="2" name="Name Not OK" tags="speaker-bot prompt-firstName" position="475,125" size="100,100">Okay, what name would you like me to use?
-
-[[Confirm Email]]</tw-passagedata><tw-passagedata pid="3" name="Confirm Email" tags="speaker-bot multiline" position="475,275" size="100,100">Ok. And the email {{which origin &quot;google-oauth2.+&quot; &quot;Google&quot; &quot;linkedin.+&quot; &quot;LinkedIn&quot; &quot;.*&quot; &quot;your email provider&quot;}} gave me is {{email}}.
+[[Enter Name]]</tw-passagedata><tw-passagedata pid="2" name="Confirm Email" tags="speaker-bot multiline" position="475,275" size="100,100">Ok. And the email {{which origin &quot;google-oauth2.+&quot; &quot;Google&quot; &quot;linkedin.+&quot; &quot;LinkedIn&quot; &quot;.*&quot; &quot;your email provider&quot;}} gave me is {{email}}.
 
 You can always update that later.
 
@@ -62,41 +20,53 @@ How should I refer to you?
 [[&quot;They&quot; pronouns (they/them)]]
 [[&quot;Ze&quot; pronouns (ze/zir)]]
 [[I&#39;d like to be specific]]
-[[Just use my name]]</tw-passagedata><tw-passagedata pid="4" name="&quot;He&quot; pronouns (he/him)" tags="auto system" position="300,425" size="100,100">#@yaml set: aboutPronoun him
+[[Just use my name]]</tw-passagedata><tw-passagedata pid="3" name="&quot;He&quot; pronouns (he/him)" tags="system" position="300,425" size="100,100">#@yaml set: aboutPronoun him
 #@yaml set: conjugatedPronoun he
 #@yaml set: posessivePronoun his
 
-[[Save]]</tw-passagedata><tw-passagedata pid="5" name="&quot;She&quot; pronouns (she/her)" tags="auto system" position="425,425" size="100,100">#@yaml set: aboutPronoun her
+[[Save]]</tw-passagedata><tw-passagedata pid="4" name="&quot;She&quot; pronouns (she/her)" tags="system" position="425,425" size="100,100">#@yaml set: aboutPronoun her
 #@yaml set: conjugatedPronoun she
 #@yaml set: posessivePronoun her
 
-[[Save]]</tw-passagedata><tw-passagedata pid="6" name="&quot;They&quot; pronouns (they/them)" tags="auto system" position="550,425" size="100,100">#@yaml set: aboutPronoun them
+[[Save]]</tw-passagedata><tw-passagedata pid="5" name="&quot;They&quot; pronouns (they/them)" tags="system" position="550,425" size="100,100">#@yaml set: aboutPronoun them
 #@yaml set: conjugatedPronoun they
 #@yaml set: posessivePronoun their
 
-[[Save]]</tw-passagedata><tw-passagedata pid="7" name="&quot;Ze&quot; pronouns (ze/zir)" tags="auto system" position="675,425" size="100,100">#@yaml set: aboutPronoun zir
+[[Save]]</tw-passagedata><tw-passagedata pid="6" name="&quot;Ze&quot; pronouns (ze/zir)" tags="system" position="675,425" size="100,100">#@yaml set: aboutPronoun zir
 #@yaml set: conjugatedPronoun ze
 #@yaml set: posessivePronoun zir
 
-[[Save]]</tw-passagedata><tw-passagedata pid="8" name="I&#39;d like to be specific" tags="speaker-bot auto" position="800,425" size="100,100">Okay. You can do that in your profile once we&#39;re done here.
+[[Save]]</tw-passagedata><tw-passagedata pid="7" name="I&#39;d like to be specific" tags="speaker-bot" position="800,425" size="100,100">Okay. You can do that in your profile once we&#39;re done here.
 
-[[Save]]</tw-passagedata><tw-passagedata pid="9" name="Just use my name" tags="auto speaker-bot" position="925,425" size="100,100">#@yaml set: aboutPronoun {{firstName}}
+[[Save]]</tw-passagedata><tw-passagedata pid="8" name="Just use my name" tags="speaker-bot" position="925,425" size="100,100">#@yaml set: aboutPronoun {{firstName}}
 #@yaml set: conjugatedPronoun {{firstName}}
 #@yaml set: posessivePronoun {{firstName}}
 
 No problem
 
-[[Save]]</tw-passagedata><tw-passagedata pid="10" name="Save" tags="speaker-bot auto" position="600,725" size="100,100">That&#39;s everything, let me save it for you.
+[[Save]]</tw-passagedata><tw-passagedata pid="9" name="Save" tags="speaker-bot" position="600,725" size="100,100">That&#39;s everything, let me save it for you.
 
-[[Save Action]]</tw-passagedata><tw-passagedata pid="11" name="start" tags="speaker-bot multiline" position="300,125" size="100,100">###@yaml
-- graphql:
-    id: currentAuthorization
-    query: *CURRENT_AUTHORIZATION
-    store:
-      - &quot;currentUser.id&quot;: userId
-      - &quot;currentUser.firstName&quot;: firstName
-      - &quot;currentUser.authorizations.nodes[0].providerEmails[0]&quot;: email
-      - &quot;currentUser.authorizations.nodes[0].providerId&quot;: origin
+[[Save Action]]</tw-passagedata><tw-passagedata pid="10" name="start" tags="speaker-bot multiline" position="300,125" size="100,100">###@yaml
+graphql:
+  id: currentAuthorization
+  query: |
+    query currentAuthorization {
+      currentUser {
+        id,
+        firstName,
+        authorizations (orderBy: PRIMARY_KEY_ASC) {
+          nodes {
+            providerId,
+            providerEmails
+          }
+        }
+      }
+    }
+  store:
+    - &quot;currentUser.id&quot;: userId
+    - &quot;currentUser.firstName&quot;: firstName
+    - &quot;currentUser.authorizations.nodes[0].providerEmails[0]&quot;: email
+    - &quot;currentUser.authorizations.nodes[0].providerId&quot;: origin
 ###
 
 Hey there!
@@ -106,14 +76,33 @@ I&#39;m Karl (he/him). The AI ibex of Aibex.
 I asked {{which origin &quot;google-oauth2.+&quot; &quot;Google&quot; &quot;linkedin.+&quot; &quot;LinkedIn&quot; &quot;.*&quot; &quot;your email provider&quot;}} what your name was, and they said &quot;{{default firstName &quot;to just use your email address&quot;}}&quot;. Is that right?
 
 [[Yes-&gt;Confirm Email]]
-[[No-&gt;Name Not OK]]</tw-passagedata><tw-passagedata pid="12" name="Next Steps" tags="speaker-bot auto" position="750,875" size="100,100">Next up, I&#39;d like to walk you through how Aibex works.
+[[No-&gt;Name Not OK]]</tw-passagedata><tw-passagedata pid="11" name="Next Steps" tags="speaker-bot" position="750,875" size="100,100">Next up, I&#39;d like to walk you through how Aibex works.
 close this, and when you&#39;re ready, let&#39;s chat about &quot;What Is Aibex&quot;
 
-[[end]]</tw-passagedata><tw-passagedata pid="13" name="end" tags="system" position="925,875" size="100,100">#@yaml end: true</tw-passagedata><tw-passagedata pid="14" name="Save Action" tags="auto speaker-bot" position="600,875" size="100,100">###@yaml
+[[end]]</tw-passagedata><tw-passagedata pid="12" name="end" tags="system" position="925,875" size="100,100">#@yaml end: true</tw-passagedata><tw-passagedata pid="13" name="Save Action" tags="speaker-bot" position="600,875" size="100,100">###@yaml
 graphql:
   id: updateUserData
-  query: *UPDATE_USER_DATA
-  variables: *UPDATE_USER_DATA_VARS
+  query: |
+    mutation updateUserData ($input: UpdateUserInput!) {
+      updateUser(input:$input) {
+        user {
+          id
+        }
+      }
+    }
+  variables: |
+    {
+      &quot;input&quot;: {
+        &quot;id&quot;: {{userId}},
+        &quot;patch&quot;: {
+          &quot;firstName&quot;: &quot;{{firstName}}&quot;,
+          &quot;aboutPronoun&quot;: &quot;{{aboutPronoun}}&quot;,
+          &quot;conjugatedPronoun&quot;: &quot;{{conjugatedPronoun}}&quot;,
+          &quot;possessivePronoun&quot;: &quot;{{possessivePronoun}}&quot;,
+          &quot;primaryEmail&quot;: &quot;{{email}}&quot;
+        }
+      }
+    }
   format: true
   store:
     - SUCCESS: updateResult
@@ -127,7 +116,9 @@ graphql:
   Awkward. Something went wrong. We&#39;ll come back to this
 {{~/ if ~}}
 
-[[Next Steps]]</tw-passagedata></tw-storydata>
+[[Next Steps]]</tw-passagedata><tw-passagedata pid="14" name="Enter Name" tags="system" position="622,127" size="100,100">#@prompt firstName
+
+[[Confirm Email]]</tw-passagedata></tw-storydata>
     </twine>
     <!-- prettier-ignore -->
     <script>document.querySelector("tw-passagedata[pid='"+document.querySelector("tw-storydata").getAttribute("startnode")+"']").classList.add("start");</script>

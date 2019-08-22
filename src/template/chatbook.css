@@ -316,10 +316,34 @@ div.wave .dot:nth-child(3) {
   }
 }
 
-/* Modal */
+/* Directives */
+.directives {
+  display: none;
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
+    "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+    "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier,
+    monospace;
+  font-size: 12px;
+}
 
-.modal-dialog {
-  max-width: 420px;
+.directive {
+  white-space: pre;
+  border: 1px dashed #666;
+  position: relative;
+}
+
+.directive::after {
+  content: attr(name);
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+}
+
+body.show-directives .directives {
+  display: block;
 }
 
 /* 

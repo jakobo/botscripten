@@ -1,4 +1,3 @@
-const IS_EXTERNAL_URL = /^\w+:\/\/\/?\w/i;
 const LINK_PATTERN = /\[\[(.*?)\]\]/g;
 
 const extractLinks = str => {
@@ -25,11 +24,6 @@ const extractLinks = str => {
         display = t.substr(leftArrIndex + 2);
         target = t.substr(0, leftArrIndex);
         break;
-    }
-
-    // render an external link & stop?
-    if (IS_EXTERNAL_URL.test(target)) {
-      return '<a href="' + target + '" target="_blank">' + display + "</a>";
     }
 
     links.push({

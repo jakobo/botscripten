@@ -42,6 +42,17 @@ const OTHER_PASSAGE_TMPL = ({ speaker, tags, text }) => `
   </div>
 `;
 
+const DIRECTIVES_TMPL = directives => `
+  <div class="directives">
+    ${directives
+      .map(
+        ({ name, content }) =>
+          `<div class="directive" name="${name}">${content.trim()}</div>`
+      )
+      .join("")}
+  </div>
+`;
+
 /**
  * Forces a delay via promises in order to spread out messages
  */
@@ -241,7 +252,11 @@ class Story {
   renderPassage = async (passage, renderer) => {
     const speaker = passage.getSpeaker();
     let statements = passage.render();
-    let next = statements.shift();
+    console.log(statements.directives);
+
+    await renderer(DIRECTIVES_TMPL(statements.directives));
+
+    let next = statements.text.shift();
     this.showTyping();
     while (next) {
       const content = OTHER_PASSAGE_TMPL({
@@ -251,7 +266,7 @@ class Story {
       });
       await delay(this.calculateDelay(next)); // todo
       await renderer(content);
-      next = statements.shift();
+      next = statements.text.shift();
     }
     this.hideTyping();
     this.scrollToBottom();

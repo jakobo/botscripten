@@ -38,7 +38,10 @@ const renderPassage = passage => {
 
   // if system tag, return an empty render set
   if (passage.hasTag("system")) {
-    return [];
+    return {
+      directives,
+      text: [],
+    };
   }
 
   // if prompt tag is set, notify the story
@@ -53,11 +56,17 @@ const renderPassage = passage => {
   // return the array
   if (passage.hasTag("multiline")) {
     result = result.trim();
-    return result.split(/[\r\n]+/g);
+    return {
+      directives,
+      text: result.split(/[\r\n]+/g),
+    };
   }
 
   // else returns an array of 1
-  return [result];
+  return {
+    directives,
+    text: [result],
+  };
 };
 
 class Passage {
