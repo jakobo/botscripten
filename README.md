@@ -79,13 +79,12 @@ Chatbook is designed to work exclusively with Twine's tag system. That means no 
 
 The following tags are supported by ChatbookViewer. It is assumed that anyone consuming a Chatbook formatted Twine story will also support these tags.
 
-| tag                    | explanation                                                                                                                                                                                                                                                                                                                                                            |
-| :--------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `auto`                 | Adding `auto` will automatically advance the conversation to the **first** link discovered in the conversation (using any of the standard `[[link]]`, `[[display -> destination]]` or `[[destination <- display]]` formats). Think of this as having your bot say multiple items, one after another.                                                                   |
-| `multiline`            | Adding `multiline` turns one speaker line into many. If you have more of an SMS-style of writing, the `multiline` tag will treat line breaks as new messages from the same speaker.                                                                                                                                                                                    |
-| `speaker-*` _(prefix)_ | The `speaker-*` tag describes "who" the message is from. For example, a tag of `speaker-bob` would imply the message should come from `bob`.                                                                                                                                                                                                                           |
-| `system`               | Use the `system` tag when you want to tag something as not originating from a speaker. Any output that _would have been generated_ from a `system` node is ignored                                                                                                                                                                                                     |
-| `prompt-*` _(prefix)_  | The `prompt-*` tag presents the user with a text box for input, saved to the remainder of the tag. So a tag of `prompt-firstName` implies that you want to prompt the user for text, which you wish to save as `firstName`. Upon answering the prompt, the first `[[link]]` encountered will be followed to continue the conversation, similar to the `auto` behavior. |
+| tag                    | explanation                                                                                                                                                                                                                                                         |
+| :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `multiline`            | Adding `multiline` turns one speaker line into many. If you have more of an SMS-style of writing, the `multiline` tag will treat line breaks as new messages from the same speaker.                                                                                 |
+| `speaker-*` _(prefix)_ | The `speaker-*` tag describes "who" the message is from. For example, a tag of `speaker-bob` would imply the message should come from `bob`.                                                                                                                        |
+| `system`               | Use the `system` tag when you want to tag something as not originating from a speaker. Any output that _would have been generated_ from a `system` node is ignored                                                                                                  |
+| `wait`                 | Adding `wait` will prevent the conversation from automatically advancing. Automatic advancement happens when there is exactly 1 link to follow, and the `wait` tag is not set. The most common reason for `wait` is to present some form of "continue" to the user. |
 
 To maintain compatibility with the [Twee 3 Specification](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-specification.md), the tags `script` and `stylesheet` will never be used.
 
@@ -176,7 +175,67 @@ Directives are evaluated after the Passage is parsed, but before any tag behavio
 
 # 📖 Node Module Documentation
 
-Most individuals are interested in writing for the Chatbook format, not consuming it. If you are looking to
+Most individuals are interested in writing for the Chatbook format, not consuming it. If you are looking to read chatbook's Twine HTML files, and are also in a node.js environment, you can install chatbook over npm/yarn and access the parser. Parsing a valid chatbook HTML file will yield the following:
+
+```js
+import chatbook from "@aibex/chatbook";
+import fs from "fs";
+
+const story = chatbook(fs.readFileSync("your/file.html").toString());
+
+story = {
+  name: "", // story name
+  start: null, // name ID of starting story node
+  startId: null, // numeric ID of starting story node
+  creator: "", // creator of story file
+  creatorVersion: "", // version of creator used
+  ifid: "", // IFID - Interactive Fiction ID
+  zoom: "", // Twine Zoom Level
+  format: "", // Story Format (Chatbook / ChatbookViewer)
+  formatVersion: "", // Version of Chatbook / ChatbookViewer used
+  options: "", // Twine options
+  tags: [
+    {
+      // A collection of tags in the following format...
+      name: "", // Tag name
+      color: "", // Tag color in Twine
+    },
+    // ...
+  ],
+  passages: [
+    {
+      // A collection of passages in the following format...
+      pid: null, // The passage's numeric ID
+      name: "", // The passage name
+      tags: [], // An array of tags for this passage
+      directives: [
+        {
+          // An array of Chatbook directives in the following format...
+          name: "", // The directive name
+          content: "", // The content in the directive, minus the name
+        },
+        // ...
+      ],
+      links: [
+        {
+          // Links discovered in the passage in the following format...
+          display: "", // The display text for a given link
+          target: "", // The destination Passage's name
+        },
+        // ...
+      ],
+      position: "", // The Twine position of this passage
+      size: "", // The Twine size of this passage
+      content: "", // The passage content minus links, comments, and directives
+    },
+    // ...
+  ],
+  passageIndex: {
+    [name]: id, // A lookup index of [Passage Name]: passageNumericId
+    //...
+  },
+};
+```
 
 # ⚠️ Why would you use Chatbook over <Insert Twine Format>?
 

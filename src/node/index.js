@@ -19,6 +19,7 @@ const storyDefaults = {
   options: "",
   tags: [],
   passages: [],
+  passageIndex: {},
 };
 
 const tagDefaults = {
@@ -27,7 +28,6 @@ const tagDefaults = {
 };
 
 const passageDefaults = {
-  id: null,
   pid: null,
   name: "",
   tags: [],
@@ -89,6 +89,7 @@ const parse = str => {
   const startId = s.getAttribute("startnode");
   const story = {
     ...storyDefaults,
+    startId,
     name: s.getAttribute("name") || "",
     start: passages[startId].name, // Twine starts PIDs at
     creator: s.getAttribute("creator") || "",

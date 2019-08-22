@@ -90,7 +90,7 @@ class Story {
     // elements
     this.elements = {
       active: find(this.document, selectActive),
-      history: find(this.document, selectHistory)
+      history: find(this.document, selectHistory),
     };
 
     // properties of story node
@@ -210,19 +210,15 @@ class Story {
       passage,
       s => (this.elements.active.innerHTML += s)
     );
-    if (passage.hasTag("auto")) {
-      // auto advance if the auto tag is set, skipping anything that
-      // could pause our operation
+
+    if (!passage.hasTag("wait") && passage.links.length === 1) {
+      // auto advance if the wait tag is not set and there is exactly
+      // 1 link found in our pssage.
       this.advance(this.findPassage(passage.links[0].target));
       return;
     }
 
-    // if prompt is set from the current node, enable freetext
-    if (this.showPrompt) {
-      this.renderTextInput(passage);
-    } else {
-      this.renderChoices(passage);
-    }
+    this.renderChoices(passage);
   };
 
   /**
@@ -232,7 +228,7 @@ class Story {
     await renderer(
       USER_PASSAGE_TMPL({
         pid,
-        text
+        text,
       })
     );
     this.scrollToBottom();
@@ -251,7 +247,7 @@ class Story {
       const content = OTHER_PASSAGE_TMPL({
         speaker,
         tags: passage.tags,
-        text: next
+        text: next,
       });
       await delay(this.calculateDelay(next)); // todo
       await renderer(content);
@@ -314,24 +310,6 @@ class Story {
       )}">${l.display}</a>`;
     });
   };
-
-  /**
-   * Renders a free-text input based on showPrompt settings
-   */
-  renderTextInput = passage => {
-    this.removeChoices();
-    const panel = find(this.document, selectResponses);
-    panel.innerHTML = `<input type="text" id="user-input" placeholder="${
-      this.showPrompt.placeholder
-    }" /><button data-passage="${escape(
-      passage.links[0].target
-    )}">&gt;</button>`;
-  };
-
-  /**
-   * Enables the text-input instead of standard choices
-   */
-  prompt = (saveAs, placeholder) => (this.showPrompt = { saveAs, placeholder });
 
   /**
    * Registers a custom directive for this story

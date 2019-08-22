@@ -35,14 +35,14 @@ const storyDefaults = {
   formatVersion: "",
   options: "",
   tags: [],
-  passages: []
+  passages: [],
+  passageIndex: {}
 };
 const tagDefaults = {
   name: "",
   color: ""
 };
 const passageDefaults = {
-  id: null,
   pid: null,
   name: "",
   tags: [],
@@ -94,6 +94,7 @@ const parse = str => {
   const startId = s.getAttribute("startnode");
 
   const story = _objectSpread({}, storyDefaults, {
+    startId,
     name: s.getAttribute("name") || "",
     start: passages[startId].name,
     // Twine starts PIDs at
