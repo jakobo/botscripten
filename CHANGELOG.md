@@ -1,6 +1,19 @@
 # Changelog
 
-# StoryFormat 0.1.1 / npm 0.1.1 (in progress)
+# 0.2.0
+
+- **Breaking Changes**
+  - The `auto` tag is removed, and is assumed to be the default behavior. If you would like to pause the conversation until the user takes an action, you should use the `wait` tag instead.
+  - The `prompt-*` tag is removed. If you want to prompt, it's recommended to do so as a directive. This ensures that your Chatbook script is as portable as possible and isn't bound to the constraints of Twine's tag system
+- **Features**
+  - ChatbookViewer - You can now use the `show directives` option to view any directives you've defined. This uses the same extractor as the npm module
+
+**0.1.1 > 0.2.0 Migration Guide** <br>
+To migrate to 0.2.0, you'll want to add a `wait` tag anywhere you intentionally want Chatbook to pause for user input and there was only a single link available. `auto` tags can be cleaned up at your leisure.
+
+You'll also need to replace your `prompt-*` tags with a directive. We recommend `#@prompt saveAsName` which will require minimal code change for any parsers/interpreters that were relying on prompt tags.
+
+# 0.1.1
 
 - **Features**
   - node.js support. Chatbook now has a simple parser for Chatbook-formated Twine2 files.
@@ -17,7 +30,7 @@
 
 Between 0.1.0 and 0.1.1, the `chatbook` repository was transferred to the `aibexhq` organization. Contributors remained the same.
 
-# StoryFormat 0.1.0 / npm 0.1.0
+# 0.1.0
 
 - **Breaking Changes**
   - Comments are migrated from JavaScript style `/* ... */` to using Octothorpes `#` / `###`. This allos us to support Directives.

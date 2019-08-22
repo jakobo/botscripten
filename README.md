@@ -5,7 +5,7 @@
 ![Chatbook logo](dist/Twine2/Chatbook/icon.svg)
 
 [![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
-[![Story Format Version](https://img.shields.io/badge/StoryFormat-0.1.0-blue)](/dist/Twine2)
+[![Story Format Version](https://img.shields.io/badge/StoryFormat-0.2.0-blue)](/dist/Twine2)
 [![npm](https://img.shields.io/npm/v/@aibex/chatbook)](https://www.npmjs.com/package/@aibex/chatbook)
 [![CircleCI](https://circleci.com/gh/aibexhq/chatbook/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/chatbook/tree/master)
 
@@ -50,12 +50,14 @@ Chatbook comes with two distinct flavors: **An Interactive Output** (ChatbookVie
 
 1. From the Twine menu, select `Formats`
 2. Then, select the `Add a New Format` tab
-3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/chatbook@0.1.0/dist/Twine2/Chatbook/format.js`
+3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/chatbook@0.2.0/dist/Twine2/Chatbook/format.js`
 4. Click `Add`
-5. Then, `https://cdn.jsdelivr.net/gh/aibexhq/chatbook@0.1.0/dist/Twine2/ChatbookViewer/format.js`
+5. Then, `https://cdn.jsdelivr.net/gh/aibexhq/chatbook@0.2.0/dist/Twine2/ChatbookViewer/format.js`
 6. Click `Add`
 
 Once you've done this, you can either select Chatbook or ChatbookViewer (Interactive) as your default format.
+
+If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide.
 
 ## Create your first chat story
 
