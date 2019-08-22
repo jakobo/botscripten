@@ -1,7 +1,7 @@
 const TOKEN_ESCAPED_OCTO = "__TOKEN_ESCAPED_BACKSLASH_OCTO__";
 
 const BLOCK_COMMENT = /###[\s\S]*?###/gm;
-const INLINE_COMMENT = /^#.*$/g;
+const INLINE_COMMENT = /^#.*$/gm;
 
 const stripComments = str =>
   str
