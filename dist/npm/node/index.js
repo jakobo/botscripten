@@ -17,6 +17,8 @@ var _extractLinks = _interopRequireDefault(require("../common/extractLinks"));
 
 var _stripComments = _interopRequireDefault(require("../common/stripComments"));
 
+var _lodash = _interopRequireDefault(require("lodash.unescape"));
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -65,15 +67,16 @@ const parse = str => {
   const pIndex = {};
   p.forEach(pg => {
     const index = passages.length;
-    const directives = (0, _extractDirectives.default)(pg.innerHTML);
-    let content = (0, _stripComments.default)(pg.innerHTML);
+    const raw = (0, _lodash.default)(pg.innerHTML);
+    const directives = (0, _extractDirectives.default)(raw);
+    let content = (0, _stripComments.default)(raw);
     const linkData = (0, _extractLinks.default)(content);
     content = linkData.updated;
     content = content.trim();
     const pid = pg.getAttribute("pid");
     passages[pid] = _objectSpread({}, passageDefaults, {
       pid: pg.getAttribute("pid"),
-      name: pg.getAttribute("name") || "",
+      name: (0, _lodash.default)(pg.getAttribute("name") || ""),
       tags: (pg.getAttribute("tags") || "").split(/[\s]+/g),
       position: pg.getAttribute("position") || `${index * 10},${index * 10}`,
       size: pg.getAttribute("size") || "100,100",
@@ -95,16 +98,16 @@ const parse = str => {
 
   const story = _objectSpread({}, storyDefaults, {
     startId,
-    name: s.getAttribute("name") || "",
-    start: passages[startId].name,
+    name: (0, _lodash.default)(s.getAttribute("name") || ""),
+    start: (0, _lodash.default)(passages[startId].name),
     // Twine starts PIDs at
-    creator: s.getAttribute("creator") || "",
+    creator: (0, _lodash.default)(s.getAttribute("creator") || ""),
     creatorVersion: s.getAttribute("creator-verson") || "",
     ifid: s.getAttribute("ifid") || "",
     zoom: s.getAttribute("zoom") || "1",
     format: s.getAttribute("format") || "",
     formatVersion: s.getAttribute("format-version") || "",
-    options: s.getAttribute("options") || "",
+    options: (0, _lodash.default)(s.getAttribute("options") || ""),
     passageIndex: pIndex,
     tags,
     passages

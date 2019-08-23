@@ -3,6 +3,7 @@ import { JSDOM } from "jsdom";
 import extractDirectives from "../common/extractDirectives";
 import extractLinks from "../common/extractLinks";
 import stripComments from "../common/stripComments";
+import unescape from "lodash.unescape";
 
 const gen$ = d => q => [...d.querySelectorAll(q)];
 
@@ -52,8 +53,9 @@ const parse = str => {
   const pIndex = {};
   p.forEach(pg => {
     const index = passages.length;
-    const directives = extractDirectives(pg.innerHTML);
-    let content = stripComments(pg.innerHTML);
+    const raw = unescape(pg.innerHTML);
+    const directives = extractDirectives(raw);
+    let content = stripComments(raw);
 
     const linkData = extractLinks(content);
     content = linkData.updated;
@@ -64,7 +66,7 @@ const parse = str => {
     passages[pid] = {
       ...passageDefaults,
       pid: pg.getAttribute("pid"),
-      name: pg.getAttribute("name") || "",
+      name: unescape(pg.getAttribute("name") || ""),
       tags: (pg.getAttribute("tags") || "").split(/[\s]+/g),
       position: pg.getAttribute("position") || `${index * 10},${index * 10}`,
       size: pg.getAttribute("size") || "100,100",
@@ -90,15 +92,15 @@ const parse = str => {
   const story = {
     ...storyDefaults,
     startId,
-    name: s.getAttribute("name") || "",
-    start: passages[startId].name, // Twine starts PIDs at
-    creator: s.getAttribute("creator") || "",
+    name: unescape(s.getAttribute("name") || ""),
+    start: unescape(passages[startId].name), // Twine starts PIDs at
+    creator: unescape(s.getAttribute("creator") || ""),
     creatorVersion: s.getAttribute("creator-verson") || "",
     ifid: s.getAttribute("ifid") || "",
     zoom: s.getAttribute("zoom") || "1",
     format: s.getAttribute("format") || "",
     formatVersion: s.getAttribute("format-version") || "",
-    options: s.getAttribute("options") || "",
+    options: unescape(s.getAttribute("options") || ""),
     passageIndex: pIndex,
     tags,
     passages,

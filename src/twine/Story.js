@@ -1,5 +1,6 @@
 import Passage from "./Passage";
 import escape from "lodash.escape";
+import unescape from "lodash.unescape";
 
 const selectPassages = "tw-passagedata";
 const selectCss = '*[type="text/twine-css"]';
@@ -185,7 +186,7 @@ class Story {
     } else {
       // handle passages with ' and " (can't use a css selector consistently)
       const p = findAll(this.story, "tw-passagedata").filter(
-        p => p.getAttribute("name") === idOrName
+        p => unescape(p.getAttribute("name")) === idOrName
       )[0];
       if (!p) return null;
       return this.passages[p.getAttribute("pid")];
