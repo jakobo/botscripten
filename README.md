@@ -22,8 +22,8 @@ Chatbook is also available as an npm parser, able to handle Passage-specific fea
 
 If "yes", then Chatbook is worth looking into.
 
-🔮 [Example Using ChatbookViewer](http://htmlpreview.github.io/?https://github.com/aibexhq/chatbook/blob/master/examples/onboarding.html)) <br>
-📦 [Example Using Chatbook](http://htmlpreview.github.io/?https://github.com/aibexhq/chatbook/blob/master/examples/onboarding.min.html))
+🔮 [Example Using ChatbookViewer](http://htmlpreview.github.io/?https://github.com/aibexhq/chatbook/blob/master/examples/onboarding.html) <br>
+📦 [Example Using Chatbook](http://htmlpreview.github.io/?https://github.com/aibexhq/chatbook/blob/master/examples/onboarding.min.html)
 
 Chatbook comes with two distinct flavors: **An Interactive Output** (ChatbookViewer) for testing and stepping through conversations in a pseudo chat interface based on the Trialogue code, and **A Minimal Output** (Chatbook) for using your Twine output files in other systems. When developing a rich chatbot conversation, you'll use ChatbookViewer. When you're ready to publish, you'll select the Chatbook format and shed all of the HTML/CSS/JavaScript required for the interactive version.
 
