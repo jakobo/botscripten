@@ -9,6 +9,8 @@
 [![npm](https://img.shields.io/npm/v/@aibex/chatbook)](https://www.npmjs.com/package/@aibex/chatbook)
 [![CircleCI](https://circleci.com/gh/aibexhq/chatbook/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/chatbook/tree/master)
 
+**Upgrading? Check the [Changelog](/CHANGELOG.md)**
+
 Chatbook is a chat-style [Twine](http://twinery.org) Story Fromat based on [Trialogue](https://github.com/phivk/trialogue) and its predecessors. Unlike other Twine sources, Chatbook is optimized for **an external runtime**. That is, while you can use Chatbook for Interactive Fiction, that's not this story format's intent.
 
 Chatbook is also available as an npm parser, able to handle Passage-specific features found in the Chatbook format. It's available via `npm install @aibex/chatbook` or `yarn add @aibex/chatbook`.
