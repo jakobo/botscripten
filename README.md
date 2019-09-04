@@ -38,7 +38,7 @@ Chatbook comes with two distinct flavors: **An Interactive Output** (ChatbookVie
   - [Conditional Branching (cycles, etc)](#conditional-branching-cycles-etc)
   - [Scripting Directives in ChatbookViewer](#scripting-directives-in-chatbookviewer)
 - [📖 Node Module Documentation](#-node-module-documentation)
-- [⚠️ Why would you use Chatbook over <Insert Twine Format>?](#️-why-would-you-use-chatbook-over-insert-twine-format)
+- [⚠️ Why would you use Chatbook over (Insert Twine Format)?](#️-why-would-you-use-chatbook-over-insert-twine-format)
 - [Developing on Chatbook](#developing-on-chatbook)
   - [Local Development](#local-development)
   - [Building for Release](#building-for-release)
@@ -241,7 +241,7 @@ story = {
 };
 ```
 
-# ⚠️ Why would you use Chatbook over <Insert Twine Format>?
+# ⚠️ Why would you use Chatbook over (Insert Twine Format])?
 
 First off, every Twine format I've worked with is amazing and super thougtful. If your goal is to create interactive fiction, self-contained tutorials, etc, you should just use Trialogue, Harlowe, or Sugarcube. However, if you're using Twine as a conversation editor (and you are more interested in the `tw-passagedata` blocks and the data structure behind Twine) Chatbook may be for you.
 
