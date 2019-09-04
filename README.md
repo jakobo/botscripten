@@ -36,7 +36,7 @@ Chatbook comes with two distinct flavors: **An Interactive Output** (ChatbookVie
   - [Conditional Branching (cycles, etc)](#conditional-branching-cycles-etc)
   - [Scripting Directives in ChatbookViewer](#scripting-directives-in-chatbookviewer)
 - [📖 Node Module Documentation](#-node-module-documentation)
-- [⚠️ Why would you use Chatbook over <Insert Twine Format>?](#️-why-would-you-use-chatbook-over-insert-twine-format)
+- [⚠️ Why would you use Chatbook over [[Insert Twine Format]]?](#️-why-would-you-use-chatbook-over-insert-twine-format)
 - [Developing on Chatbook](#developing-on-chatbook)
   - [Local Development](#local-development)
   - [Building for Release](#building-for-release)
@@ -83,9 +83,8 @@ The following tags are supported by ChatbookViewer. It is assumed that anyone co
 
 | tag                    | explanation                                                                                                                                                                                                                                                         |
 | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `multiline`            | Adding `multiline` turns one speaker line into many. If you have more of an SMS-style of writing, the `multiline` tag will treat line breaks as new messages from the same speaker.                                                                                 |
-| `speaker-*` _(prefix)_ | The `speaker-*` tag describes "who" the message is from. For example, a tag of `speaker-bob` would imply the message should come from `bob`.                                                                                                                        |
-| `system`               | Use the `system` tag when you want to tag something as not originating from a speaker. Any output that _would have been generated_ from a `system` node is ignored                                                                                                  |
+| `oneline`              | Adding `oneline` turns the entire block of speaker text into a single line. By default, newlines are treated as individual messages, much like a set of SMS messages.                                                                                               |
+| `speaker-*` _(prefix)_ | The `speaker-*` tag describes "who" the message is from. For example, a tag of `speaker-bob` would imply the message should come from `bob`. Any passages without a speaker tag are treated as system-level messages and are ignored.                               |
 | `wait`                 | Adding `wait` will prevent the conversation from automatically advancing. Automatic advancement happens when there is exactly 1 link to follow, and the `wait` tag is not set. The most common reason for `wait` is to present some form of "continue" to the user. |
 
 To maintain compatibility with the [Twee 3 Specification](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-specification.md), the tags `script` and `stylesheet` will never be used.
@@ -141,7 +140,19 @@ Anyone parsing Chatbook Twine files can assume that the regexes `/^#@([\S]+)(.*)
 
 There is no set definition for directives, as adding a directive to Chatbook would require **every external parser to also support it**. This is also why Chatbook is so light- there's almost no parsing being done of the individual Passages.
 
-For consistency with ChatbookViewer, directives should run when a Passage is parsed, but before any tag behavior (such as `auto` or `speaker-*` are applied) This allows directives to form opinions about the Passage and output during rendering.
+For consistency with ChatbookViewer, directives should run when a Passage is parsed, but before any tag behavior (such as `wait` or `speaker-*` are applied) This allows directives to form opinions about the Passage and output during rendering.
+
+⚠️ **WARNING** Directives run _FIRST_, before any wait/speaker/oneline tags take effect. This can cause unexpected behavior. Consider the following passage:
+
+```
+This is some text
+
+#@directive here
+
+And some more text
+```
+
+The directive will be extracted and ran before any messages are sent. To mitigate this (or simply reduce bugs in your script), you need to split your passage up so that the directives come _FIRST_ in your passage.
 
 ## Conditional Branching (cycles, etc)
 
@@ -239,7 +250,7 @@ story = {
 };
 ```
 
-# ⚠️ Why would you use Chatbook over <Insert Twine Format>?
+# ⚠️ Why would you use Chatbook over [[Insert Twine Format]]?
 
 First off, every Twine format I've worked with is amazing and super thougtful. If your goal is to create interactive fiction, self-contained tutorials, etc, you should just use Trialogue, Harlowe, or Sugarcube. However, if you're using Twine as a conversation editor (and you are more interested in the `tw-passagedata` blocks and the data structure behind Twine) Chatbook may be for you.
 

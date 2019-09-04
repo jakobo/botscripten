@@ -9,13 +9,9 @@ onboarding
 	"format-version": "0.1.3",
 	"start": "start",
 	"tag-colors": {
-		"auto": "green",
-		"metadata": "blue",
-		"prologue": "blue",
-		"prompt-firstName": "yellow",
-		"speaker-bot": "orange",
-		"speaker-system": "purple",
-		"system": "purple"
+		"wait": "red",
+    "oneline": "green",
+		"speaker-bot": "purple"
 	},
 	"zoom": 1
 }
@@ -44,7 +40,7 @@ How should I refer to you?
 [[Just use my name]]
 
 
-:: "He" pronouns (he/him) [system] {"position":"300,425","size":"100,100"}
+:: "He" pronouns (he/him) [] {"position":"300,425","size":"100,100"}
 #@yaml set: aboutPronoun him
 #@yaml set: conjugatedPronoun he
 #@yaml set: posessivePronoun his
@@ -52,7 +48,7 @@ How should I refer to you?
 [[Save]]
 
 
-:: "She" pronouns (she/her) [system] {"position":"425,425","size":"100,100"}
+:: "She" pronouns (she/her) [] {"position":"425,425","size":"100,100"}
 #@yaml set: aboutPronoun her
 #@yaml set: conjugatedPronoun she
 #@yaml set: posessivePronoun her
@@ -60,7 +56,7 @@ How should I refer to you?
 [[Save]]
 
 
-:: "They" pronouns (they/them) [system] {"position":"550,425","size":"100,100"}
+:: "They" pronouns (they/them) [] {"position":"550,425","size":"100,100"}
 #@yaml set: aboutPronoun them
 #@yaml set: conjugatedPronoun they
 #@yaml set: posessivePronoun their
@@ -68,7 +64,7 @@ How should I refer to you?
 [[Save]]
 
 
-:: "Ze" pronouns (ze/zir) [system] {"position":"675,425","size":"100,100"}
+:: "Ze" pronouns (ze/zir) [] {"position":"675,425","size":"100,100"}
 #@yaml set: aboutPronoun zir
 #@yaml set: conjugatedPronoun ze
 #@yaml set: posessivePronoun zir
@@ -139,11 +135,11 @@ close this, and when you're ready, let's chat about "What Is Aibex"
 [[end]]
 
 
-:: end [system] {"position":"925,875","size":"100,100"}
-#@yaml end: true
+:: end [] {"position":"925,875","size":"100,100"}
+#@end
 
 
-:: Save Action [speaker-bot] {"position":"600,875","size":"100,100"}
+:: Save Action [speaker-bot, oneline] {"position":"600,875","size":"100,100"}
 ###@yaml
 graphql:
   id: updateUserData
@@ -184,7 +180,7 @@ graphql:
 [[Next Steps]]
 
 
-:: Enter Name [system] {"position":"622,127","size":"100,100"}
+:: Enter Name [] {"position":"622,127","size":"100,100"}
 #@prompt firstName
 
 [[Confirm Email]]

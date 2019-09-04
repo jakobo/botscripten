@@ -1,5 +1,20 @@
 # Changelog
 
+# 0.3.0
+
+- **Breaking Changes**
+  - The `system` tag is removed. Passages are assumed to be system level passages unless a `speaker-*` tag is defined
+  - `multiline` is the default behavior. To deliver a large block of text with newlines, use the `oneline` tag
+- **Features**
+  - "Show Directives" is now enabled by default
+- **Documentation Updates**
+  - Added clarity to how directives parse. Adding a directive in the middle of a passage will cause unexpected behavior. This is because all directives are extracted and ran _FIRST_. The most common solution to this is to split a passage up, ensuring that the second passage begins with the relevant directive(s).
+
+**0.2.x > 0.3.0 Migration Guide** <br>
+To migrate to 0.3.0, you'll want to ensure you have `speaker-*` tags on every line you wish to have a speaker for. Additionally, you will want to add the `oneline` tag to any passages you wish to deliver at once instead of incrementally.
+
+The `system` and `multline` tags can be removed at your leisure.
+
 # 0.2.0
 
 - **Breaking Changes**
