@@ -36,8 +36,8 @@ const renderPassage = passage => {
     });
   });
 
-  // if system tag, return an empty render set
-  if (passage.hasTag("system")) {
+  // if no speaker tag, return an empty render set
+  if (!passage.getSpeaker()) {
     return {
       directives,
       text: [],
@@ -52,20 +52,19 @@ const renderPassage = passage => {
     }
   }
 
-  // if this is a multiline item, trim, split, and mark each item
-  // return the array
-  if (passage.hasTag("multiline")) {
-    result = result.trim();
+  if (passage.hasTag("oneline")) {
     return {
       directives,
-      text: result.split(/[\r\n]+/g),
+      text: [result],
     };
   }
 
-  // else returns an array of 1
+  // if this is a multiline item, trim, split, and mark each item
+  // return the array
+  result = result.trim();
   return {
     directives,
-    text: [result],
+    text: result.split(/[\r\n]+/g),
   };
 };
 
@@ -89,9 +88,7 @@ class Passage {
 
   getSpeaker = () => {
     const speakerTag = this.tags.find(t => t.indexOf("speaker-") === 0) || "";
-    const systemTag = this.hasTag("system");
     if (speakerTag) return speakerTag.replace(/^speaker-/, "");
-    if (systemTag) return "system";
     return null;
   };
 

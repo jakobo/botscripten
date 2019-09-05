@@ -4,9 +4,9 @@
 
 ![Chatbook logo](dist/Twine2/Chatbook/icon.svg)
 
-[![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
-[![Story Format Version](https://img.shields.io/badge/StoryFormat-0.2.0-blue)](/dist/Twine2)
+[![Story Format Version](https://img.shields.io/badge/StoryFormat-0.3.0-blue)](/dist/Twine2)
 [![npm](https://img.shields.io/npm/v/@aibex/chatbook)](https://www.npmjs.com/package/@aibex/chatbook)
+[![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
 [![CircleCI](https://circleci.com/gh/aibexhq/chatbook/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/chatbook/tree/master)
 
 **Upgrading? Check the [Changelog](/CHANGELOG.md)**
@@ -52,14 +52,12 @@ Chatbook comes with two distinct flavors: **An Interactive Output** (ChatbookVie
 
 1. From the Twine menu, select `Formats`
 2. Then, select the `Add a New Format` tab
-3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/chatbook@0.2.0/dist/Twine2/Chatbook/format.js`
+3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/chatbook@0.3.0/dist/Twine2/Chatbook/format.js`
 4. Click `Add`
-5. Then, `https://cdn.jsdelivr.net/gh/aibexhq/chatbook@0.2.0/dist/Twine2/ChatbookViewer/format.js`
+5. Then, `https://cdn.jsdelivr.net/gh/aibexhq/chatbook@0.3.0/dist/Twine2/ChatbookViewer/format.js`
 6. Click `Add`
 
-Once you've done this, you can either select Chatbook or ChatbookViewer (Interactive) as your default format.
-
-If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide.
+Once you've done this, you will have access to Chatbook and ChatbookViewer story formats in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide, as migrating to 0.3.0 can introduce breaking changes.
 
 ## Create your first chat story
 
@@ -130,9 +128,9 @@ If you look at the [onboarding example](/examples/onboarding.twee), you'll notic
 These special comments are called **Directives** and they consist of the comment identifier (`#` or `###`) immediatly followed by `@` and a `word`. These are all Directives:
 
 ```
-#@yaml
+#@doAThing
 
-#@party true
+#@make party
 
 ###@sql
 INSERT INTO winners (name, time) VALUES ('you', NOW())
@@ -141,35 +139,29 @@ INSERT INTO winners (name, time) VALUES ('you', NOW())
 
 Anyone parsing Chatbook Twine files can assume that the regexes `/^#@([\S]+)(.*)/g` (inline) and `/^###@([\S]+)([\s\S]*?)###/gm` (block) will match and extract the directive and the remainder of the comment.
 
+For consistency with ChatbookViewer, directives should be run when a Passage is parsed, but before any tag behavior (such as `auto` or `speaker-*` are applied) This allows directives to form opinions about the Passage and it's output before rendering occurs.
+
 There is no set definition for directives, as adding a directive to Chatbook would require **every external parser to also support it**. This is also why Chatbook is so light- there's almost no parsing being done of the individual Passages.
 
-For consistency with ChatbookViewer, directives should run when a Passage is parsed, but before any tag behavior (such as `auto` or `speaker-*` are applied) This allows directives to form opinions about the Passage and output during rendering.
+But if you'd like some examples, these are some directives we think are pretty useful and are worth implementing:
+
+- `#@set <name> <value>` - A directive that sets a local variable `<name>` to value `<value>` within the conversation
+- `#@increment <name> <amount>` - A directive to increment a local variable `<name>` by amount `<amount>`
+- `#@end` - A directive that tells the system to end a conversation (don't put any `[[links]]` in this passage obviously!)
 
 ## Conditional Branching (cycles, etc)
 
 Since Chatbook does not maintain a concept of state, nor have a way to script items such as cycling or conditional links, you should present **all possible branches** using the `[[link]]` syntax. This will allow you to view all permutations in ChatbookViewer.
 
-You can then select a [Directive](#%22special%22-comments-directives) that controls what links are available at runtime. Below is a hypothetical directive that checks a variable in the system in order to determine what branch should be automatically followed.
-
-```
-In ChatbookViewer, I will present this as a list of options. But my runtime engine
-may look at the two directives below and determine that we should automatically
-advance to labelA or labelB.
-
-#@advance TO labelA IF earlierChoice = "foo"
-#@advance TO labelB IF earlierChoice = "foo"
-
-[[labelA -> I am option one]]
-[[labelB -> I am option two]]
-```
+Conditional branching can then be implemented as a [Directive](#%22special%22-comments-directives). This gives you control outside of the Twine environment as to which link is followed under what conditions.
 
 ## Scripting Directives in ChatbookViewer
 
-If you absolutely want to handle Directives in ChatbookViewer, you can do so by selecting `Edit Story JavaScript` in Twine, and registering a handler for your directive. For example, this logs all `@yaml` directives' content to the developer tools console.
+If you absolutely want to handle Directives in ChatbookViewer, you can do so by selecting `Edit Story JavaScript` in Twine, and registering a handler for your directive. For example, this logs all `@log` directives' content to the developer tools console.
 
 ```
-story.directive("@yaml", function(info, rendered, passage, story) {
-  console.log("YAML data from " + passage.id);
+story.directive("@log", function(info, rendered, passage, story) {
+  console.log("LOG data from " + passage.id);
   console.log("Directive contained: " + info);
   return rendered; // return the original (or altered) output
 });
@@ -241,7 +233,7 @@ story = {
 };
 ```
 
-# ⚠️ Why would you use Chatbook over (Insert Twine Format])?
+# ⚠️ Why would you use Chatbook over (Insert Twine Format)?
 
 First off, every Twine format I've worked with is amazing and super thougtful. If your goal is to create interactive fiction, self-contained tutorials, etc, you should just use Trialogue, Harlowe, or Sugarcube. However, if you're using Twine as a conversation editor (and you are more interested in the `tw-passagedata` blocks and the data structure behind Twine) Chatbook may be for you.
 

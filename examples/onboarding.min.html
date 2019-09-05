@@ -5,7 +5,7 @@
   </head>
   <body>
     <twine>
-      <!-- UUID://DEC7B08C-8D6C-416E-A86D-180A53DBF339// --><tw-storydata name="onboarding" startnode="10" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="DEC7B08C-8D6C-416E-A86D-180A53DBF339" zoom="1" format="TEST_Chatbook" format-version="0.2.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="speaker-bot" color="orange"></tw-tag><tw-tag name="speaker-system" color="purple"></tw-tag><tw-tag name="system" color="purple"></tw-tag><tw-tag name="auto" color="green"></tw-tag><tw-tag name="metadata" color="blue"></tw-tag><tw-tag name="prologue" color="blue"></tw-tag><tw-tag name="prompt-firstName" color="yellow"></tw-tag><tw-passagedata pid="1" name="Name Not OK" tags="speaker-bot" position="475,125" size="100,100">Okay, what name would you like me to use?
+      <!-- UUID://DEC7B08C-8D6C-416E-A86D-180A53DBF339// --><tw-storydata name="onboarding" startnode="10" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="DEC7B08C-8D6C-416E-A86D-180A53DBF339" zoom="1" format="TEST_Chatbook" format-version="0.2.2" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="wait" color="red"></tw-tag><tw-tag name="oneline" color="green"></tw-tag><tw-tag name="speaker-bot" color="purple"></tw-tag><tw-passagedata pid="1" name="Name Not OK" tags="speaker-bot" position="475,125" size="100,100">Okay, what name would you like me to use?
 
 [[Enter Name]]</tw-passagedata><tw-passagedata pid="2" name="Confirm Email" tags="speaker-bot multiline" position="475,275" size="100,100">Ok. And the email {{which origin &quot;google-oauth2.+&quot; &quot;Google&quot; &quot;linkedin.+&quot; &quot;LinkedIn&quot; &quot;.*&quot; &quot;your email provider&quot;}} gave me is {{email}}.
 
@@ -20,19 +20,19 @@ How should I refer to you?
 [[&quot;They&quot; pronouns (they/them)]]
 [[&quot;Ze&quot; pronouns (ze/zir)]]
 [[I&#39;d like to be specific]]
-[[Just use my name]]</tw-passagedata><tw-passagedata pid="3" name="&quot;He&quot; pronouns (he/him)" tags="system" position="300,425" size="100,100">#@yaml set: aboutPronoun him
+[[Just use my name]]</tw-passagedata><tw-passagedata pid="3" name="&quot;He&quot; pronouns (he/him)" tags="" position="300,425" size="100,100">#@yaml set: aboutPronoun him
 #@yaml set: conjugatedPronoun he
 #@yaml set: posessivePronoun his
 
-[[Save]]</tw-passagedata><tw-passagedata pid="4" name="&quot;She&quot; pronouns (she/her)" tags="system" position="425,425" size="100,100">#@yaml set: aboutPronoun her
+[[Save]]</tw-passagedata><tw-passagedata pid="4" name="&quot;She&quot; pronouns (she/her)" tags="" position="425,425" size="100,100">#@yaml set: aboutPronoun her
 #@yaml set: conjugatedPronoun she
 #@yaml set: posessivePronoun her
 
-[[Save]]</tw-passagedata><tw-passagedata pid="5" name="&quot;They&quot; pronouns (they/them)" tags="system" position="550,425" size="100,100">#@yaml set: aboutPronoun them
+[[Save]]</tw-passagedata><tw-passagedata pid="5" name="&quot;They&quot; pronouns (they/them)" tags="" position="550,425" size="100,100">#@yaml set: aboutPronoun them
 #@yaml set: conjugatedPronoun they
 #@yaml set: posessivePronoun their
 
-[[Save]]</tw-passagedata><tw-passagedata pid="6" name="&quot;Ze&quot; pronouns (ze/zir)" tags="system" position="675,425" size="100,100">#@yaml set: aboutPronoun zir
+[[Save]]</tw-passagedata><tw-passagedata pid="6" name="&quot;Ze&quot; pronouns (ze/zir)" tags="" position="675,425" size="100,100">#@yaml set: aboutPronoun zir
 #@yaml set: conjugatedPronoun ze
 #@yaml set: posessivePronoun zir
 
@@ -79,7 +79,7 @@ I asked {{which origin &quot;google-oauth2.+&quot; &quot;Google&quot; &quot;link
 [[No-&gt;Name Not OK]]</tw-passagedata><tw-passagedata pid="11" name="Next Steps" tags="speaker-bot" position="750,875" size="100,100">Next up, I&#39;d like to walk you through how Aibex works.
 close this, and when you&#39;re ready, let&#39;s chat about &quot;What Is Aibex&quot;
 
-[[end]]</tw-passagedata><tw-passagedata pid="12" name="end" tags="system" position="925,875" size="100,100">#@yaml end: true</tw-passagedata><tw-passagedata pid="13" name="Save Action" tags="speaker-bot" position="600,875" size="100,100">###@yaml
+[[end]]</tw-passagedata><tw-passagedata pid="12" name="end" tags="" position="925,875" size="100,100">#@end</tw-passagedata><tw-passagedata pid="13" name="Save Action" tags="speaker-bot, oneline" position="600,875" size="100,100">###@yaml
 graphql:
   id: updateUserData
   query: |
@@ -116,7 +116,7 @@ graphql:
   Awkward. Something went wrong. We&#39;ll come back to this
 {{~/ if ~}}
 
-[[Next Steps]]</tw-passagedata><tw-passagedata pid="14" name="Enter Name" tags="system" position="622,127" size="100,100">#@prompt firstName
+[[Next Steps]]</tw-passagedata><tw-passagedata pid="14" name="Enter Name" tags="" position="622,127" size="100,100">#@prompt firstName
 
 [[Confirm Email]]</tw-passagedata></tw-storydata>
     </twine>
