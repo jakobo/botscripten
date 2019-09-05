@@ -6,7 +6,7 @@ onboarding
 {
 	"ifid": "DEC7B08C-8D6C-416E-A86D-180A53DBF339",
 	"format": "TEST_ChatbookViewer",
-	"format-version": "0.1.3",
+	"format-version": "0.3.0",
 	"start": "start",
 	"tag-colors": {
 		"wait": "red",
@@ -41,33 +41,33 @@ How should I refer to you?
 
 
 :: "He" pronouns (he/him) [] {"position":"300,425","size":"100,100"}
-#@yaml set: aboutPronoun him
-#@yaml set: conjugatedPronoun he
-#@yaml set: posessivePronoun his
+#@set aboutPronoun him
+#@set conjugatedPronoun he
+#@set posessivePronoun his
 
 [[Save]]
 
 
 :: "She" pronouns (she/her) [] {"position":"425,425","size":"100,100"}
-#@yaml set: aboutPronoun her
-#@yaml set: conjugatedPronoun she
-#@yaml set: posessivePronoun her
+#@set aboutPronoun her
+#@set conjugatedPronoun she
+#@set posessivePronoun her
 
 [[Save]]
 
 
 :: "They" pronouns (they/them) [] {"position":"550,425","size":"100,100"}
-#@yaml set: aboutPronoun them
-#@yaml set: conjugatedPronoun they
-#@yaml set: posessivePronoun their
+#@set aboutPronoun them
+#@set conjugatedPronoun they
+#@set posessivePronoun their
 
 [[Save]]
 
 
 :: "Ze" pronouns (ze/zir) [] {"position":"675,425","size":"100,100"}
-#@yaml set: aboutPronoun zir
-#@yaml set: conjugatedPronoun ze
-#@yaml set: posessivePronoun zir
+#@set aboutPronoun zir
+#@set conjugatedPronoun ze
+#@set posessivePronoun zir
 
 [[Save]]
 
@@ -79,9 +79,9 @@ Okay. You can do that in your profile once we're done here.
 
 
 :: Just use my name [speaker-bot] {"position":"925,425","size":"100,100"}
-#@yaml set: aboutPronoun {{firstName}}
-#@yaml set: conjugatedPronoun {{firstName}}
-#@yaml set: posessivePronoun {{firstName}}
+#@set aboutPronoun {{firstName}}
+#@set conjugatedPronoun {{firstName}}
+#@set posessivePronoun {{firstName}}
 
 No problem
 
@@ -94,29 +94,17 @@ That's everything, let me save it for you.
 [[Save Action]]
 
 
-:: start [speaker-bot multiline] {"position":"300,125","size":"100,100"}
-###@yaml
-graphql:
-  id: currentAuthorization
-  query: |
-    query currentAuthorization {
-      currentUser {
-        id,
-        firstName,
-        authorizations (orderBy: PRIMARY_KEY_ASC) {
-          nodes {
-            providerId,
-            providerEmails
-          }
-        }
-      }
-    }
-  store:
-    - "currentUser.id": userId
-    - "currentUser.firstName": firstName
-    - "currentUser.authorizations.nodes[0].providerEmails[0]": email
-    - "currentUser.authorizations.nodes[0].providerId": origin
+:: start [speaker-bot] {"position":"300,125","size":"100,100"}
+# This is a sample SQL query that would run and populate variables for the remainder
+# of the conversation
+###@sql
+SELECT u.id as userId, u.first as firstName, a.email as email, a.providerId as origin
+FROM users u INNER JOIN authorizations a ON u.id = a.user_id
+WHERE u.id = 12345
 ###
+
+# This is a sample directive that would enable "handlebars" support for this Passage
+#@handlebars
 
 Hey there!
 
@@ -130,46 +118,28 @@ I asked {{which origin "google-oauth2.+" "Google" "linkedin.+" "LinkedIn" ".*" "
 
 :: Next Steps [speaker-bot] {"position":"750,875","size":"100,100"}
 Next up, I'd like to walk you through how Aibex works.
+
 close this, and when you're ready, let's chat about "What Is Aibex"
 
 [[end]]
 
 
 :: end [] {"position":"925,875","size":"100,100"}
+# Ends the conversation
 #@end
 
 
 :: Save Action [speaker-bot, oneline] {"position":"600,875","size":"100,100"}
-###@yaml
-graphql:
-  id: updateUserData
-  query: |
-    mutation updateUserData ($input: UpdateUserInput!) {
-      updateUser(input:$input) {
-        user {
-          id
-        }
-      }
-    }
-  variables: |
-    {
-      "input": {
-        "id": {{userId}},
-        "patch": {
-          "firstName": "{{firstName}}",
-          "aboutPronoun": "{{aboutPronoun}}",
-          "conjugatedPronoun": "{{conjugatedPronoun}}",
-          "possessivePronoun": "{{possessivePronoun}}",
-          "primaryEmail": "{{email}}"
-        }
-      }
-    }
-  format: true
-  store:
-    - SUCCESS: updateResult
+# A sample SQL save
+###@sql
+UPDATE users u
+  SET u.first = '{{sqlEscape firstName}}'
+  SET u.about = '{{sqlEscape aboutPronoun}}'
+  SET u.conjugated = '{{sqlEscape conjugatedPronoun}}'
+  SET u.posessive = '{{sqlEscape posessivePronoun}}'
+WHERE u.id = 12345
 ###
-
-{{~# if updateResult ~}}
+{{~# if result ~}}
   Great, all saved
   {{~> line ~}}
   You can update all of this from your profile, too.
