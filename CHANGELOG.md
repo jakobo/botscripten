@@ -1,5 +1,26 @@
 # Changelog
 
+# 0.4.0
+
+- **Breaking Changes**
+  - In the chatbook parser, passages are now returned as an object to avoid empty passages at index 0 (twine numbering starts at zero)
+
+**0.3.0 > 0.4.0 Migration Guide** <br>
+To migrate to 0.4.0, change any instances where you were looping over `story.passages` to loop instead over `story.passageIndex` and get the object from the passages collection, or iterate over the object keys of passages itself.
+
+```js
+// prior
+for (const p in story.passages) {
+  // ...
+}
+
+// new
+for (const pid of Object.keys(story.passages)) {
+  const p = story.passages[pid];
+  // ...
+}
+```
+
 # 0.3.0
 
 - **Breaking Changes**

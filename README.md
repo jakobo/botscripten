@@ -197,9 +197,10 @@ story = {
     },
     // ...
   ],
-  passages: [
-    {
-      // A collection of passages in the following format...
+  passages: {
+    // A collection of passages in the following format...
+    // pid is the passage's numeric ID
+    [pid]: {
       pid: null, // The passage's numeric ID
       name: "", // The passage name
       tags: [], // An array of tags for this passage
@@ -224,7 +225,7 @@ story = {
       content: "", // The passage content minus links, comments, and directives
     },
     // ...
-  ],
+  },
   passageIndex: {
     [name]: id, // A lookup index of [Passage Name]: passageNumericId
     //...

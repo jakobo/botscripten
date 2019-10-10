@@ -63,7 +63,7 @@ const parse = str => {
   const s = $("tw-storydata")[0];
   const p = $("tw-passagedata");
   const t = $("tw-tag");
-  const passages = [];
+  const passages = {};
   const pIndex = {};
   p.forEach(pg => {
     const index = passages.length;
