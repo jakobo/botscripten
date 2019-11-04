@@ -51,11 +51,6 @@
       "last 1 safari version"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn run husky:precommit"
-    }
-  },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
     "jest": "^24.9.0",
