@@ -1,10 +1,10 @@
-# Botscripten
+# Botscripten (formerly Chatbook)
 
 **A modified Trialogue/Twine engine specifically for Building, Testing, and Exporting conversations as Minimal HTML5**
 
 ![Botscripten logo](dist/Twine2/Botscripten/icon.svg)
 
-[![Story Format Version](https://img.shields.io/badge/StoryFormat-0.3.0-blue)](/dist/Twine2)
+[![Story Format Version](https://img.shields.io/badge/StoryFormat-0.5.0-blue)](/dist/Twine2)
 [![npm](https://img.shields.io/npm/v/@aibex/botscripten)](https://www.npmjs.com/package/@aibex/botscripten)
 [![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
 [![CircleCI](https://circleci.com/gh/aibexhq/botscripten/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/botscripten/tree/master)
@@ -52,12 +52,12 @@ Botscripten comes with two distinct flavors: **An Interactive Output** (Botscrip
 
 1. From the Twine menu, select `Formats`
 2. Then, select the `Add a New Format` tab
-3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@0.3.0/dist/Twine2/Botscripten/format.js`
+3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@0.5.0/dist/Twine2/Botscripten/format.js`
 4. Click `Add`
-5. Then, `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@0.3.0/dist/Twine2/BotscriptenViewer/format.js`
+5. Then, `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@0.5.0/dist/Twine2/BotscriptenViewer/format.js`
 6. Click `Add`
 
-Once you've done this, you will have access to Botscripten and BotscriptenViewer story formats in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide, as migrating to 0.3.0 can introduce breaking changes.
+Once you've done this, you will have access to Botscripten and BotscriptenViewer story formats in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide, as migrating to 0.5.0 can introduce breaking changes.
 
 ## Create your first chat story
 
