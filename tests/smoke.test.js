@@ -25,7 +25,7 @@ describe("onboarding.html Parse", () => {
     expect(typeof story).toBe("object");
     expect(story.name).toBe("onboarding");
     expect(story.start).toBe("start");
-    expect(story.format).toMatch(/Chatbook/);
+    expect(story.format).toMatch(/Botscripten/);
     expect(story.passages[story.passageIndex[story.start]]).toMatchObject({
       pid: story.passageIndex[story.start],
     });

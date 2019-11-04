@@ -5,7 +5,7 @@ onboarding
 :: StoryData
 {
 	"ifid": "DEC7B08C-8D6C-416E-A86D-180A53DBF339",
-	"format": "TEST_ChatbookViewer",
+	"format": "TEST_BotscriptenViewer",
 	"format-version": "0.3.0",
 	"start": "start",
 	"tag-colors": {

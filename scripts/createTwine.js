@@ -16,7 +16,7 @@ const build = (name, description, outDir, { template, js, css }) => {
     name: "{{STORY_NAME}}",
     passages: "{{STORY_DATA}}",
     script: js ? `<script>${fs.readFileSync(js).toString()}</script>` : "",
-    stylesheet: css ? `<style>${fs.readFileSync(css).toString()}</style>` : ""
+    stylesheet: css ? `<style>${fs.readFileSync(css).toString()}</style>` : "",
   });
 
   const formatData = {
@@ -27,7 +27,7 @@ const build = (name, description, outDir, { template, js, css }) => {
     url: pkg.repository,
     version: pkg.version,
     proofing: false,
-    source: storyFile
+    source: storyFile,
   };
 
   fs.mkdirpSync(outDir);
@@ -39,22 +39,21 @@ const build = (name, description, outDir, { template, js, css }) => {
 };
 
 build(
-  "ChatbookViewer",
-  "An interactive chat viewer for Chatbook",
-  path.resolve(__dirname, "../dist/Twine2/ChatbookViewer"),
+  "BotscriptenViewer",
+  "An interactive chat viewer for Botscripten",
+  path.resolve(__dirname, "../dist/Twine2/BotscriptenViewer"),
   {
     template: path.resolve(__dirname, "../src/template/index.html"),
-    css: path.resolve(__dirname, "../src/template/chatbook.css"),
-    js: path.resolve(__dirname, "../dist/chatbook.umd.js")
+    css: path.resolve(__dirname, "../src/template/botscripten.css"),
   }
 );
 
 build(
-  "Chatbook",
-  "An export friendly version of Chatbook+Twine",
-  path.resolve(__dirname, "../dist/Twine2/Chatbook"),
+  "Botscripten",
+  "An export friendly version of a chat bot script in Twine",
+  path.resolve(__dirname, "../dist/Twine2/Botscripten"),
   {
-    template: path.resolve(__dirname, "../src/template/index.min.html")
+    template: path.resolve(__dirname, "../src/template/index.min.html"),
   }
 );
 

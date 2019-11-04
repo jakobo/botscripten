@@ -91,7 +91,7 @@ class Story {
 
     if (src) {
       this.document = document.implementation.createHTMLDocument(
-        "Chatbook Injected Content"
+        "Botscripten Injected Content"
       );
     } else {
       this.document = document;
@@ -248,7 +248,7 @@ class Story {
   };
 
   /**
-   * Render a Twine+Chatbook passage object
+   * Render a Twine passage object
    */
   renderPassage = async (passage, renderer) => {
     const speaker = passage.getSpeaker();

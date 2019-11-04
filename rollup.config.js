@@ -9,7 +9,7 @@ export default [
   {
     input: "src/twine/index.js",
     output: {
-      name: "chatbook",
+      name: "botscripten",
       file: pkg.browser,
       format: "umd",
     },

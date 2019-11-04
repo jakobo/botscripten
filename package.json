@@ -1,16 +1,16 @@
 {
-  "name": "@aibex/chatbook",
+  "name": "@aibex/botscripten",
   "version": "0.4.0",
-  "description": "A modified Twine engine specifically for chat conversations, based on Trialogue",
-  "author": "Jakob Heuser <jakob+npm@felocity.com>",
+  "description": "Craft rich bot conversations using the Twine/Twee format",
+  "author": "Aibex, Inc <oss@aibex.com>",
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "repository": "github:aibexhq/chatbook",
+  "repository": "github:aibexhq/botscript",
   "main": "index.js",
-  "browser": "dist/chatbook.umd.js",
+  "browser": "dist/Twine2/BotscriptenViewer/format.js",
   "scripts": {
     "dev": "NODE_ENV=development concurrently -r \"npm:dev:*\"",
     "test": "yarn build && jest",
@@ -20,15 +20,14 @@
     "ci": "pretty-quick --check && yarn build && jest",
     "release": "release-it",
     "____________________": "echo \"The following sub-commands are used to serve the main commands above\"",
-    "build:twine": "rollup -c -m inline && node scripts/createTwine && yarn clean:artifacts",
+    "build:twine": "rollup -c -m inline && node scripts/createTwine",
     "build:node": "rm -rf dist/node/* && babel src/node --out-dir dist/npm/node && babel src/common --out-dir dist/npm/common",
     "clean:dist": "rm -rf dist/",
-    "clean:artifacts": "rm -rf dist/chatbook.*",
     "dev:watch": "nodemon -L --ignore dist/ --exec yarn buildAll",
     "dev:serve": "nodemon -L --watch build/ --watch scripts/ --exec node scripts/serve",
     "examples": "concurrently -r \"npm:examples:*\"",
-    "examples:onboarding": "yarn tweego -f ChatbookViewer -o ./examples/onboarding.html ./examples/onboarding.twee",
-    "examples:onboarding.min": "yarn tweego -f Chatbook -o ./examples/onboarding.min.html ./examples/onboarding.twee",
+    "examples:onboarding": "yarn tweego -f BotscriptenViewer -o ./examples/onboarding.html ./examples/onboarding.twee",
+    "examples:onboarding.min": "yarn tweego -f Botscripten -o ./examples/onboarding.min.html ./examples/onboarding.twee",
     "format:prettier": "pretty-quick --staged",
     "husky:precommit": "concurrently \"npm:format:*\" && yarn build && git add dist/ && jest"
   },
@@ -37,7 +36,9 @@
     "twinery",
     "storyformat",
     "trialogue",
-    "chatbook"
+    "botscript",
+    "bot",
+    "botframework"
   ],
   "browserslist": {
     "production": [
@@ -58,6 +59,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
+    "html-entities": "^1.2.1",
     "jest": "^24.9.0",
     "jsdom": "^15.1.1",
     "lodash.escape": "^4.0.1",

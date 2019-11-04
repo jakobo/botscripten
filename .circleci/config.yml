@@ -4,7 +4,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - chatbook
+      - botscripten
 
 # ######################################################################
 # Job Definitions
@@ -13,10 +13,10 @@ workflows:
 # marked as a failure
 # ######################################################################
 jobs:
-  chatbook:
+  botscripten:
     docker:
       - image: node:10.13.0
-    working_directory: ~/chatbook
+    working_directory: ~/botscripten
     steps:
       - checkout
       - setup_remote_docker

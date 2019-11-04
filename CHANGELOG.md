@@ -1,5 +1,10 @@
 # Changelog
 
+# 0.5.0
+
+- **Breaking Changes**
+  - Chatbook was renamed to `Botscripten`. `package.json` files will need to reference `@aibex/botscripten` beginning with 0.5.0. This was done to avoid confusion with "Chapbook", the new Twine story format from Twine's creator.
+
 # 0.4.0
 
 - **Breaking Changes**
