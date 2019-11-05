@@ -72,7 +72,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/plugin-transform-runtime": "^7.6.2",
-    "@babel/preset-env": "7.6.3",
+    "@babel/preset-env": "7.7.0",
     "concurrently": "^5.0.0",
     "extwee": "^1.5.0",
     "fs-extra": "^8.1.0",
