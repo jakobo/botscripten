@@ -7,7 +7,12 @@
 [![Story Format Version](https://img.shields.io/badge/StoryFormat-0.5.0-blue)](/dist/Twine2)
 [![npm](https://img.shields.io/npm/v/@aibex/botscripten)](https://www.npmjs.com/package/@aibex/botscripten)
 [![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
+<<<<<<< HEAD
 [![CircleCI](https://circleci.com/gh/aibexhq/botscripten/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/botscripten/tree/master) [![Greenkeeper badge](https://badges.greenkeeper.io/aibexhq/botscripten.svg)](https://greenkeeper.io/)
+=======
+[![CircleCI](https://circleci.com/gh/aibexhq/botscripten/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/botscripten/tree/master)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=aibexhq/botscripten&identifier=138425562)](https://dependabot.com)
+>>>>>>> chore: Add dependabot
 
 **Upgrading? Check the [Changelog](/CHANGELOG.md)**
 
@@ -27,7 +32,7 @@ If "yes", then Botscripten is worth looking into.
 
 Botscripten comes with two distinct flavors: **An Interactive Output** (BotscriptenViewer) for testing and stepping through conversations in a pseudo chat interface based on the Trialogue code, and **A Minimal Output** (Botscripten) for using your Twine output files in other systems. When developing a rich chatbot conversation, you'll use BotscriptenViewer. When you're ready to publish, you'll select the Botscripten format and shed all of the HTML/CSS/JavaScript required for the interactive version.
 
-- [Botscripten](#botscripten)
+- [Botscripten (formerly Chatbook)](#botscripten-formerly-chatbook)
 - [🚀 Setup and Your First "Chat"](#-setup-and-your-first-chat)
   - [Add Botscripten and BotscriptenViewer as a Twine Story Formats](#add-botscripten-and-botscriptenviewer-as-a-twine-story-formats)
   - [Create your first chat story](#create-your-first-chat-story)
