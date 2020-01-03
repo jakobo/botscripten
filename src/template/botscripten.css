@@ -11,37 +11,85 @@
   --passage-text-color: #000;
 }
 
+#twine-user-stylesheet,
+#twine-user-script {
+  display: none !important;
+}
+
+/* PROOFING */
+.proof {
+  padding: 50px;
+  font-size: 12px;
+}
+
+.proof main,
+.proof .user-response-panel {
+  display: none;
+}
+.proof nav {
+  background-color: var(--navbar-bg-color);
+}
+.proof twine {
+  padding-top: var(--navbar-height);
+}
+.proof twine,
+.proof twine * {
+  display: block !important;
+  font-family: monospace;
+  white-space: pre;
+}
+.proof tw-storydata::before {
+  content: ":: StoryTitle\A"attr(name);
+  color: green;
+}
+.proof tw-passagedata::before {
+  content: ":: " attr(name) " [" attr(tags) "]";
+  color: blue;
+  margin: 1em 0 0 0;
+  display: block;
+  font-weight: bold;
+}
+.proof tw-passagedata.start::before {
+  content: "🚀 :: " attr(name) " [" attr(tags) "]";
+}
+.proof tw-passagedata + tw-passagedata {
+  border-top: 1pt dashed black;
+  padding: 1em 0;
+  margin: 1em 0 0 0;
+}
+/* END PROOFING */
+
 /* Atomic Utilities */
-.bg-color {
+.run .bg-color {
   background-color: var(--bg-color);
 }
 
-.minh-full {
+.run .minh-full {
   min-height: calc(
     100vh - var(--navbar-height) - var(--user-response-panel-height) - 17px -
       5px
   );
 }
 
-.ml--3 {
+.run .ml--3 {
   margin-left: -1rem !important;
 }
 
 @media (min-width: 992px) {
-  .w-lg-auto {
+  .run .w-lg-auto {
     width: auto !important;
   }
 }
 
 /* General */
 html,
-body {
+body.run {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
   position: relative;
   min-height: 100%;
 }
 
-body {
+body.run {
   padding-top: var(--navbar-height);
   margin-bottom: calc(
     var(--user-response-panel-height) + 18px + 5px
@@ -49,42 +97,42 @@ body {
 }
 
 /* Nav */
-nav.navbar {
+.run nav.navbar {
   height: var(--navbar-height);
   background-color: var(--navbar-bg-color);
   padding: 0.5rem 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-nav .nav-title {
+.run nav .nav-title {
   font-size: 1.5rem;
   line-height: 40px;
   margin: 0 auto;
 }
 
-nav .nav-icon {
+.run nav .nav-icon {
   width: 35px;
 }
 
 /* Chat Panel */
-.chat-panel {
+.run .chat-panel {
   padding-top: 15px;
 }
 
-.chat-passage-wrapper {
+.run .chat-passage-wrapper {
   position: relative;
   margin: 0.5rem 0;
 }
 
-.chat-passage-wrapper[data-speaker="you"] {
+.run .chat-passage-wrapper[data-speaker="you"] {
   text-align: right;
 }
-.chat-passage-wrapper[data-speaker="you"] .chat-passage:before {
+.run .chat-passage-wrapper[data-speaker="you"] .chat-passage:before {
   text-align: right;
   color: var(--user-color);
 }
 
-.chat-passage {
+.run .chat-passage {
   display: inline-block;
   padding: 0.25rem 0.5rem;
   margin-left: 35px;
@@ -93,22 +141,22 @@ nav .nav-icon {
   text-align: left;
 }
 @media (min-width: 576px) {
-  .chat-passage {
+  .run .chat-passage {
     max-width: calc(100% - 100px);
   }
 }
 @media (min-width: 768px) {
-  .chat-passage {
+  .run .chat-passage {
     max-width: calc(100% - 80px);
   }
 }
 @media (min-width: 992px) {
-  .chat-passage {
+  .run .chat-passage {
     max-width: calc(100% - 100px);
   }
 }
 
-.chat-passage:before {
+.run .chat-passage:before {
   content: attr(data-speaker);
   display: block;
   font-size: 0.75rem;
@@ -116,33 +164,33 @@ nav .nav-icon {
   color: var(--speaker-color);
 }
 
-.chat-passage p {
+.run .chat-passage p {
   margin: 0;
 }
 
-.chat-passage img {
+.run .chat-passage img {
   max-width: 100%;
   max-height: calc(100vh - 2 * var(--user-response-panel-height));
   padding: 0.25rem 0;
 }
-.chat-passage iframe {
+.run .chat-passage iframe {
   max-width: 100%;
   max-height: calc(100vh - 2 * var(--user-response-panel-height));
 }
 
-.chat-passage figure {
+.run .chat-passage figure {
   margin-bottom: 0.25rem;
   font-size: 0.75rem;
 }
 
 /* User Response Panel */
-.user-response-panel {
+.run .user-response-panel {
   padding-right: 15px;
   padding-left: 15px;
 }
 
 @media (min-width: 992px) {
-  .user-response-panel {
+  .run .user-response-panel {
     max-width: calc(
       100% / (12 / 6)
     ); /* 100% / (12/[col width of chat-panel]) */
@@ -150,12 +198,12 @@ nav .nav-icon {
   }
 }
 
-.user-response-panel hr {
+.run .user-response-panel hr {
   margin: 0;
   border-top: 5px solid white;
 }
 
-.user-response-hint {
+.run .user-response-hint {
   font-style: italic;
   font-size: 0.75rem;
   text-align: center;
@@ -163,16 +211,16 @@ nav .nav-icon {
 }
 
 @media (max-width: 379.98px) {
-  .user-response-hint {
+  .run .user-response-hint {
     font-size: 0.6rem;
     height: 14px;
   }
-  body {
+  body.run {
     margin-bottom: calc(
       var(--user-response-panel-height) + 14px + 5px
     ); /* + height of hint + hr */
   }
-  .minh-full {
+  .run .minh-full {
     min-height: calc(
       100vh - var(--navbar-height) - var(--user-response-panel-height) - 14px -
         5px
@@ -181,16 +229,16 @@ nav .nav-icon {
 }
 
 @media (max-width: 319.98px) {
-  .user-response-hint {
+  .run .user-response-hint {
     font-size: 0.5rem;
     height: 12px;
   }
-  body {
+  body.run {
     margin-bottom: calc(
       var(--user-response-panel-height) + 12px + 5px
     ); /* + height of hint + hr */
   }
-  .minh-full {
+  .run .minh-full {
     min-height: calc(
       100vh - var(--navbar-height) - var(--user-response-panel-height) - 12px -
         5px
@@ -198,14 +246,14 @@ nav .nav-icon {
   }
 }
 
-.user-reponse-wrapper {
+.run .user-reponse-wrapper {
   height: var(--user-response-panel-height);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.user-response-panel .user-response {
+.run .user-response-panel .user-response {
   display: inline-block;
   padding: 0.5rem;
   margin: 0.25rem;
@@ -214,13 +262,13 @@ nav .nav-icon {
   border-top: 2px solid transparent;
   transition: border-color 0.15s ease-in;
 }
-.user-response-panel .user-response:hover {
+.run .user-response-panel .user-response:hover {
   text-decoration: none;
   border-color: var(--user-color);
 }
 
 /* Passage Avatars */
-.chat-passage-wrapper:before {
+.run .chat-passage-wrapper:before {
   margin-right: 5px;
   position: absolute;
   vertical-align: top;
@@ -232,11 +280,11 @@ nav .nav-icon {
   background-color: var(--speaker-color);
 }
 
-.chat-passage-wrapper[data-speaker="you"]:before {
+.run .chat-passage-wrapper[data-speaker="you"]:before {
   display: none;
 }
 
-.chat-passage-wrapper[data-speaker="you"]:after {
+.run .chat-passage-wrapper[data-speaker="you"]:after {
   margin-left: -30px;
   position: absolute;
   vertical-align: top;
@@ -248,21 +296,21 @@ nav .nav-icon {
   background-color: var(--user-color);
 }
 
-.chat-passage[data-speaker="you"] {
+.run .chat-passage[data-speaker="you"] {
   margin-left: 0;
   margin-right: 35px;
 }
 
 /* Typing Animation */
 
-div.wave {
+.run div.wave {
   position: relative;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-div.wave .dot {
+.run div.wave .dot {
   display: inline-block;
   width: 6px;
   height: 6px;
@@ -272,11 +320,11 @@ div.wave .dot {
   animation: wave 1.2s ease-in-out infinite;
 }
 
-div.wave .dot:nth-child(2) {
+.run div.wave .dot:nth-child(2) {
   animation-delay: 0.1s;
 }
 
-div.wave .dot:nth-child(3) {
+.run div.wave .dot:nth-child(3) {
   animation-delay: 0.2s;
 }
 
@@ -293,7 +341,7 @@ div.wave .dot:nth-child(3) {
 }
 
 /* Directives */
-.directives {
+.run .directives {
   display: none;
   font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
     "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
@@ -302,13 +350,13 @@ div.wave .dot:nth-child(3) {
   font-size: 12px;
 }
 
-.directive {
+.run .directive {
   white-space: pre;
   border: 1px dashed #666;
   position: relative;
 }
 
-.directive::after {
+.run .directive::after {
   content: attr(name);
   position: absolute;
   right: 2px;
@@ -318,6 +366,6 @@ div.wave .dot:nth-child(3) {
   letter-spacing: 0.2em;
 }
 
-body.show-directives .directives {
+body.run.show-directives .directives {
   display: block;
 }

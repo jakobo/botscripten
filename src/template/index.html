@@ -33,6 +33,10 @@
           checked="checked"
         />show directives</label
       >
+      <label
+        ><input type="checkbox" name="proofing" id="proofing" />show
+        proofing</label
+      >
     </nav>
 
     <main role="main" class="container-fluid">
@@ -76,6 +80,9 @@
         </div>
       </div>
     </main>
-    <%= passages %> <%= script %>
+    <twine>
+      <%= passages %>
+    </twine>
+    <%= script %>
   </body>
 </html>

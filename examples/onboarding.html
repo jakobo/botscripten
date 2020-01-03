@@ -33,6 +33,10 @@
           checked="checked"
         />show directives</label
       >
+      <label
+        ><input type="checkbox" name="proofing" id="proofing" />show
+        proofing</label
+      >
     </nav>
 
     <main role="main" class="container-fluid">
@@ -76,7 +80,8 @@
         </div>
       </div>
     </main>
-    <!-- UUID://DEC7B08C-8D6C-416E-A86D-180A53DBF339// --><tw-storydata name="onboarding" startnode="10" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="DEC7B08C-8D6C-416E-A86D-180A53DBF339" zoom="1" format="TEST_Botscripten" format-version="0.5.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="wait" color="red"></tw-tag><tw-tag name="oneline" color="green"></tw-tag><tw-tag name="speaker-bot" color="purple"></tw-tag><tw-passagedata pid="1" name="Name Not OK" tags="speaker-bot" position="475,125" size="100,100">Okay, what name would you like me to use?
+    <twine>
+      <!-- UUID://DEC7B08C-8D6C-416E-A86D-180A53DBF339// --><tw-storydata name="onboarding" startnode="10" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="DEC7B08C-8D6C-416E-A86D-180A53DBF339" zoom="1" format="TEST_Botscripten" format-version="0.5.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="wait" color="red"></tw-tag><tw-tag name="oneline" color="green"></tw-tag><tw-tag name="speaker-bot" color="purple"></tw-tag><tw-passagedata pid="1" name="Name Not OK" tags="speaker-bot" position="475,125" size="100,100">Okay, what name would you like me to use?
 
 [[Enter Name]]</tw-passagedata><tw-passagedata pid="2" name="Confirm Email" tags="speaker-bot multiline" position="475,275" size="100,100">Ok. And the email {{which origin &quot;google-oauth2.+&quot; &quot;Google&quot; &quot;linkedin.+&quot; &quot;LinkedIn&quot; &quot;.*&quot; &quot;your email provider&quot;}} gave me is {{email}}.
 
@@ -159,6 +164,8 @@ WHERE u.id = 12345
 
 [[Next Steps]]</tw-passagedata><tw-passagedata pid="14" name="Enter Name" tags="" position="622,127" size="100,100">#@prompt firstName
 
-[[Confirm Email]]</tw-passagedata></tw-storydata> <script src="http://localhost:3002/dist/botscripten.umd.js"></script>
+[[Confirm Email]]</tw-passagedata></tw-storydata>
+    </twine>
+    <script src="http://localhost:3002/dist/botscripten.umd.js"></script>
   </body>
 </html>
