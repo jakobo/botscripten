@@ -1,2 +1,2 @@
 git:
-  commitMessage: "chore: release v${version}"
+  commitMessage: "❓ Chore: release v${version}"
