@@ -10,7 +10,7 @@
   },
   "repository": "github:aibexhq/botscript",
   "main": "index.js",
-  "browser": "dist/Twine2/BotscriptenViewer/format.js",
+  "browser": "dist/botscripten.umd.js",
   "scripts": {
     "dev": "NODE_ENV=development concurrently -r \"npm:dev:*\"",
     "test": "yarn build && jest",
@@ -26,8 +26,7 @@
     "dev:watch": "nodemon -L --ignore dist/ --exec yarn buildAll",
     "dev:serve": "nodemon -L --watch build/ --watch scripts/ --exec node scripts/serve",
     "examples": "concurrently -r \"npm:examples:*\"",
-    "examples:onboarding": "yarn tweego -f BotscriptenViewer -o ./examples/onboarding.html ./examples/onboarding.twee",
-    "examples:onboarding.min": "yarn tweego -f Botscripten -o ./examples/onboarding.min.html ./examples/onboarding.twee",
+    "examples:onboarding": "yarn tweego -f Botscripten -o ./examples/onboarding.html ./examples/onboarding.twee",
     "format:prettier": "pretty-quick --staged",
     "husky:precommit": "concurrently \"npm:format:*\" && yarn build && git add dist/ && jest"
   },

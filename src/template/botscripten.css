@@ -6,14 +6,12 @@
   --bg-color: #c7bdb5; /*global chat bg color*/
   --user-color: #417505; /*user name & placeholder avatar bg*/
   --speaker-color: #888; /*default color for speaker name & placeholder avatar bg*/
-  --sidebar-bg-color: #fff;
   --navbar-bg-color: #fff;
   --passage-bg-color: #fff;
   --passage-text-color: #000;
 }
 
 /* Atomic Utilities */
-
 .bg-color {
   background-color: var(--bg-color);
 }
@@ -36,7 +34,6 @@
 }
 
 /* General */
-
 html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
@@ -51,33 +48,7 @@ body {
   ); /* + height of hint + hr */
 }
 
-/* Offcanvas sidebar */
-
-@media (max-width: 991.98px) {
-  .offcanvas-collapse {
-    z-index: 1100;
-    position: fixed;
-    top: var(--navbar-height); /* Height of navbar */
-    bottom: 0;
-    left: 100%;
-    width: 100%;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    overflow-y: auto;
-    visibility: hidden;
-    background-color: var(--sidebar-bg-color);
-    transition-timing-function: ease-in-out;
-    transition-duration: 0.3s;
-    transition-property: left, visibility;
-  }
-  .offcanvas-collapse.open {
-    left: 0;
-    visibility: visible;
-  }
-}
-
 /* Nav */
-
 nav.navbar {
   height: var(--navbar-height);
   background-color: var(--navbar-bg-color);
@@ -96,7 +67,6 @@ nav .nav-icon {
 }
 
 /* Chat Panel */
-
 .chat-panel {
   padding-top: 15px;
 }
@@ -166,11 +136,11 @@ nav .nav-icon {
 }
 
 /* User Response Panel */
-
 .user-response-panel {
   padding-right: 15px;
   padding-left: 15px;
 }
+
 @media (min-width: 992px) {
   .user-response-panel {
     max-width: calc(
@@ -191,6 +161,7 @@ nav .nav-icon {
   text-align: center;
   height: 18px;
 }
+
 @media (max-width: 379.98px) {
   .user-response-hint {
     font-size: 0.6rem;
@@ -208,6 +179,7 @@ nav .nav-icon {
     );
   }
 }
+
 @media (max-width: 319.98px) {
   .user-response-hint {
     font-size: 0.5rem;
@@ -248,7 +220,6 @@ nav .nav-icon {
 }
 
 /* Passage Avatars */
-
 .chat-passage-wrapper:before {
   margin-right: 5px;
   position: absolute;
@@ -260,9 +231,11 @@ nav .nav-icon {
   border-radius: 15px;
   background-color: var(--speaker-color);
 }
+
 .chat-passage-wrapper[data-speaker="you"]:before {
   display: none;
 }
+
 .chat-passage-wrapper[data-speaker="you"]:after {
   margin-left: -30px;
   position: absolute;
@@ -274,6 +247,7 @@ nav .nav-icon {
   border-radius: 15px;
   background-color: var(--user-color);
 }
+
 .chat-passage[data-speaker="you"] {
   margin-left: 0;
   margin-right: 35px;
@@ -287,6 +261,7 @@ div.wave {
   margin-left: auto;
   margin-right: auto;
 }
+
 div.wave .dot {
   display: inline-block;
   width: 6px;
@@ -296,6 +271,7 @@ div.wave .dot {
   background: var(--passage-text-color);
   animation: wave 1.2s ease-in-out infinite;
 }
+
 div.wave .dot:nth-child(2) {
   animation-delay: 0.1s;
 }
@@ -344,18 +320,4 @@ div.wave .dot:nth-child(3) {
 
 body.show-directives .directives {
   display: block;
-}
-
-/* 
- * counter extra padding-right added by BS4 modal
- * https://stackoverflow.com/questions/32862394/bootstrap-modals-keep-adding-padding-right-to-body-after-closed
- */
-body.modal-open {
-  padding-right: 0 !important;
-}
-body.modal-open .user-response-panel {
-  padding-right: 15px !important;
-}
-body.modal-open nav.navbar {
-  padding-right: 15px !important;
 }

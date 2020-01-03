@@ -1,22 +1,18 @@
-# Botscripten (formerly Chatbook)
+# Botscripten
 
 **A modified Trialogue/Twine engine specifically for Building, Testing, and Exporting conversations as Minimal HTML5**
 
 ![Botscripten logo](dist/Twine2/Botscripten/icon.svg)
 
-[![Story Format Version](https://img.shields.io/badge/StoryFormat-0.5.0-blue)](/dist/Twine2)
+[![Story Format Version](https://img.shields.io/badge/StoryFormat-0.5.1-blue)](/dist/Twine2)
 [![npm](https://img.shields.io/npm/v/@aibex/botscripten)](https://www.npmjs.com/package/@aibex/botscripten)
 [![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
-<<<<<<< HEAD
-[![CircleCI](https://circleci.com/gh/aibexhq/botscripten/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/botscripten/tree/master) [![Greenkeeper badge](https://badges.greenkeeper.io/aibexhq/botscripten.svg)](https://greenkeeper.io/)
-=======
 [![CircleCI](https://circleci.com/gh/aibexhq/botscripten/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/botscripten/tree/master)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=aibexhq/botscripten&identifier=138425562)](https://dependabot.com)
->>>>>>> chore: Add dependabot
 
 **Upgrading? Check the [Changelog](/CHANGELOG.md)**
 
-Botscripten (formerly Chatbook) is a chat-style [Twine](http://twinery.org) Story Fromat based on [Trialogue](https://github.com/phivk/trialogue) and its predecessors. Unlike other Twine sources, Botscripten is optimized for **an external runtime**. That is, while you can use Botscripten for Interactive Fiction, that's not this story format's intent.
+Botscripten is a chat-style [Twine](http://twinery.org) Story Fromat based on [Trialogue](https://github.com/phivk/trialogue) and its predecessors. Unlike other Twine sources, Botscripten is optimized for **an external runtime**. That is, while you can use Botscripten for Interactive Fiction, that's not this story format's intent.
 
 Botscripten is also available as an npm parser, able to handle Passage-specific features found in the Botscripten format. It's available via `npm install @aibex/botscripten` or `yarn add @aibex/botscripten`.
 
@@ -32,14 +28,14 @@ If "yes", then Botscripten is worth looking into.
 
 Botscripten comes with two distinct flavors: **An Interactive Output** (BotscriptenViewer) for testing and stepping through conversations in a pseudo chat interface based on the Trialogue code, and **A Minimal Output** (Botscripten) for using your Twine output files in other systems. When developing a rich chatbot conversation, you'll use BotscriptenViewer. When you're ready to publish, you'll select the Botscripten format and shed all of the HTML/CSS/JavaScript required for the interactive version.
 
-- [Botscripten (formerly Chatbook)](#botscripten-formerly-chatbook)
-- [🚀 Setup and Your First "Chat"](#-setup-and-your-first-chat)
+- [Botscripten](#botscripten)
+- [🚀 Setup and Your First &quot;Chat&quot;](#-setup-and-your-first-quotchatquot)
   - [Add Botscripten and BotscriptenViewer as a Twine Story Formats](#add-botscripten-and-botscriptenviewer-as-a-twine-story-formats)
   - [Create your first chat story](#create-your-first-chat-story)
 - [🏷 Botscripten Tags](#-botscripten-tags)
 - [🙈 Comments in Botscripten](#-comments-in-botscripten)
 - [🗂 Recipies](#-recipies)
-  - ["Special" Comments (Directives)](#special-comments-directives)
+  - [&quot;Special&quot; Comments (Directives)](#quotspecialquot-comments-directives)
   - [Conditional Branching (cycles, etc)](#conditional-branching-cycles-etc)
   - [Scripting Directives in BotscriptenViewer](#scripting-directives-in-botscriptenviewer)
 - [📖 Node Module Documentation](#-node-module-documentation)
@@ -57,12 +53,10 @@ Botscripten comes with two distinct flavors: **An Interactive Output** (Botscrip
 
 1. From the Twine menu, select `Formats`
 2. Then, select the `Add a New Format` tab
-3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@0.5.0/dist/Twine2/Botscripten/format.js`
+3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@0.5.1/dist/Twine2/Botscripten/format.js`
 4. Click `Add`
-5. Then, `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@0.5.0/dist/Twine2/BotscriptenViewer/format.js`
-6. Click `Add`
 
-Once you've done this, you will have access to Botscripten and BotscriptenViewer story formats in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide, as migrating to 0.5.0 can introduce breaking changes.
+Once you've done this, you will have access to the Botscripten story formats in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide, as migrating to 0.5.0 from an earlier version can introduce breaking changes.
 
 ## Create your first chat story
 
@@ -73,7 +67,7 @@ Once you've done this, you will have access to Botscripten and BotscriptenViewer
    - Title (e.g. start)
    - Passage text (e.g. "Hi 👋")
    - One or more links (e.g. `[[What's your name?]]`)
-   - Speaker tag (e.g. `speaker-bot`). This will display the speaker's name (in this case `bot`) in ChatbotViewer format
+   - Speaker tag (e.g. `speaker-bot`). This will display the speaker's name (in this case `bot`) in standalone viewer
 3. Edit the newly created passage(s) to include:
    - Passage text (e.g. "My name is Bot")
    - One or more links (e.g. `[[Back to start->start]]`)
@@ -84,15 +78,15 @@ Once you've done this, you will have access to Botscripten and BotscriptenViewer
 
 Botscripten is designed to work exclusively with Twine's tag system. That means no code in your conversation nodes. This is important because behind the scenes, many other Twine formats convert Passages containing `<% ... %>` into JavaScript code, defeating the goal of portability.
 
-The following tags are supported by BotscriptenViewer. It is assumed that anyone consuming a Botscripten formatted Twine story will also support these tags.
+The following passage tags are supported by BotscriptenViewer. It is assumed that anyone consuming a Botscripten formatted Twine story will also support these tags.
 
 | tag                    | explanation                                                                                                                                                                                                                                                         |
 | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `oneline`              | By default, chat bots will display one message per line, similar to an SMS conversation. If you'd like to send content as a paragraph, use the `oneline` tag. The entire Twine node will then be treated as a single message.                                       |
-| `speaker-*` _(prefix)_ | The `speaker-*` tag describes "who" the message is from. For example, a tag of `speaker-bob` would imply the message should come from `bob`.                                                                                                                        |
+| `speaker-*` _(prefix)_ | The `speaker-*` tag describes "who" the message is from. For example, a tag of `speaker-bob` would imply the message should come from `bob`. The speaker tag is arbitrary, but should be consistent to identify "who" is talking.                                   |
 | `wait`                 | Adding `wait` will prevent the conversation from automatically advancing. Automatic advancement happens when there is exactly 1 link to follow, and the `wait` tag is not set. The most common reason for `wait` is to present some form of "continue" to the user. |
 
-To maintain compatibility with the [Twee 3 Specification](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-specification.md), the tags `script` and `stylesheet` will never be used.
+To maintain compatibility with the [Twee 3 Specification](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-specification.md), the tags `script` and `stylesheet` should **never** be used.
 
 # 🙈 Comments in Botscripten
 
@@ -141,13 +135,13 @@ INSERT INTO winners (name, time) VALUES ('you', NOW())
 ###
 ```
 
-Anyone parsing Botscripten Twine files can assume that the regexes `/^#@([\S]+)(.*)/g` (inline) and `/^###@([\S]+)([\s\S]*?)###/gm` (block) will match and extract the directive and the remainder of the comment.
+Anyone parsing Botscripten Twine files can assume that the regular expressions `/^#@([\S]+)(.*)/g` (inline) and `/^###@([\S]+)([\s\S]*?)###/gm` (block) will match and extract the directive and the remainder of the comment.
 
 For consistency with BotscriptenViewer, directives should be run when a Passage is parsed, but before any tag behavior (such as `auto` or `speaker-*` are applied) This allows directives to form opinions about the Passage and it's output before rendering occurs.
 
 There is no set definition for directives, as adding a directive to Botscripten would require **every external parser to also support it**. This is also why Botscripten is so light- there's almost no parsing being done of the individual Passages.
 
-But if you'd like some examples, these are some directives we think are pretty useful and are worth implementing:
+But if you'd like some examples, these are some directives we think are pretty useful and are worth implementing in your own conversation engine:
 
 - `#@set <name> <value>` - A directive that sets a local variable `<name>` to value `<value>` within the conversation
 - `#@increment <name> <amount>` - A directive to increment a local variable `<name>` by amount `<amount>`
@@ -155,15 +149,15 @@ But if you'd like some examples, these are some directives we think are pretty u
 
 ## Conditional Branching (cycles, etc)
 
-Since Botscripten does not maintain a concept of state, nor have a way to script items such as cycling or conditional links, you should present **all possible branches** using the `[[link]]` syntax. This will allow you to view all permutations in BotscriptenViewer.
+Since Botscripten does not maintain a concept of state, nor have a way to script items such as cycling or conditional links, you should present **all possible branches** using the `[[link]]` syntax. This will allow you to view all permutations in Botscripten when testing conversations locally.
 
-Conditional branching can then be implemented as a [Directive](#%22special%22-comments-directives). This gives you control outside of the Twine environment as to which link is followed under what conditions.
+Conditional branching can then be implemented as a [Directive](#%22special%22-comments-directives). This gives you control outside of the Twine environment as to which link is followed under what conditions. We're partial to a `###@next ... ###` directive, but feel free to create your own!
 
 ## Scripting Directives in BotscriptenViewer
 
 If you absolutely want to handle Directives in BotscriptenViewer, you can do so by selecting `Edit Story JavaScript` in Twine, and registering a handler for your directive. For example, this logs all `@log` directives' content to the developer tools console.
 
-```
+```js
 story.directive("@log", function(info, rendered, passage, story) {
   console.log("LOG data from " + passage.id);
   console.log("Directive contained: " + info);
@@ -257,11 +251,10 @@ First off, every Twine format I've worked with is amazing and super thougtful. I
 4. run `yarn dev` to start developing using the twee files in the `examples` folder
 
 - Examples are available under `http://localhost:3000`
-- TEST_BotscriptenViewer can be installed in Twine from `http://localhost:3001/BotscriptenViewer`
 - TEST_Botscripten can be installed in Twine from `http://localhost:3001/Botscripten`
-- When you are done developing/testing, be sure to remove the TEST_Botscripten / TEST_BotscriptenViewer formats. If you forget, just restart the dev server so Twine doesn't complain
+- When you are done developing/testing, be sure to remove the TEST_Botscripten format. If you forget, just restart the dev server so Twine doesn't complain every time you start it up
 
-For local testing convienence, a `stories` directory exists that is easy to call via `yarn tweego`. The `tweego` command ensures that Botscripten & BotscriptenViewer are available in your tweego story format path.
+For local testing convienence, a `stories` directory exists that is easy to call via `yarn tweego`. The `tweego` command ensures that Botscripten is available in your tweego story format path.
 
 As an example, the onboarding document was converted from Twine to Twee using the command `yarn tweego -d ./stories/onboarding.html -o ./examples/onboarding.twee`
 
@@ -270,8 +263,7 @@ As an example, the onboarding document was converted from Twine to Twee using th
 1. Be current on `master`
 2. `yarn install` and `yarn build`
 3. Commit all files
-4. Tag the release `git tag -a -m "<message>" x.x.x`
-5. `git push origin master --tags`
+4. `npm run-script release` (yarn isn't reliable with this)
 
 # Acknowledgements
 

@@ -1,5 +1,10 @@
 # Changelog
 
+# 0.5.1
+
+- **Features**
+  - There's now just a single story format, "Botscripten" to manage. Prior versions will continue to work, as the CDN will cache those indefinitely. We were able to leverage smaller file sizes for the botscripten output by using cdn.jsdelivr.net URLs for the botscripten files instead of inlining them into the template. While this requires an internet connection to run botscripten stories, it simplifies the install for individuals.
+
 # 0.5.0
 
 - **Breaking Changes**

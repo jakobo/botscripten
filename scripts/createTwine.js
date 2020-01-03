@@ -3,7 +3,11 @@ const path = require("path");
 const tmpl = require("lodash.template");
 const pkg = require("../package.json");
 
-const PREFIX = process.env.NODE_ENV === "development" ? "TEST_" : "";
+const IS_DEV = process.env.NODE_ENV === "development";
+const PREFIX = IS_DEV ? "TEST_" : "";
+const URL_BASE = IS_DEV
+  ? "http://localhost:3002"
+  : `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@${pkg.version}`;
 
 const build = (name, description, outDir, { template, js, css }) => {
   // common
@@ -15,8 +19,8 @@ const build = (name, description, outDir, { template, js, css }) => {
   const storyFile = tmpl(fs.readFileSync(template).toString())({
     name: "{{STORY_NAME}}",
     passages: "{{STORY_DATA}}",
-    script: js ? `<script>${fs.readFileSync(js).toString()}</script>` : "",
-    stylesheet: css ? `<style>${fs.readFileSync(css).toString()}</style>` : "",
+    script: `<script src="${URL_BASE}/${js}"></script>`,
+    stylesheet: `<link rel="stylesheet" href="${URL_BASE}/${css}" />`,
   });
 
   const formatData = {
@@ -39,21 +43,13 @@ const build = (name, description, outDir, { template, js, css }) => {
 };
 
 build(
-  "BotscriptenViewer",
-  "An interactive chat viewer for Botscripten",
-  path.resolve(__dirname, "../dist/Twine2/BotscriptenViewer"),
-  {
-    template: path.resolve(__dirname, "../src/template/index.html"),
-    css: path.resolve(__dirname, "../src/template/botscripten.css"),
-  }
-);
-
-build(
   "Botscripten",
-  "An export friendly version of a chat bot script in Twine",
+  "An interactive chat viewer",
   path.resolve(__dirname, "../dist/Twine2/Botscripten"),
   {
-    template: path.resolve(__dirname, "../src/template/index.min.html"),
+    template: path.resolve(__dirname, "../src/template/index.html"),
+    css: "src/template/botscripten.css",
+    js: "dist/botscripten.umd.js",
   }
 );
 
