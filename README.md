@@ -8,7 +8,7 @@
 [![npm](https://img.shields.io/npm/v/@aibex/botscripten)](https://www.npmjs.com/package/@aibex/botscripten)
 [![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
 [![CircleCI](https://circleci.com/gh/aibexhq/botscripten/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/botscripten/tree/master)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=aibexhq/botscripten&identifier=138425562)](https://dependabot.com)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=aibexhq/botscripten)](https://dependabot.com)
 
 **Upgrading? Check the [Changelog](/CHANGELOG.md)**
 
