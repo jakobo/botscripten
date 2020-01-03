@@ -1,0 +1,46 @@
+{
+  "path": "emoji-cz",
+  "emoji-cz": {
+    "types": {
+      "Feat": {},
+      "Fix": {},
+      "Docs": {
+        "emoji": "📝",
+        "description": "Documentation only changes"
+      },
+      "Style": {},
+      "Refactor": {
+        "emoji": "♻️ ",
+        "description": "A code change that neither fixes a bug nor adds a feature"
+      },
+      "Perf": {
+        "emoji": "⚡️",
+        "description": "A code change that strictly improves performance"
+      },
+      "Test": {
+        "emoji": "✅",
+        "description": "Adding, correcting, or fixing tests"
+      },
+      "Convo": {
+        "emoji": "💬",
+        "description": "Work focused exclusively on an Aibex conversation (text and literals)"
+      },
+      "Upgrade": {
+        "emoji": "⬆️ ",
+        "description": "Upgrading dependencies"
+      },
+      "Downgrade": {
+        "emoji": "⬇️ ",
+        "description": "Downgrading dependencies"
+      },
+      "Pin": {
+        "emoji": "📌",
+        "description": "Pin a dependency to a specific version"
+      },
+      "Chore": {
+        "emoji": "❓",
+        "description": "Other changes that don't modify src or test files"
+      }
+    }
+  }
+}

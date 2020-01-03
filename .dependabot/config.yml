@@ -3,5 +3,8 @@ update_configs:
   - package_manager: javascript
     directory: /
     update_schedule: live
+    commit_message:
+      prefix: ⬆️ Upgrade
+      include_scope: false
     default_labels:
       - dependabot

@@ -2,13 +2,9 @@
   "name": "@aibex/botscripten",
   "version": "0.5.1",
   "description": "Craft rich bot conversations using the Twine/Twee format",
+  "repository": "github:aibexhq/botscript",
   "author": "Aibex, Inc <oss@aibex.com>",
   "license": "Apache-2.0",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "repository": "github:aibexhq/botscript",
   "main": "index.js",
   "browser": "dist/botscripten.umd.js",
   "scripts": {
@@ -28,7 +24,8 @@
     "examples": "concurrently -r \"npm:examples:*\"",
     "examples:onboarding": "yarn tweego -f Botscripten -o ./examples/onboarding.html ./examples/onboarding.twee",
     "format:prettier": "pretty-quick --staged",
-    "husky:precommit": "concurrently \"npm:format:*\" && yarn build && git add dist/ && jest"
+    "husky:precommit": "concurrently \"npm:format:*\" && yarn build && git add dist/ && jest",
+    "commit:cz": "exec < /dev/tty && git-cz --hook || true"
   },
   "keywords": [
     "twine",
@@ -39,25 +36,11 @@
     "bot",
     "botframework"
   ],
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn run husky:precommit"
-    }
-  },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
+    "commitizen": "^4.0.3",
+    "commitlint-config-gitmoji": "^1.0.1",
+    "emoji-cz": "^0.3.0",
     "html-entities": "^1.2.1",
     "jest": "^24.9.0",
     "jsdom": "^15.1.1",
@@ -86,5 +69,27 @@
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "static-server": "^2.2.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run husky:precommit",
+      "prepare-commit-msg": "yarn run commit:cz"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
