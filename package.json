@@ -40,7 +40,7 @@
     "@babel/runtime": "^7.7.7",
     "html-entities": "^1.2.1",
     "jest": "^24.9.0",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.0.0",
     "lodash.escape": "^4.0.1",
     "lodash.template": "^4.5.0",
     "lodash.unescape": "^4.0.1"
