@@ -57,7 +57,7 @@
     "emoji-cz": "^0.3.0",
     "extwee": "^1.5.0",
     "fs-extra": "^8.1.0",
-    "husky": "^3.0.0",
+    "husky": "^4.2.1",
     "nodemon": "^2.0.2",
     "prettier": "1.19.1",
     "pretty-quick": "^2.0.0",
