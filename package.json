@@ -5,6 +5,9 @@
   "repository": "github:aibexhq/botscript",
   "author": "Aibex, Inc <oss@aibex.com>",
   "license": "Apache-2.0",
+  "engines": {
+    "node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
+  },
   "main": "index.js",
   "browser": "dist/botscripten.umd.js",
   "scripts": {
@@ -14,7 +17,7 @@
     "buildAll": "yarn clean:dist && concurrently \"npm:build:*\" && yarn examples",
     "tweego": "TWEEGO_PATH=./dist/Twine2 tweego",
     "ci": "pretty-quick --check && yarn build && jest",
-    "release": "release-it",
+    "release": "semantic-release",
     "____________________": "echo \"The following sub-commands are used to serve the main commands above\"",
     "build:twine": "rollup -c -m inline && node scripts/createTwine",
     "build:node": "rm -rf dist/node/* && babel src/node --out-dir dist/npm/node && babel src/common --out-dir dist/npm/common",
@@ -54,6 +57,7 @@
     "@babel/preset-env": "7.8.4",
     "commitizen": "^4.0.3",
     "concurrently": "^5.0.2",
+    "conventional-changelog-conventionalcommits": "^4.2.3",
     "emoji-cz": "^0.3.0",
     "extwee": "^1.5.0",
     "fs-extra": "^8.1.0",
@@ -61,12 +65,12 @@
     "nodemon": "^2.0.2",
     "prettier": "1.19.1",
     "pretty-quick": "^2.0.0",
-    "release-it": "^12.3.5",
     "rollup": "^1.27.14",
     "rollup-plugin-babel": "^4.2.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "semantic-release": "^17.0.2",
     "static-server": "^2.2.1"
   },
   "browserslist": {

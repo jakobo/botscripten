@@ -2,44 +2,54 @@
   "path": "emoji-cz",
   "emoji-cz": {
     "types": {
-      "Feat": {},
-      "Fix": {},
+      "Feat": {
+        "release": "minor"
+      },
+      "Fix": {
+        "release": "patch"
+      },
       "Docs": {
         "emoji": "📝",
-        "description": "Documentation only changes"
+        "description": "Documentation only changes",
+        "release": "patch"
       },
-      "Style": {},
+      "Style": {
+        "release": "patch"
+      },
       "Refactor": {
         "emoji": "♻️ ",
-        "description": "A code change that neither fixes a bug nor adds a feature"
+        "description": "A code change that neither fixes a bug nor adds a feature",
+        "release": "patch"
       },
       "Perf": {
         "emoji": "⚡️",
-        "description": "A code change that strictly improves performance"
+        "description": "A code change that strictly improves performance",
+        "release": "minor"
       },
       "Test": {
         "emoji": "✅",
-        "description": "Adding, correcting, or fixing tests"
-      },
-      "Convo": {
-        "emoji": "💬",
-        "description": "Work focused exclusively on an Aibex conversation (text and literals)"
+        "description": "Adding, correcting, or fixing tests",
+        "release": "patch"
       },
       "Upgrade": {
         "emoji": "⬆️ ",
-        "description": "Upgrading dependencies"
+        "description": "Upgrading dependencies",
+        "release": "patch"
       },
       "Downgrade": {
         "emoji": "⬇️ ",
-        "description": "Downgrading dependencies"
+        "description": "Downgrading dependencies",
+        "release": "patch"
       },
       "Pin": {
         "emoji": "📌",
-        "description": "Pin a dependency to a specific version"
+        "description": "Pin a dependency to a specific version",
+        "release": "patch"
       },
       "Chore": {
         "emoji": "❓",
-        "description": "Other changes that don't modify src or test files"
+        "description": "Other changes that don't modify src or test files",
+        "release": false
       }
     }
   }
