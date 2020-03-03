@@ -52,7 +52,7 @@ Botscripten comes with two distinct flavors: **An Interactive Output** for testi
 
 1. From the Twine menu, select `Formats`
 2. Then, select the `Add a New Format` tab
-3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@1.0.0/dist/Twine2/Botscripten/format.js`
+3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@v1.0.0/dist/Twine2/Botscripten/format.js`
 4. Click `Add`
 
 Once you've done this, you will have access to the Botscripten story format in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide, as migrating to 0.5.0 from an earlier version can introduce breaking changes.
