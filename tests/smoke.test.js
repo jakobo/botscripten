@@ -17,14 +17,14 @@ describe("Parser Smoke Tests", () => {
 describe("onboarding.html Parse", () => {
   let html = "";
   beforeAll(() => {
-    html = getFile("onboarding.html");
+    html = getFile("sample.html");
   });
 
   test("parse() returns an story object with passage objects, tags, and directives", () => {
     const story = parse(html);
     expect(typeof story).toBe("object");
-    expect(story.name).toBe("onboarding");
-    expect(story.start).toBe("start");
+    expect(story.name).toBe("Test");
+    expect(story.start).toBe("Start");
     expect(story.format).toMatch(/Botscripten/);
     expect(story.passages[story.passageIndex[story.start]]).toMatchObject({
       pid: story.passageIndex[story.start],

@@ -1,0 +1,72 @@
+:: StoryTitle
+Test
+
+
+:: StoryData
+{
+	"ifid": "3A31AA6F-EF9A-43B1-BF53-08AF770247A8",
+	"format": "TEST_Botscripten",
+	"format-version": "0.5.1",
+	"start": "Start",
+	"zoom": 1
+}
+
+
+:: Start [speaker-bot] {"position":"412,189","size":"100,100"}
+Hey there!
+
+I'm the chat bot, and this is a demo!
+
+[[A demo?]]
+
+
+:: A demo? [speaker-bot] {"position":"412,339","size":"100,100"}
+Yep! A demo! With choices!
+
+[[Choices are neat -> Choice Good]]
+[[I'm not a fan -> Choice Bad]]
+
+
+::  Choice Good [speaker-bot] {"position":"337,489","size":"100,100"}
+#@set choice good
+
+Oh, that's great! I like having choices too.
+
+[[Directives]]
+
+
+::  Choice Bad [speaker-bot] {"position":"487,489","size":"100,100"}
+#@set choice bad
+
+Oh no. Well, at least there was only one of them!
+
+[[Directives]]
+
+
+:: Directives [speaker-bot] {"position":"412,634","size":"100,100"}
+See that block above with the #@ symbol? That's a directive.
+
+Directives are how you can tell your scripting system to **DO** more than just chat like a bot.
+
+In this case, we told our scripting engine we wanted to set the "choice" var.
+
+[[Does it always go on one line?]]
+
+
+:: Does it always go on one line? [speaker-bot] {"position":"412,784","size":"100,100"}
+###@sql
+SELECT * FROM users
+WHERE username = "chatbot"
+###
+
+Not really. The above part is a "Block Directive" and everything inside is treated as a single statement.
+
+[[So, how does it run?]]
+
+
+:: So, how does it run? [speaker-bot] {"position":"412,934","size":"100,100"}
+That's the fun part. It's up to you. Botscripten is meant to make it easy to put together guided conversations. You can use your own directive language to run queries, ask open ended questions, or do whatever techno-wizardry suits you.
+
+Go forth and build!
+
+

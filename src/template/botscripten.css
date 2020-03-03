@@ -3,9 +3,13 @@
 :root {
   --navbar-height: 56px;
   --user-response-panel-height: 110px;
-  --bg-color: #c7bdb5; /*global chat bg color*/
-  --user-color: #417505; /*user name & placeholder avatar bg*/
-  --speaker-color: #888; /*default color for speaker name & placeholder avatar bg*/
+  --bg-color: #4d5263; /*global chat bg color*/
+  --user-color: #7aaebb; /*user name & placeholder avatar bg*/
+  --speaker-color: rgb(
+    136,
+    136,
+    136
+  ); /*default color for speaker name & placeholder avatar bg*/
   --navbar-bg-color: #fff;
   --passage-bg-color: #fff;
   --passage-text-color: #000;
@@ -17,6 +21,11 @@
 }
 
 /* PROOFING */
+#show_directives,
+#proofing {
+  margin-left: 1em;
+}
+
 .proof {
   padding: 50px;
   font-size: 12px;
@@ -97,6 +106,11 @@ body.run {
 }
 
 /* Nav */
+nav .toggles {
+  position: absolute;
+  right: 1em;
+}
+
 .run nav.navbar {
   height: var(--navbar-height);
   background-color: var(--navbar-bg-color);
@@ -352,8 +366,11 @@ body.run {
 
 .run .directive {
   white-space: pre;
-  border: 1px dashed #666;
+  border: 1px dashed #c3c3c3;
   position: relative;
+  overflow-x: scroll;
+  padding-top: 20px;
+  color: white;
 }
 
 .run .directive::after {
@@ -364,6 +381,7 @@ body.run {
   font-weight: bold;
   font-size: 14px;
   letter-spacing: 0.2em;
+  color: white;
 }
 
 body.run.show-directives .directives {

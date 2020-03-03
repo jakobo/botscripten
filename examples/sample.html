@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>
-      <%= name %>
+      Test
     </title>
     <meta charset="utf-8" />
     <meta
@@ -20,11 +20,11 @@
       integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
       crossorigin="anonymous"
     />
-    <%= stylesheet %>
+    <link rel="stylesheet" href="http://localhost:3002/src/template/botscripten.css" />
   </head>
   <body class="bg-white">
     <nav class="navbar navbar-expand-lg fixed-top">
-      <h1 id="ptitle" class="nav-title"><%= name %></h1>
+      <h1 id="ptitle" class="nav-title">Test</h1>
       <div class="toggles">
         <label
           ><input
@@ -83,8 +83,38 @@
       </div>
     </main>
     <twine>
-      <%= passages %>
+      <!-- UUID://3A31AA6F-EF9A-43B1-BF53-08AF770247A8// --><tw-storydata name="Test" startnode="1" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="3A31AA6F-EF9A-43B1-BF53-08AF770247A8" zoom="1" format="TEST_Botscripten" format-version="0.5.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Start" tags="speaker-bot" position="412,189" size="100,100">Hey there!
+
+I&#39;m the chat bot, and this is a demo!
+
+[[A demo?]]</tw-passagedata><tw-passagedata pid="2" name="A demo?" tags="speaker-bot" position="412,339" size="100,100">Yep! A demo! With choices!
+
+[[Choices are neat -&gt; Choice Good]]
+[[I&#39;m not a fan -&gt; Choice Bad]]</tw-passagedata><tw-passagedata pid="3" name="Choice Good" tags="speaker-bot" position="337,489" size="100,100">#@set choice good
+
+Oh, that&#39;s great! I like having choices too.
+
+[[Directives]]</tw-passagedata><tw-passagedata pid="4" name="Choice Bad" tags="speaker-bot" position="487,489" size="100,100">#@set choice bad
+
+Oh no. Well, at least there was only one of them!
+
+[[Directives]]</tw-passagedata><tw-passagedata pid="5" name="Directives" tags="speaker-bot" position="412,634" size="100,100">See that block above with the #@ symbol? That&#39;s a directive.
+
+Directives are how you can tell your scripting system to **DO** more than just chat like a bot.
+
+In this case, we told our scripting engine we wanted to set the &quot;choice&quot; var.
+
+[[Does it always go on one line?]]</tw-passagedata><tw-passagedata pid="6" name="Does it always go on one line?" tags="speaker-bot" position="412,784" size="100,100">###@sql
+SELECT * FROM users
+WHERE username = &quot;chatbot&quot;
+###
+
+Not really. The above part is a &quot;Block Directive&quot; and everything inside is treated as a single statement.
+
+[[So, how does it run?]]</tw-passagedata><tw-passagedata pid="7" name="So, how does it run?" tags="speaker-bot" position="412,934" size="100,100">That&#39;s the fun part. It&#39;s up to you. Botscripten is meant to make it easy to put together guided conversations. You can use your own directive language to run queries, ask open ended questions, or do whatever techno-wizardry suits you.
+
+Go forth and build!</tw-passagedata></tw-storydata>
     </twine>
-    <%= script %>
+    <script src="http://localhost:3002/dist/botscripten.umd.js"></script>
   </body>
 </html>

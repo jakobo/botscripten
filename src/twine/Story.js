@@ -181,12 +181,13 @@ class Story {
    * Find a passage based on its id or name
    */
   findPassage = idOrName => {
+    idOrName = `${idOrName}`.trim();
     if (isNumeric(idOrName)) {
       return this.passages[idOrName];
     } else {
       // handle passages with ' and " (can't use a css selector consistently)
       const p = findAll(this.story, "tw-passagedata").filter(
-        p => unescape(p.getAttribute("name")) === idOrName
+        p => unescape(p.getAttribute("name")).trim() === idOrName
       )[0];
       if (!p) return null;
       return this.passages[p.getAttribute("pid")];

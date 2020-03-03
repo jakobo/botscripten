@@ -23,19 +23,18 @@ Botscripten is also available as an npm parser, able to handle Passage-specific 
 
 If "yes", then Botscripten is worth looking into.
 
-🔮 [Example Using BotscriptenViewer](http://htmlpreview.github.io/?https://github.com/aibexhq/botscripten/blob/master/examples/onboarding.html) <br>
-📦 [Example Using Botscripten](http://htmlpreview.github.io/?https://github.com/aibexhq/botscripten/blob/master/examples/onboarding.min.html)
+🔮 [A Sample Conversation](http://htmlpreview.github.io/?https://github.com/aibexhq/botscripten/blob/master/examples/sample.html)
 
-Botscripten comes with two distinct flavors: **An Interactive Output** (BotscriptenViewer) for testing and stepping through conversations in a pseudo chat interface based on the Trialogue code, and **A Minimal Output** (Botscripten) for using your Twine output files in other systems. When developing a rich chatbot conversation, you'll use BotscriptenViewer. When you're ready to publish, you'll select the Botscripten format and shed all of the HTML/CSS/JavaScript required for the interactive version.
+Botscripten comes with two distinct flavors: **An Interactive Output** for testing and stepping through conversations in a pseudo chat interface based on the Trialogue code, and built in proofing version. External JavaScript keeps the output file small, making it easy to use the pure HTML in other systems.
 
 - [Botscripten](#botscripten)
-- [🚀 Setup and Your First &quot;Chat&quot;](#-setup-and-your-first-quotchatquot)
+- [🚀 Setup and Your First "Chat"](#-setup-and-your-first-chat)
   - [Add Botscripten and BotscriptenViewer as a Twine Story Formats](#add-botscripten-and-botscriptenviewer-as-a-twine-story-formats)
   - [Create your first chat story](#create-your-first-chat-story)
 - [🏷 Botscripten Tags](#-botscripten-tags)
 - [🙈 Comments in Botscripten](#-comments-in-botscripten)
 - [🗂 Recipies](#-recipies)
-  - [&quot;Special&quot; Comments (Directives)](#quotspecialquot-comments-directives)
+  - ["Special" Comments (Directives)](#special-comments-directives)
   - [Conditional Branching (cycles, etc)](#conditional-branching-cycles-etc)
   - [Scripting Directives in BotscriptenViewer](#scripting-directives-in-botscriptenviewer)
 - [📖 Node Module Documentation](#-node-module-documentation)
@@ -56,7 +55,9 @@ Botscripten comes with two distinct flavors: **An Interactive Output** (Botscrip
 3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@0.5.1/dist/Twine2/Botscripten/format.js`
 4. Click `Add`
 
-Once you've done this, you will have access to the Botscripten story formats in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide, as migrating to 0.5.0 from an earlier version can introduce breaking changes.
+Once you've done this, you will have access to the Botscripten story format in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide, as migrating to 0.5.0 from an earlier version can introduce breaking changes.
+
+Upgrading is as simple as removing your old Botscripten and adding the new URL above. You can then convert any existing story to the new format.
 
 ## Create your first chat story
 
@@ -237,7 +238,7 @@ story = {
 First off, every Twine format I've worked with is amazing and super thougtful. If your goal is to create interactive fiction, self-contained tutorials, etc, you should just use Trialogue, Harlowe, or Sugarcube. However, if you're using Twine as a conversation editor (and you are more interested in the `tw-passagedata` blocks and the data structure behind Twine) Botscripten may be for you.
 
 - **Zero `story.*` Calls** To be as portable as possible, No template tags may be used. That means your code cannot contain the `<% ... %>` blocks seen in Trialogue/Paloma. These tags are incredibly difficult to parse/lex, because they assume a JavaScript environmemt at runtime. And since you don't know where your Twine file is going to run, you must decouple the programming from the data.
-- **Tags drive behavior** Because of that first restriction, we need a way to perform actions within Botscripten. Thankfully, Twine's Tag system is up to the task.
+- **Tags drive behavior** Because of that first restriction, we need a way to perform actions within Botscripten. Thankfully, Twine's Tag system is up to the task. **We strive to keep the tag count low to minimize the number of reserved tags in the system.**
 - **Dev Experience** Iterating on Twine templates is hard. A lot of time was spent to make the dev experience as simple as (1) put [tweego](https://www.motoslave.net/tweego/) in your executable path, and (2) type `yarn dev`.
 - **Multiple Formats** Botscripten provides two syncrhonized formats from the same repository. Features in the proofing / html5-min version will also show up simultaneously in the Interactive one.
 
@@ -254,9 +255,9 @@ First off, every Twine format I've worked with is amazing and super thougtful. I
 - TEST_Botscripten can be installed in Twine from `http://localhost:3001/Botscripten`
 - When you are done developing/testing, be sure to remove the TEST_Botscripten format. If you forget, just restart the dev server so Twine doesn't complain every time you start it up
 
-For local testing convienence, a `stories` directory exists that is easy to call via `yarn tweego`. The `tweego` command ensures that Botscripten is available in your tweego story format path.
+For local testing convienence, we have a `yarn tweego` command. It ensures that Botscripten is in the `tweego` path before performing a build.
 
-As an example, the onboarding document was converted from Twine to Twee using the command `yarn tweego -d ./stories/onboarding.html -o ./examples/onboarding.twee`
+As an example, the sample document was converted from Twine to Twee using the command `yarn tweego -d ./stories/sample.html -o ./examples/sample.twee`. (You may need to manually edit the html file to set the format to "Botscripten")
 
 ## Building for Release
 
