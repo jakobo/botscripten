@@ -1,5 +1,18 @@
 # Changelog
 
+# v1.0.0
+
+- **Features**
+  - Changed default color to darker blue to match Botscripten theme
+  - Created a simpler `sample.html` that demonsrates botscripten in a more straightforward manner
+- **Fixes**
+  - Fixed alignment of header over chat dialog
+
+**BREAKING CHANGES**
+- This release commits us to the semantic version standard going forward
+  
+This is our first release using `semantic-release` and there are still rough edges in changelog generation.
+
 # 0.5.1
 
 - **Features**
