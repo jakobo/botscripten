@@ -1,3 +1,16 @@
+## [1.1.0](https://github.com/aibexhq/botscripten/compare/v1.0.0...v1.1.0) (2020-03-04)
+
+
+### 🐛 Bug Fixes
+
+* Fixes semantic-release to work with our release style ([1d278df](https://github.com/aibexhq/botscripten/commit/1d278df0381d6e4eac3ac4f49d122c1a7c9b966c))
+
+
+### ✨ Features
+
+* Completes the removal of botscriptenviewer ([bf5ef99](https://github.com/aibexhq/botscripten/commit/bf5ef998f683761f00ffc5f23002081eb0efbec8))
+* Enables semantic-release by disabling --dry-run ([6973f61](https://github.com/aibexhq/botscripten/commit/6973f61db73bd4d97ea7911dddc84c12cba746a1))
+
 # Changelog
 
 # 0.5.1
