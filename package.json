@@ -1,6 +1,6 @@
 {
   "name": "@aibex/botscripten",
-  "version": "0.5.1",
+  "version": "1.0.0",
   "description": "Craft rich bot conversations using the Twine/Twee format",
   "repository": "github:aibexhq/botscripten",
   "author": "Aibex, Inc <oss@aibex.com>",
