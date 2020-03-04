@@ -27,7 +27,7 @@
     "examples": "concurrently -r \"npm:examples:*\"",
     "examples:sample": "yarn tweego -f Botscripten -o ./examples/sample.html ./examples/sample.twee",
     "format:prettier": "pretty-quick --staged",
-    "husky:precommit": "concurrently \"npm:format:*\" && yarn build && git add dist/ && jest",
+    "husky:precommit": "concurrently \"npm:format:*\" && yarn build && git add dist/",
     "commit:cz": "exec < /dev/tty && git-cz --hook || true"
   },
   "keywords": [
