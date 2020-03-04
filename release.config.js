@@ -13,7 +13,7 @@ module.exports = {
     [
       "@semantic-release/commit-analyzer",
       {
-        preset: "conventional-changelog",
+        preset: "conventionalcommits",
         parserOpts: {
           headerPattern: /^.+?\s(\w*)(?:\((.*)\))?!?: (.*)$/, // emoji friendly
         },
@@ -36,7 +36,7 @@ module.exports = {
     [
       "@semantic-release/git",
       {
-        assets: ["dist/**/*", "CHANGELOG.md"],
+        assets: ["dist/**/*", "examples/**/*", "CHANGELOG.md"],
         message:
           "🧹 Chore: Releases ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
       },
