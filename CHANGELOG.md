@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/aibexhq/botscripten/compare/v1.1.0...v1.2.0) (2020-03-04)
+
+
+### ✨ Features
+
+* Runs botscripten offline ([580a0a0](https://github.com/aibexhq/botscripten/commit/580a0a087145e0f95f697d0e6d8ee4596354576f))
+
 ## [1.1.0](https://github.com/aibexhq/botscripten/compare/v1.0.0...v1.1.0) (2020-03-04)
 
 
