@@ -41,4 +41,4 @@ jobs:
       - run: yarn build
       - run:
           name: performing semantic-release
-          command: yarn run release || true
+          command: yarn run release --dry-run || true
