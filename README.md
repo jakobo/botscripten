@@ -52,12 +52,14 @@ Botscripten comes with two distinct flavors: **An Interactive Output** for testi
 
 1. From the Twine menu, select `Formats`
 2. Then, select the `Add a New Format` tab
-3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@0.5.1/dist/Twine2/Botscripten/format.js`
+3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@master/dist/Twine2/Botscripten/format.js`
 4. Click `Add`
 
-Once you've done this, you will have access to the Botscripten story format in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide, as migrating to 0.5.0 from an earlier version can introduce breaking changes.
+Once you've done this, you will have access to the Botscripten story format in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide.
 
-Upgrading is as simple as removing your old Botscripten and adding the new URL above. You can then convert any existing story to the new format.
+Upgrading is as simple as removing your old Botscripten and adding the new URL above. Any stories you publish will automatically work in the new format.
+
+_(If you are interested in the `next` version of botscripten, you may use `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@next/dist/Twine2/Botscripten/format.js` as your story format URL)_
 
 ## Create your first chat story
 
