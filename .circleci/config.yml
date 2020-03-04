@@ -13,6 +13,7 @@ workflows:
               only:
                 - master
                 - next
+                - beta
 
 # ######################################################################
 # Job Definitions
