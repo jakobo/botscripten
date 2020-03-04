@@ -2,9 +2,17 @@ version: 2
 
 workflows:
   version: 2
-  build_and_test:
+  build_test_release:
     jobs:
       - botscripten
+      - release:
+          requires:
+            - botscripten
+          filters:
+            branches:
+              only:
+                - master
+                - next
 
 # ######################################################################
 # Job Definitions
@@ -15,10 +23,22 @@ workflows:
 jobs:
   botscripten:
     docker:
-      - image: node:10.13.0
+      - image: "circleci/node:latest"
     working_directory: ~/botscripten
     steps:
       - checkout
       - setup_remote_docker
       - run: yarn install
       - run: yarn ci
+  release:
+    docker:
+      - image: "circleci/node:latest"
+    working_directory: ~/botscripten
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: yarn install
+      - run: yarn build
+      - run:
+          name: performing semantic-release
+          command: yarn run release || true
