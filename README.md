@@ -29,14 +29,14 @@ Botscripten comes with two distinct flavors: **An Interactive Output** for testi
 
 - [Botscripten](#botscripten)
 - [🚀 Setup and Your First "Chat"](#-setup-and-your-first-chat)
-  - [Add Botscripten and BotscriptenViewer as a Twine Story Formats](#add-botscripten-and-botscriptenviewer-as-a-twine-story-formats)
+  - [Add Botscripten as a Twine Story Format](#add-botscripten-as-a-twine-story-format)
   - [Create your first chat story](#create-your-first-chat-story)
 - [🏷 Botscripten Tags](#-botscripten-tags)
 - [🙈 Comments in Botscripten](#-comments-in-botscripten)
 - [🗂 Recipies](#-recipies)
   - ["Special" Comments (Directives)](#special-comments-directives)
   - [Conditional Branching (cycles, etc)](#conditional-branching-cycles-etc)
-  - [Scripting Directives in BotscriptenViewer](#scripting-directives-in-botscriptenviewer)
+  - [Scripting Directives in Botscripten](#scripting-directives-in-botscripten)
 - [📖 Node Module Documentation](#-node-module-documentation)
 - [⚠️ Why would you use Botscripten over (Insert Twine Format)?](#️-why-would-you-use-botscripten-over-insert-twine-format)
 - [Developing on Botscripten](#developing-on-botscripten)
@@ -46,7 +46,7 @@ Botscripten comes with two distinct flavors: **An Interactive Output** for testi
 
 # 🚀 Setup and Your First "Chat"
 
-## Add Botscripten and BotscriptenViewer as a Twine Story Formats
+## Add Botscripten as a Twine Story Format
 
 ![add](/docs/add-format.gif)
 
@@ -64,22 +64,23 @@ Upgrading is as simple as removing your old Botscripten and adding the new URL a
 ![create a chat](/docs/trialogue-create.gif)
 
 1. Create a story in the Twine editor.
-2. Edit the start passage to include:
+2. Set your story format to `Botscripten`
+3. Edit the start passage to include:
    - Title (e.g. start)
    - Passage text (e.g. "Hi 👋")
    - One or more links (e.g. `[[What's your name?]]`)
    - Speaker tag (e.g. `speaker-bot`). This will display the speaker's name (in this case `bot`) in standalone viewer
-3. Edit the newly created passage(s) to include:
+4. Edit the newly created passage(s) to include:
    - Passage text (e.g. "My name is Bot")
    - One or more links (e.g. `[[Back to start->start]]`)
    - Speaker tag (e.g. `speaker-bot`)
-4. Hit `Play` to test the result (Using BotscriptenViewer)
+5. Hit `Play` to test the result
 
 # 🏷 Botscripten Tags
 
 Botscripten is designed to work exclusively with Twine's tag system. That means no code in your conversation nodes. This is important because behind the scenes, many other Twine formats convert Passages containing `<% ... %>` into JavaScript code, defeating the goal of portability.
 
-The following passage tags are supported by BotscriptenViewer. It is assumed that anyone consuming a Botscripten formatted Twine story will also support these tags.
+The following passage tags are supported by Botscripten. It is assumed that anyone consuming a Botscripten formatted Twine story will also support these tags.
 
 | tag                    | explanation                                                                                                                                                                                                                                                         |
 | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -91,7 +92,7 @@ To maintain compatibility with the [Twee 3 Specification](https://github.com/ift
 
 # 🙈 Comments in Botscripten
 
-The Botscripten story format allows for simple comments. Lines beginning with an octothorpe `#` are removed during the parsing process in BotscriptenViewer. These lines are made available in Botscripten should you need to attach meaning to your comments.
+The Botscripten story format allows for simple comments. Lines beginning with an octothorpe `#` are removed from chat lines when playing a story, but remain in the source code for external tools.
 
 If you'd like to place a comment across multiple lines, you can use a triple-octothorpe `###`. Everything until the next `###` will be considered a comment.
 
@@ -122,7 +123,7 @@ Below are some common challenges & solutions to writing Twine scripts in Botscri
 
 ## "Special" Comments (Directives)
 
-If you look at the [onboarding example](/examples/onboarding.twee), you'll notice many of the comments contain an `@yaml` statement. While `BotscriptenViewer` doesn't care about these items (they're comments after all), any other system parsing the Twine file can read these statements out of the comment blocks.
+If you look at the [sample](/examples/sample.twee), you'll notice many of the comments contain an `@yaml` statement. While `Botscripten` (viewer) doesn't care about these items (they're comments after all), any other system parsing the Twine file can read these statements out of the comment blocks. Additionally, if you use botscripen's npm engine, you'll have access to these special comments as part of the story parsing.
 
 These special comments are called **Directives** and they consist of the comment identifier (`#` or `###`) immediatly followed by `@` and a `word`. These are all Directives:
 
@@ -138,7 +139,7 @@ INSERT INTO winners (name, time) VALUES ('you', NOW())
 
 Anyone parsing Botscripten Twine files can assume that the regular expressions `/^#@([\S]+)(.*)/g` (inline) and `/^###@([\S]+)([\s\S]*?)###/gm` (block) will match and extract the directive and the remainder of the comment.
 
-For consistency with BotscriptenViewer, directives should be run when a Passage is parsed, but before any tag behavior (such as `auto` or `speaker-*` are applied) This allows directives to form opinions about the Passage and it's output before rendering occurs.
+For consistency between systems, directives should be run when a Passage is parsed, but before any tag behavior (such as `wait` or `speaker-*` are applied) This allows directives to form opinions about the Passage and it's output before rendering occurs.
 
 There is no set definition for directives, as adding a directive to Botscripten would require **every external parser to also support it**. This is also why Botscripten is so light- there's almost no parsing being done of the individual Passages.
 
@@ -154,9 +155,9 @@ Since Botscripten does not maintain a concept of state, nor have a way to script
 
 Conditional branching can then be implemented as a [Directive](#%22special%22-comments-directives). This gives you control outside of the Twine environment as to which link is followed under what conditions. We're partial to a `###@next ... ###` directive, but feel free to create your own!
 
-## Scripting Directives in BotscriptenViewer
+## Scripting Directives in Botscripten
 
-If you absolutely want to handle Directives in BotscriptenViewer, you can do so by selecting `Edit Story JavaScript` in Twine, and registering a handler for your directive. For example, this logs all `@log` directives' content to the developer tools console.
+If you absolutely want to handle Directives in Botscripten, you can do so by selecting `Edit Story JavaScript` in Twine, and registering a handler for your directive. For example, this logs all `@log` directives' content to the developer tools console.
 
 ```js
 story.directive("@log", function(info, rendered, passage, story) {
@@ -186,8 +187,8 @@ story = {
   creatorVersion: "", // version of creator used
   ifid: "", // IFID - Interactive Fiction ID
   zoom: "", // Twine Zoom Level
-  format: "", // Story Format (Botscripten / BotscriptenViewer)
-  formatVersion: "", // Version of Botscripten / BotscriptenViewer used
+  format: "", // Story Format (Botscripten)
+  formatVersion: "", // Version of Botscripten used
   options: "", // Twine options
   tags: [
     {
