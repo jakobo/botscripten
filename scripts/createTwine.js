@@ -2,25 +2,27 @@ const fs = require("fs-extra");
 const path = require("path");
 const tmpl = require("lodash.template");
 const pkg = require("../package.json");
+const CleanCSS = require("clean-css");
 
 const IS_DEV = process.env.NODE_ENV === "development";
 const PREFIX = IS_DEV ? "TEST_" : "";
-const URL_BASE = IS_DEV
-  ? "http://localhost:3002"
-  : `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@${pkg.version}`;
 
 const build = (name, description, outDir, { template, js, css }) => {
   // common
   const svg = path.resolve(__dirname, "../src/template/icon.svg");
   const svgOut = path.resolve(outDir, "./icon.svg");
-
   const targetFile = path.resolve(outDir, "./format.js");
 
-  const storyFile = tmpl(fs.readFileSync(template).toString())({
+  const jsContent = fs.readFileSync(js, "utf8").toString();
+  const cssContent = fs.readFileSync(css, "utf8").toString();
+  const tmplContent = fs.readFileSync(template, "utf8").toString();
+  const minCss = new CleanCSS({}).minify(cssContent.replace(/\s+/g, " "));
+
+  const storyFile = tmpl(tmplContent)({
     name: "{{STORY_NAME}}",
     passages: "{{STORY_DATA}}",
-    script: `<script src="${URL_BASE}/${js}"></script>`,
-    stylesheet: `<link rel="stylesheet" href="${URL_BASE}/${css}" />`,
+    script: `<script>${jsContent}</script>`,
+    stylesheet: `<style>${minCss.styles}</style>`,
   });
 
   const formatData = {
@@ -48,8 +50,8 @@ build(
   path.resolve(__dirname, "../dist/Twine2/Botscripten"),
   {
     template: path.resolve(__dirname, "../src/template/index.html"),
-    css: "src/template/botscripten.css",
-    js: "dist/botscripten.umd.js",
+    css: path.resolve(__dirname, "../src/template/botscripten.css"),
+    js: path.resolve(__dirname, "../dist/botscripten.umd.js"),
   }
 );
 

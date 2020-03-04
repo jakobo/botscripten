@@ -14,8 +14,8 @@
     <twine>
       <%= passages %>
     </twine>
-    <section id="runtime">
-      <nav>
+    <nav>
+      <div id="nav-reset">
         <h1><%= name %></h1>
         <div id="toggles">
           <label
@@ -31,12 +31,13 @@
             proofing</label
           >
         </div>
-      </nav>
-
-      <main class="chat-panel">
-        <div class="passages">
-          <div id="phistory" class="history chat-history"></div>
-          <div id="passage" class="active"></div>
+      </div>
+    </nav>
+    <section id="runtime">
+      <main id="chat-panel">
+        <div id="passages">
+          <div id="history"></div>
+          <div id="active-passage"></div>
           <div id="animation-container">
             <div class="chat-passage-wrapper">
               <div class="chat-passage">
@@ -49,13 +50,8 @@
             </div>
           </div>
         </div>
-        <div class="user-response-panel">
-          <hr />
-          <div
-            id="user-response-hint"
-            class="user-response-hint content-container"
-          ></div>
-          <div id="user-response-panel" class="user-reponse-wrapper"></div>
+        <div id="user-response-wrapper">
+          <div id="user-response-panel"></div>
         </div>
       </main>
     </section>

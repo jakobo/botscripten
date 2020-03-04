@@ -1,40 +1,34 @@
 const path = require("path");
+const util = require("util");
+const outdent = require("outdent");
 
 const StaticServer = require("static-server");
-const exampleServer = new StaticServer({
-  rootPath: path.resolve(__dirname, "../examples/"),
-  port: 3000,
-  name: "Botscripten-example-server", // optional, will set "X-Powered-by" HTTP header
+
+const servers = [
+  new StaticServer({
+    rootPath: path.resolve(__dirname, "../examples/"),
+    port: 3000,
+    name: "Botscripten-example-server", // optional, will set "X-Powered-by" HTTP header
+  }),
+  new StaticServer({
+    rootPath: path.resolve(__dirname, "../dist/Twine2/"),
+    port: 3001,
+    name: "Botscripten-dist-server", // optional, will set "X-Powered-by" HTTP header
+  }),
+];
+
+const allServers = servers.map(s => {
+  const pvStart = util.promisify(s.start);
+  return s.start();
 });
 
-exampleServer.start(() => {
-  console.log("🌎 Example Server listening to", exampleServer.port);
-});
+Promise.all(allServers).then(() => {
+  console.log(outdent`
+    🌎 Example Server listening to 3000
+    📦 Format/Dist Server listening to 3001
+    Active URLs:
+      Botscripten @ http://localhost:3001/Botscripten/format.js
+      Samples @ http://localhost:3000
 
-const distServer = new StaticServer({
-  rootPath: path.resolve(__dirname, "../dist/Twine2/"),
-  port: 3001,
-  name: "Botscripten-dist-server", // optional, will set "X-Powered-by" HTTP header
+    Please remember to remove these from Twine when done testing`);
 });
-
-const devServer = new StaticServer({
-  rootPath: path.resolve(__dirname, "../"),
-  port: 3002,
-  name: "Botscripten-raw-server", // optional, will set "X-Powered-by" HTTP header
-});
-
-devServer.start(() =>
-  distServer.start(() => {
-    console.log("📦 Format/Dist Server listening to", distServer.port);
-    console.log("   mock cdn.jsdelivr.net on port", devServer.port);
-    console.log("Active URLs:");
-    console.log(
-      `  Botscripten @ http://localhost:${
-        distServer.port
-      }/Botscripten/format.js`
-    );
-    console.log(
-      "\nPlease remember to remove these from Twine when done testing"
-    );
-  })
-);

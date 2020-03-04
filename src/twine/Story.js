@@ -8,8 +8,8 @@ const selectJs = '*[type="text/twine-javascript"]';
 const selectActiveLink = "#user-response-panel a[data-passage]";
 const selectActiveButton = "#user-response-panel button[data-passage]";
 const selectActiveInput = "#user-response-panel input";
-const selectActive = ".chat-panel .active";
-const selectHistory = ".chat-panel .history";
+const selectActive = "#active-passage";
+const selectHistory = "#history";
 const selectResponses = "#user-response-panel";
 const typingIndicator = "#animation-container";
 
@@ -27,7 +27,7 @@ const isNumeric = d => IS_NUMERIC.test(d);
 const USER_PASSAGE_TMPL = ({ id, text }) => `
   <div class="chat-passage-reset">
     <div class="chat-passage-wrapper" data-speaker="you">
-      <div class="chat-passage phistory" data-speaker="you" data-upassage="${id}">
+      <div class="chat-passage" data-speaker="you" data-upassage="${id}">
         ${text}
       </div>
     </div>
@@ -308,7 +308,7 @@ class Story {
    * Scrolls the document as far as possible (based on history container's height)
    */
   scrollToBottom = () => {
-    const hist = find(this.document, "#phistory");
+    const hist = find(this.document, selectHistory);
     document.scrollingElement.scrollTop = hist.offsetHeight;
   };
 

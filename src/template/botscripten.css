@@ -1,8 +1,10 @@
-/* Variables */
-
+/**
+* Global styles
+*/
 :root {
-  --navbar-height: 56px;
-  --user-response-panel-height: 110px;
+  --nav-height: 46px;
+  --nav-buffer: 10px;
+  --max-width: 768px;
   --bg-color: #4d5263; /*global chat bg color*/
   --user-color: #7aaebb; /*user name & placeholder avatar bg*/
   --speaker-color: rgb(
@@ -13,7 +15,7 @@
   --directive-border: #c3c3c3;
   --navbar-bg-color: #fff;
   --passage-bg-color: #fff;
-  --passage-text-color: #000;
+  --passage-text-color: #222;
 }
 
 body {
@@ -24,7 +26,7 @@ body {
   padding: 0;
 }
 
-body.proof {
+body.proof twine {
   padding: 50px;
   font-size: 12px;
 }
@@ -32,8 +34,8 @@ body.proof {
 #twine-user-stylesheet,
 #twine-user-script,
 twine,
-.proof main,
-.proof .user-response-panel {
+.proof #runtime main,
+.proof #user-response-panel {
   display: none !important;
 }
 
@@ -44,13 +46,54 @@ twine,
   white-space: pre;
 }
 
-.toggles label {
+/**
+* Nav (available in all modes)
+*/
+nav {
+  position: fixed;
+  z-index: 1;
+  height: var(--nav-height);
+  background: var(--navbar-bg-color);
+  width: 100vw;
+  max-width: var(--max-width);
+  top: 0;
+  border: 5px solid var(--speaker-color);
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+nav h1 {
+  margin: 0;
+  font-size: 26px;
+  padding: 10px 1em 0 1em;
+  line-height: 26px;
+}
+
+#nav-reset {
+  position: relative;
+}
+
+#toggles {
+  position: absolute;
+  right: 1em;
+  top: 50%;
+}
+
+#toggles label {
   margin-left: 1em;
 }
 
+twine,
+#runtime {
+  margin-top: var(--nav-height);
+}
+
 /*
-PROOFING STYLES
-Used for adjusting tw-storydata into a readable proof that is twee-like
+* Proofing styles
+* Set when body has a .proof class. Hides the majority of runtime
+* and uses pseudoclasses to display the information in a twee-like
+* format
 */
 .proof tw-storydata::before {
   content: ":: StoryTitle\A"attr(name);
@@ -76,25 +119,31 @@ Used for adjusting tw-storydata into a readable proof that is twee-like
   position: absolute;
   top: 0;
 }
-/* END PROOFING */
 
-/*
-CHAT PASSAGE (INTERACTIVE)
+/**
+* Runtime (interactive) code
+* All runtime items are in the section#runtime
 */
 #runtime {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  max-height: 100%;
-  max-width: 768px;
+  height: calc(100vh - var(--nav-height));
+  max-height: calc(100% - var(--nav-height));
+  max-width: var(--max-width);
 }
 
-main {
+#runtime main {
   flex: 1 1 auto;
   background-color: var(--bg-color);
-  padding: 15px;
+  padding: var(--nav-buffer) 15px 15px 15px;
 }
 
+/**
+* Chat passages
+* These are repeatable passages added in the interactive code.
+* They are the "chat lines" and appear in the history, the
+* passage, and are also used as part of the "wave"
+*/
 .chat-passage-reset {
   position: relative;
 }
@@ -164,85 +213,17 @@ main {
   background-color: var(--user-color);
 }
 
-/*
-RESPONSE PANEL (INTERACTIVE)
+/**
+* Directives
+* When enabled, directives show the "behind the scenes" items that would
+* have been otherwise called as part of a given step. They are inserted
+* **first** in a conversation to simulate how they are handled in a
+* botscripten engine.
 */
-.user-response-panel {
-  padding-right: 15px;
-  padding-left: 15px;
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
+body.show-directives .directives {
+  display: block;
 }
 
-.user-response-panel hr {
-  margin: 0;
-  border-top: 5px solid white;
-}
-
-.user-reponse-wrapper {
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.user-response-panel .user-response {
-  display: inline-block;
-  padding: 0.5rem;
-  margin: 0.25rem;
-  background-color: white;
-  color: #333;
-  border-top: 2px solid transparent;
-  transition: border-color 0.15s ease-in;
-}
-.user-response-panel .user-response:hover {
-  text-decoration: none;
-  border-color: var(--user-color);
-}
-
-/*
-TYPING ANIMATION
-*/
-div.wave {
-  position: relative;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-div.wave .dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  margin-right: 2px;
-  background: var(--passage-text-color);
-  animation: wave 1.2s ease-in-out infinite;
-}
-
-div.wave .dot:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-div.wave .dot:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-@keyframes wave {
-  0%,
-  50%,
-  100% {
-    transform: initial;
-  }
-
-  25% {
-    transform: translateY(-15px);
-  }
-}
-
-/* Directives */
 .directives {
   display: none;
   font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
@@ -273,6 +254,81 @@ div.wave .dot:nth-child(3) {
   color: var(--passage-bg-color);
 }
 
-body.show-directives .directives {
-  display: block;
+/**
+* User response panel
+* When presented with a choice, the user will select
+* a response from this panel to continue the conversation
+*/
+#user-response-wrapper {
+  padding-right: 15px;
+  padding-left: 15px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  border-top: 3px solid var(--directive-border);
+}
+
+#user-response-panel {
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#user-response-panel .user-response {
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.25rem;
+  background-color: white;
+  color: #333;
+  border-top: 2px solid transparent;
+  transition: border-color 0.15s ease-in;
+}
+#user-response-panel .user-response:hover {
+  text-decoration: none;
+  border-color: var(--user-color);
+}
+
+/**
+* Typing animation
+* Always active, the wave shows typing dots and its visibility
+* is controlled by the chat system
+*/
+#animation-container .wave {
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#animation-container .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 2px;
+  background: var(--passage-text-color);
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+#animation-container .dot:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+#animation-container .dot:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes wave {
+  0%,
+  50%,
+  100% {
+    transform: initial;
+  }
+
+  25% {
+    transform: translateY(-15px);
+  }
 }
