@@ -3,9 +3,7 @@ const path = require("path");
 const tmpl = require("lodash.template");
 const pkg = require("../package.json");
 const CleanCSS = require("clean-css");
-
-const IS_DEV = process.env.NODE_ENV === "development";
-const PREFIX = IS_DEV ? "TEST_" : "";
+const htmlMin = require("html-minifier").minify;
 
 const build = (name, description, outDir, { template, js, css }) => {
   // common
@@ -25,15 +23,22 @@ const build = (name, description, outDir, { template, js, css }) => {
     stylesheet: `<style>${minCss.styles}</style>`,
   });
 
+  const minStory = htmlMin(storyFile, {
+    collapseInlineTagWhitespace: true,
+    collapseWhitespace: true,
+    removeComments: true,
+    useShortDoctype: true,
+  });
+
   const formatData = {
-    name: `${PREFIX}${name}`,
+    name,
     description,
     author: pkg.author.replace(/ <.*>/, ""),
     image: "icon.svg",
     url: pkg.repository,
     version: pkg.version,
     proofing: false,
-    source: storyFile,
+    source: minStory,
   };
 
   fs.mkdirpSync(outDir);
