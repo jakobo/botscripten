@@ -9,81 +9,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="icon" href="favicon.ico" />
-
-    <!-- Bootstrap core CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="http://localhost:3002/src/template/botscripten.css" />
   </head>
-  <body class="bg-white">
-    <nav class="navbar navbar-expand-lg fixed-top">
-      <h1 id="ptitle" class="nav-title">Test</h1>
-      <div class="toggles">
-        <label
-          ><input
-            type="checkbox"
-            name="show_directives"
-            id="show_directives"
-            checked="checked"
-          />show directives</label
-        >
-        <label
-          ><input type="checkbox" name="proofing" id="proofing" />show
-          proofing</label
-        >
-      </div>
-    </nav>
-
-    <main role="main" class="container-fluid">
-      <div class="row">
-        <div class="left-sidebar col-lg d-none d-lg-block">
-          <div
-            id="left-sidebar-container"
-            class="content-container position-fixed mt-3 mt-lg-5 m-lg-4"
-          ></div>
-        </div>
-        <div class="chat-panel col-lg-6 minh-full bg-color">
-          <div id="phistory" class="history chat-history"></div>
-          <div id="passage" class="active"></div>
-          <div id="animation-container">
-            <div class="chat-passage-wrapper">
-              <div class="chat-passage">
-                <div class="wave">
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="user-response-panel fixed-bottom bg-color">
-            <hr />
-            <div
-              id="user-response-hint"
-              class="user-response-hint content-container"
-            ></div>
-            <div id="user-response-panel" class="user-reponse-wrapper"></div>
-          </div>
-        </div>
-        <div class="right-sidebar col-lg offcanvas-collapse">
-          <div class="position-fixed ml--3 w-100 w-lg-auto h-100">
-            <div
-              id="right-sidebar-container"
-              class="content-container m-3 m-sm-5 m-lg-3 mt-lg-5 m-xl-5 mt-xl-5"
-            ></div>
-          </div>
-        </div>
-      </div>
-    </main>
+  <body>
     <twine>
-      <!-- UUID://3A31AA6F-EF9A-43B1-BF53-08AF770247A8// --><tw-storydata name="Test" startnode="1" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="3A31AA6F-EF9A-43B1-BF53-08AF770247A8" zoom="1" format="TEST_Botscripten" format-version="0.5.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Start" tags="speaker-bot" position="412,189" size="100,100">Hey there!
+      <!-- UUID://3A31AA6F-EF9A-43B1-BF53-08AF770247A8// --><tw-storydata name="Test" startnode="1" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="3A31AA6F-EF9A-43B1-BF53-08AF770247A8" zoom="1" format="TEST_Botscripten" format-version="1.0.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Start" tags="speaker-bot wait" position="412,189" size="100,100">Hey there!
 
 I&#39;m the chat bot, and this is a demo!
 
@@ -98,7 +27,7 @@ Oh, that&#39;s great! I like having choices too.
 
 Oh no. Well, at least there was only one of them!
 
-[[Directives]]</tw-passagedata><tw-passagedata pid="5" name="Directives" tags="speaker-bot" position="412,634" size="100,100">See that block above with the #@ symbol? That&#39;s a directive.
+[[Directives]]</tw-passagedata><tw-passagedata pid="5" name="Directives" tags="speaker-bot wait" position="412,634" size="100,100">See that block above with the #@ symbol? That&#39;s a directive.
 
 Directives are how you can tell your scripting system to **DO** more than just chat like a bot.
 
@@ -115,6 +44,51 @@ Not really. The above part is a &quot;Block Directive&quot; and everything insid
 
 Go forth and build!</tw-passagedata></tw-storydata>
     </twine>
-    <script src="http://localhost:3002/dist/botscripten.umd.js"></script>
+    <section id="runtime">
+      <nav>
+        <h1>Test</h1>
+        <div id="toggles">
+          <label
+            ><input
+              type="checkbox"
+              name="show_directives"
+              id="show_directives"
+              checked="checked"
+            />show directives</label
+          >
+          <label
+            ><input type="checkbox" name="proofing" id="proofing" />show
+            proofing</label
+          >
+        </div>
+      </nav>
+
+      <main class="chat-panel">
+        <div class="passages">
+          <div id="phistory" class="history chat-history"></div>
+          <div id="passage" class="active"></div>
+          <div id="animation-container">
+            <div class="chat-passage-wrapper">
+              <div class="chat-passage">
+                <div class="wave">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="user-response-panel">
+          <hr />
+          <div
+            id="user-response-hint"
+            class="user-response-hint content-container"
+          ></div>
+          <div id="user-response-panel" class="user-reponse-wrapper"></div>
+        </div>
+      </main>
+    </section>
+    <link rel="stylesheet" href="http://localhost:3002/src/template/botscripten.css" /> <script src="http://localhost:3002/dist/botscripten.umd.js"></script>
   </body>
 </html>

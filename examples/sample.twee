@@ -12,7 +12,7 @@ Test
 }
 
 
-:: Start [speaker-bot] {"position":"412,189","size":"100,100"}
+:: Start [speaker-bot wait] {"position":"412,189","size":"100,100"}
 Hey there!
 
 I'm the chat bot, and this is a demo!
@@ -43,7 +43,7 @@ Oh no. Well, at least there was only one of them!
 [[Directives]]
 
 
-:: Directives [speaker-bot] {"position":"412,634","size":"100,100"}
+:: Directives [speaker-bot wait] {"position":"412,634","size":"100,100"}
 See that block above with the #@ symbol? That's a directive.
 
 Directives are how you can tell your scripting system to **DO** more than just chat like a bot.

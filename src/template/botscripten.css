@@ -10,43 +10,48 @@
     136,
     136
   ); /*default color for speaker name & placeholder avatar bg*/
+  --directive-border: #c3c3c3;
   --navbar-bg-color: #fff;
   --passage-bg-color: #fff;
   --passage-text-color: #000;
 }
 
-#twine-user-stylesheet,
-#twine-user-script {
-  display: none !important;
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
 }
 
-/* PROOFING */
-#show_directives,
-#proofing {
-  margin-left: 1em;
-}
-
-.proof {
+body.proof {
   padding: 50px;
   font-size: 12px;
 }
 
+#twine-user-stylesheet,
+#twine-user-script,
+twine,
 .proof main,
 .proof .user-response-panel {
-  display: none;
+  display: none !important;
 }
-.proof nav {
-  background-color: var(--navbar-bg-color);
-}
-.proof twine {
-  padding-top: var(--navbar-height);
-}
+
 .proof twine,
 .proof twine * {
   display: block !important;
   font-family: monospace;
   white-space: pre;
 }
+
+.toggles label {
+  margin-left: 1em;
+}
+
+/*
+PROOFING STYLES
+Used for adjusting tw-storydata into a readable proof that is twee-like
+*/
 .proof tw-storydata::before {
   content: ":: StoryTitle\A"attr(name);
   color: green;
@@ -66,111 +71,35 @@
   padding: 1em 0;
   margin: 1em 0 0 0;
 }
+
+.proof #runtime {
+  position: absolute;
+  top: 0;
+}
 /* END PROOFING */
 
-/* Atomic Utilities */
-.run .bg-color {
+/*
+CHAT PASSAGE (INTERACTIVE)
+*/
+#runtime {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100%;
+  max-width: 768px;
+}
+
+main {
+  flex: 1 1 auto;
   background-color: var(--bg-color);
+  padding: 15px;
 }
 
-.run .minh-full {
-  min-height: calc(
-    100vh - var(--navbar-height) - var(--user-response-panel-height) - 17px -
-      5px
-  );
-}
-
-.run .ml--3 {
-  margin-left: -1rem !important;
-}
-
-@media (min-width: 992px) {
-  .run .w-lg-auto {
-    width: auto !important;
-  }
-}
-
-/* General */
-html,
-body.run {
-  overflow-x: hidden; /* Prevent scroll on narrow devices */
+.chat-passage-reset {
   position: relative;
-  min-height: 100%;
 }
 
-body.run {
-  padding-top: var(--navbar-height);
-  margin-bottom: calc(
-    var(--user-response-panel-height) + 18px + 5px
-  ); /* + height of hint + hr */
-}
-
-/* Nav */
-nav .toggles {
-  position: absolute;
-  right: 1em;
-}
-
-.run nav.navbar {
-  height: var(--navbar-height);
-  background-color: var(--navbar-bg-color);
-  padding: 0.5rem 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.run nav .nav-title {
-  font-size: 1.5rem;
-  line-height: 40px;
-  margin: 0 auto;
-}
-
-.run nav .nav-icon {
-  width: 35px;
-}
-
-/* Chat Panel */
-.run .chat-panel {
-  padding-top: 15px;
-}
-
-.run .chat-passage-wrapper {
-  position: relative;
-  margin: 0.5rem 0;
-}
-
-.run .chat-passage-wrapper[data-speaker="you"] {
-  text-align: right;
-}
-.run .chat-passage-wrapper[data-speaker="you"] .chat-passage:before {
-  text-align: right;
-  color: var(--user-color);
-}
-
-.run .chat-passage {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  margin-left: 35px;
-  background-color: var(--passage-bg-color);
-  max-width: calc(100% - 80px);
-  text-align: left;
-}
-@media (min-width: 576px) {
-  .run .chat-passage {
-    max-width: calc(100% - 100px);
-  }
-}
-@media (min-width: 768px) {
-  .run .chat-passage {
-    max-width: calc(100% - 80px);
-  }
-}
-@media (min-width: 992px) {
-  .run .chat-passage {
-    max-width: calc(100% - 100px);
-  }
-}
-
-.run .chat-passage:before {
+.chat-passage:before {
   content: attr(data-speaker);
   display: block;
   font-size: 0.75rem;
@@ -178,111 +107,34 @@ nav .toggles {
   color: var(--speaker-color);
 }
 
-.run .chat-passage p {
+.chat-passage {
+  background: var(--passage-bg-color);
+  margin: 0 0 1em 0;
+  padding: 0.33em;
+}
+
+.chat-passage p {
   margin: 0;
 }
 
-.run .chat-passage img {
-  max-width: 100%;
-  max-height: calc(100vh - 2 * var(--user-response-panel-height));
-  padding: 0.25rem 0;
-}
-.run .chat-passage iframe {
-  max-width: 100%;
-  max-height: calc(100vh - 2 * var(--user-response-panel-height));
-}
-
-.run .chat-passage figure {
-  margin-bottom: 0.25rem;
-  font-size: 0.75rem;
-}
-
-/* User Response Panel */
-.run .user-response-panel {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-@media (min-width: 992px) {
-  .run .user-response-panel {
-    max-width: calc(
-      100% / (12 / 6)
-    ); /* 100% / (12/[col width of chat-panel]) */
-    margin: 0 auto;
-  }
-}
-
-.run .user-response-panel hr {
-  margin: 0;
-  border-top: 5px solid white;
-}
-
-.run .user-response-hint {
-  font-style: italic;
-  font-size: 0.75rem;
-  text-align: center;
-  height: 18px;
-}
-
-@media (max-width: 379.98px) {
-  .run .user-response-hint {
-    font-size: 0.6rem;
-    height: 14px;
-  }
-  body.run {
-    margin-bottom: calc(
-      var(--user-response-panel-height) + 14px + 5px
-    ); /* + height of hint + hr */
-  }
-  .run .minh-full {
-    min-height: calc(
-      100vh - var(--navbar-height) - var(--user-response-panel-height) - 14px -
-        5px
-    );
-  }
-}
-
-@media (max-width: 319.98px) {
-  .run .user-response-hint {
-    font-size: 0.5rem;
-    height: 12px;
-  }
-  body.run {
-    margin-bottom: calc(
-      var(--user-response-panel-height) + 12px + 5px
-    ); /* + height of hint + hr */
-  }
-  .run .minh-full {
-    min-height: calc(
-      100vh - var(--navbar-height) - var(--user-response-panel-height) - 12px -
-        5px
-    );
-  }
-}
-
-.run .user-reponse-wrapper {
-  height: var(--user-response-panel-height);
+.chat-passage-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
 }
 
-.run .user-response-panel .user-response {
-  display: inline-block;
-  padding: 0.5rem;
-  margin: 0.25rem;
-  background-color: var(--passage-bg-color);
-  color: var(--passage-text-color);
-  border-top: 2px solid transparent;
-  transition: border-color 0.15s ease-in;
-}
-.run .user-response-panel .user-response:hover {
-  text-decoration: none;
-  border-color: var(--user-color);
+.chat-passage-wrapper[data-speaker="you"] {
+  flex-direction: row-reverse;
 }
 
-/* Passage Avatars */
-.run .chat-passage-wrapper:before {
+.chat-passage-wrapper .chat-passage {
+  margin-left: 45px;
+}
+
+.chat-passage-wrapper[data-speaker="you"] .chat-passage {
+  margin-right: 45px;
+}
+
+.chat-passage-wrapper:before {
   margin-right: 5px;
   position: absolute;
   vertical-align: top;
@@ -294,13 +146,15 @@ nav .toggles {
   background-color: var(--speaker-color);
 }
 
-.run .chat-passage-wrapper[data-speaker="you"]:before {
+.chat-passage-wrapper[data-speaker="you"]:before {
   display: none;
 }
 
-.run .chat-passage-wrapper[data-speaker="you"]:after {
+.chat-passage-wrapper[data-speaker="you"]:after {
   margin-left: -30px;
   position: absolute;
+  top: 0;
+  right: 0;
   vertical-align: top;
   content: "";
   width: 30px;
@@ -310,21 +164,55 @@ nav .toggles {
   background-color: var(--user-color);
 }
 
-.run .chat-passage[data-speaker="you"] {
-  margin-left: 0;
-  margin-right: 35px;
+/*
+RESPONSE PANEL (INTERACTIVE)
+*/
+.user-response-panel {
+  padding-right: 15px;
+  padding-left: 15px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 
-/* Typing Animation */
+.user-response-panel hr {
+  margin: 0;
+  border-top: 5px solid white;
+}
 
-.run div.wave {
+.user-reponse-wrapper {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-response-panel .user-response {
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.25rem;
+  background-color: white;
+  color: #333;
+  border-top: 2px solid transparent;
+  transition: border-color 0.15s ease-in;
+}
+.user-response-panel .user-response:hover {
+  text-decoration: none;
+  border-color: var(--user-color);
+}
+
+/*
+TYPING ANIMATION
+*/
+div.wave {
   position: relative;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-.run div.wave .dot {
+div.wave .dot {
   display: inline-block;
   width: 6px;
   height: 6px;
@@ -334,11 +222,11 @@ nav .toggles {
   animation: wave 1.2s ease-in-out infinite;
 }
 
-.run div.wave .dot:nth-child(2) {
+div.wave .dot:nth-child(2) {
   animation-delay: 0.1s;
 }
 
-.run div.wave .dot:nth-child(3) {
+div.wave .dot:nth-child(3) {
   animation-delay: 0.2s;
 }
 
@@ -355,7 +243,7 @@ nav .toggles {
 }
 
 /* Directives */
-.run .directives {
+.directives {
   display: none;
   font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
     "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
@@ -364,16 +252,17 @@ nav .toggles {
   font-size: 12px;
 }
 
-.run .directive {
+.directive {
   white-space: pre;
-  border: 1px dashed #c3c3c3;
+  border: 1px dashed var(--directive-border);
   position: relative;
-  overflow-x: scroll;
+  overflow-x: auto;
   padding-top: 20px;
-  color: white;
+  color: var(--passage-bg-color);
+  margin-bottom: 1em;
 }
 
-.run .directive::after {
+.directive::after {
   content: attr(name);
   position: absolute;
   right: 2px;
@@ -381,9 +270,9 @@ nav .toggles {
   font-weight: bold;
   font-size: 14px;
   letter-spacing: 0.2em;
-  color: white;
+  color: var(--passage-bg-color);
 }
 
-body.run.show-directives .directives {
+body.show-directives .directives {
   display: block;
 }
