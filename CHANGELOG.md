@@ -1,3 +1,10 @@
+### [1.0.1](https://github.com/aibexhq/botscripten/compare/v1.0.0...v1.0.1) (2020-03-09)
+
+
+### 🐛 Bug Fixes
+
+* Forces patch on master ([de06b1d](https://github.com/aibexhq/botscripten/commit/de06b1db98fbcfe164750d12a3419cc95a6574e2))
+
 ### [1.2.1-beta.1](https://github.com/aibexhq/botscripten/compare/v1.2.0...v1.2.1-beta.1) (2020-03-04)
 
 
