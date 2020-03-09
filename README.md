@@ -4,7 +4,7 @@
 
 ![Botscripten logo](dist/Twine2/Botscripten/icon.svg)
 
-[![Story Format Version](https://img.shields.io/badge/StoryFormat-0.5.1-blue)](/dist/Twine2)
+[![Story Format Version](https://img.shields.io/badge/StoryFormat-1.0.0-blue)](/dist/Twine2)
 [![npm](https://img.shields.io/npm/v/@aibex/botscripten)](https://www.npmjs.com/package/@aibex/botscripten)
 [![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
 [![CircleCI](https://circleci.com/gh/aibexhq/botscripten/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/botscripten/tree/master)
