@@ -1,3 +1,10 @@
+### [1.2.1-beta.1](https://github.com/aibexhq/botscripten/compare/v1.2.0...v1.2.1-beta.1) (2020-03-09)
+
+
+### 🐛 Bug Fixes
+
+* Adds beta release channel to circleci ([61174b9](https://github.com/aibexhq/botscripten/commit/61174b9090e7e3f55f0b341d067b084fcbc5c0a3))
+
 ## [1.2.0](https://github.com/aibexhq/botscripten/compare/v1.1.0...v1.2.0) (2020-03-04)
 
 
