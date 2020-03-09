@@ -1,8 +1,10 @@
-/* Variables */
-
+/**
+* Global styles
+*/
 :root {
-  --navbar-height: 56px;
-  --user-response-panel-height: 110px;
+  --nav-height: 46px;
+  --nav-buffer: 10px;
+  --max-width: 768px;
   --bg-color: #4d5263; /*global chat bg color*/
   --user-color: #7aaebb; /*user name & placeholder avatar bg*/
   --speaker-color: rgb(
@@ -10,43 +12,89 @@
     136,
     136
   ); /*default color for speaker name & placeholder avatar bg*/
+  --directive-border: #c3c3c3;
   --navbar-bg-color: #fff;
   --passage-bg-color: #fff;
-  --passage-text-color: #000;
+  --passage-text-color: #222;
 }
 
-#twine-user-stylesheet,
-#twine-user-script {
-  display: none !important;
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
 }
 
-/* PROOFING */
-#show_directives,
-#proofing {
-  margin-left: 1em;
-}
-
-.proof {
+body.proof twine {
   padding: 50px;
   font-size: 12px;
 }
 
-.proof main,
-.proof .user-response-panel {
-  display: none;
+#twine-user-stylesheet,
+#twine-user-script,
+twine,
+.proof #runtime main,
+.proof #user-response-panel {
+  display: none !important;
 }
-.proof nav {
-  background-color: var(--navbar-bg-color);
-}
-.proof twine {
-  padding-top: var(--navbar-height);
-}
+
 .proof twine,
 .proof twine * {
   display: block !important;
   font-family: monospace;
   white-space: pre;
 }
+
+/**
+* Nav (available in all modes)
+*/
+nav {
+  position: fixed;
+  z-index: 1;
+  height: var(--nav-height);
+  background: var(--navbar-bg-color);
+  width: 100vw;
+  max-width: var(--max-width);
+  top: 0;
+  border: 5px solid var(--speaker-color);
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+nav h1 {
+  margin: 0;
+  font-size: 26px;
+  padding: 10px 1em 0 1em;
+  line-height: 26px;
+}
+
+#nav-reset {
+  position: relative;
+}
+
+#toggles {
+  position: absolute;
+  right: 1em;
+  top: 50%;
+}
+
+#toggles label {
+  margin-left: 1em;
+}
+
+twine,
+#runtime {
+  margin-top: var(--nav-height);
+}
+
+/*
+* Proofing styles
+* Set when body has a .proof class. Hides the majority of runtime
+* and uses pseudoclasses to display the information in a twee-like
+* format
+*/
 .proof tw-storydata::before {
   content: ":: StoryTitle\A"attr(name);
   color: green;
@@ -66,111 +114,41 @@
   padding: 1em 0;
   margin: 1em 0 0 0;
 }
-/* END PROOFING */
 
-/* Atomic Utilities */
-.run .bg-color {
-  background-color: var(--bg-color);
-}
-
-.run .minh-full {
-  min-height: calc(
-    100vh - var(--navbar-height) - var(--user-response-panel-height) - 17px -
-      5px
-  );
-}
-
-.run .ml--3 {
-  margin-left: -1rem !important;
-}
-
-@media (min-width: 992px) {
-  .run .w-lg-auto {
-    width: auto !important;
-  }
-}
-
-/* General */
-html,
-body.run {
-  overflow-x: hidden; /* Prevent scroll on narrow devices */
-  position: relative;
-  min-height: 100%;
-}
-
-body.run {
-  padding-top: var(--navbar-height);
-  margin-bottom: calc(
-    var(--user-response-panel-height) + 18px + 5px
-  ); /* + height of hint + hr */
-}
-
-/* Nav */
-nav .toggles {
+.proof #runtime {
   position: absolute;
-  right: 1em;
+  top: 0;
 }
 
-.run nav.navbar {
-  height: var(--navbar-height);
-  background-color: var(--navbar-bg-color);
-  padding: 0.5rem 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/**
+* Runtime (interactive) code
+* All runtime items are in the section#runtime
+*/
+#runtime {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--nav-height));
+  max-height: calc(100% - var(--nav-height));
+  max-width: var(--max-width);
 }
 
-.run nav .nav-title {
-  font-size: 1.5rem;
-  line-height: 40px;
-  margin: 0 auto;
+#runtime main {
+  flex: 1 1 auto;
+  background-color: var(--bg-color);
+  padding: var(--nav-buffer) 15px 15px 15px;
 }
 
-.run nav .nav-icon {
-  width: 35px;
-}
-
-/* Chat Panel */
-.run .chat-panel {
-  padding-top: 15px;
-}
-
-.run .chat-passage-wrapper {
+/**
+* Chat passages
+* These are repeatable passages added in the interactive code.
+* They are the "chat lines" and appear in the history, the
+* passage, and are also used as part of the "wave"
+*/
+.chat-passage-reset {
   position: relative;
-  margin: 0.5rem 0;
 }
 
-.run .chat-passage-wrapper[data-speaker="you"] {
-  text-align: right;
-}
-.run .chat-passage-wrapper[data-speaker="you"] .chat-passage:before {
-  text-align: right;
-  color: var(--user-color);
-}
-
-.run .chat-passage {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  margin-left: 35px;
-  background-color: var(--passage-bg-color);
-  max-width: calc(100% - 80px);
-  text-align: left;
-}
-@media (min-width: 576px) {
-  .run .chat-passage {
-    max-width: calc(100% - 100px);
-  }
-}
-@media (min-width: 768px) {
-  .run .chat-passage {
-    max-width: calc(100% - 80px);
-  }
-}
-@media (min-width: 992px) {
-  .run .chat-passage {
-    max-width: calc(100% - 100px);
-  }
-}
-
-.run .chat-passage:before {
+.chat-passage:before {
   content: attr(data-speaker);
   display: block;
   font-size: 0.75rem;
@@ -178,111 +156,34 @@ nav .toggles {
   color: var(--speaker-color);
 }
 
-.run .chat-passage p {
+.chat-passage {
+  background: var(--passage-bg-color);
+  margin: 0 0 1em 0;
+  padding: 0.33em;
+}
+
+.chat-passage p {
   margin: 0;
 }
 
-.run .chat-passage img {
-  max-width: 100%;
-  max-height: calc(100vh - 2 * var(--user-response-panel-height));
-  padding: 0.25rem 0;
-}
-.run .chat-passage iframe {
-  max-width: 100%;
-  max-height: calc(100vh - 2 * var(--user-response-panel-height));
-}
-
-.run .chat-passage figure {
-  margin-bottom: 0.25rem;
-  font-size: 0.75rem;
-}
-
-/* User Response Panel */
-.run .user-response-panel {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-@media (min-width: 992px) {
-  .run .user-response-panel {
-    max-width: calc(
-      100% / (12 / 6)
-    ); /* 100% / (12/[col width of chat-panel]) */
-    margin: 0 auto;
-  }
-}
-
-.run .user-response-panel hr {
-  margin: 0;
-  border-top: 5px solid white;
-}
-
-.run .user-response-hint {
-  font-style: italic;
-  font-size: 0.75rem;
-  text-align: center;
-  height: 18px;
-}
-
-@media (max-width: 379.98px) {
-  .run .user-response-hint {
-    font-size: 0.6rem;
-    height: 14px;
-  }
-  body.run {
-    margin-bottom: calc(
-      var(--user-response-panel-height) + 14px + 5px
-    ); /* + height of hint + hr */
-  }
-  .run .minh-full {
-    min-height: calc(
-      100vh - var(--navbar-height) - var(--user-response-panel-height) - 14px -
-        5px
-    );
-  }
-}
-
-@media (max-width: 319.98px) {
-  .run .user-response-hint {
-    font-size: 0.5rem;
-    height: 12px;
-  }
-  body.run {
-    margin-bottom: calc(
-      var(--user-response-panel-height) + 12px + 5px
-    ); /* + height of hint + hr */
-  }
-  .run .minh-full {
-    min-height: calc(
-      100vh - var(--navbar-height) - var(--user-response-panel-height) - 12px -
-        5px
-    );
-  }
-}
-
-.run .user-reponse-wrapper {
-  height: var(--user-response-panel-height);
+.chat-passage-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
 }
 
-.run .user-response-panel .user-response {
-  display: inline-block;
-  padding: 0.5rem;
-  margin: 0.25rem;
-  background-color: var(--passage-bg-color);
-  color: var(--passage-text-color);
-  border-top: 2px solid transparent;
-  transition: border-color 0.15s ease-in;
-}
-.run .user-response-panel .user-response:hover {
-  text-decoration: none;
-  border-color: var(--user-color);
+.chat-passage-wrapper[data-speaker="you"] {
+  flex-direction: row-reverse;
 }
 
-/* Passage Avatars */
-.run .chat-passage-wrapper:before {
+.chat-passage-wrapper .chat-passage {
+  margin-left: 45px;
+}
+
+.chat-passage-wrapper[data-speaker="you"] .chat-passage {
+  margin-right: 45px;
+}
+
+.chat-passage-wrapper:before {
   margin-right: 5px;
   position: absolute;
   vertical-align: top;
@@ -294,13 +195,15 @@ nav .toggles {
   background-color: var(--speaker-color);
 }
 
-.run .chat-passage-wrapper[data-speaker="you"]:before {
+.chat-passage-wrapper[data-speaker="you"]:before {
   display: none;
 }
 
-.run .chat-passage-wrapper[data-speaker="you"]:after {
+.chat-passage-wrapper[data-speaker="you"]:after {
   margin-left: -30px;
   position: absolute;
+  top: 0;
+  right: 0;
   vertical-align: top;
   content: "";
   width: 30px;
@@ -310,21 +213,97 @@ nav .toggles {
   background-color: var(--user-color);
 }
 
-.run .chat-passage[data-speaker="you"] {
-  margin-left: 0;
-  margin-right: 35px;
+/**
+* Directives
+* When enabled, directives show the "behind the scenes" items that would
+* have been otherwise called as part of a given step. They are inserted
+* **first** in a conversation to simulate how they are handled in a
+* botscripten engine.
+*/
+body.show-directives .directives {
+  display: block;
 }
 
-/* Typing Animation */
+.directives {
+  display: none;
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
+    "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+    "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier,
+    monospace;
+  font-size: 12px;
+}
 
-.run div.wave {
+.directive {
+  white-space: pre;
+  border: 1px dashed var(--directive-border);
+  position: relative;
+  overflow-x: auto;
+  padding-top: 20px;
+  color: var(--passage-bg-color);
+  margin-bottom: 1em;
+}
+
+.directive::after {
+  content: attr(name);
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--passage-bg-color);
+}
+
+/**
+* User response panel
+* When presented with a choice, the user will select
+* a response from this panel to continue the conversation
+*/
+#user-response-wrapper {
+  padding-right: 15px;
+  padding-left: 15px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  border-top: 3px solid var(--directive-border);
+}
+
+#user-response-panel {
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#user-response-panel .user-response {
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.25rem;
+  background-color: white;
+  color: #333;
+  border-top: 2px solid transparent;
+  transition: border-color 0.15s ease-in;
+}
+#user-response-panel .user-response:hover {
+  text-decoration: none;
+  border-color: var(--user-color);
+}
+
+/**
+* Typing animation
+* Always active, the wave shows typing dots and its visibility
+* is controlled by the chat system
+*/
+#animation-container .wave {
   position: relative;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-.run div.wave .dot {
+#animation-container .dot {
   display: inline-block;
   width: 6px;
   height: 6px;
@@ -334,11 +313,11 @@ nav .toggles {
   animation: wave 1.2s ease-in-out infinite;
 }
 
-.run div.wave .dot:nth-child(2) {
+#animation-container .dot:nth-child(2) {
   animation-delay: 0.1s;
 }
 
-.run div.wave .dot:nth-child(3) {
+#animation-container .dot:nth-child(3) {
   animation-delay: 0.2s;
 }
 
@@ -352,38 +331,4 @@ nav .toggles {
   25% {
     transform: translateY(-15px);
   }
-}
-
-/* Directives */
-.run .directives {
-  display: none;
-  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
-    "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
-    "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier,
-    monospace;
-  font-size: 12px;
-}
-
-.run .directive {
-  white-space: pre;
-  border: 1px dashed #c3c3c3;
-  position: relative;
-  overflow-x: scroll;
-  padding-top: 20px;
-  color: white;
-}
-
-.run .directive::after {
-  content: attr(name);
-  position: absolute;
-  right: 2px;
-  top: 2px;
-  font-weight: bold;
-  font-size: 14px;
-  letter-spacing: 0.2em;
-  color: white;
-}
-
-body.run.show-directives .directives {
-  display: block;
 }

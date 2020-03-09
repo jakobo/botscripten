@@ -1,6 +1,6 @@
 {
   "name": "@aibex/botscripten",
-  "version": "0.5.1",
+  "version": "1.0.0",
   "description": "Craft rich bot conversations using the Twine/Twee format",
   "repository": "github:aibexhq/botscripten",
   "author": "Aibex, Inc <oss@aibex.com>",
@@ -8,6 +8,7 @@
   "engines": {
     "node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
   },
+  "browserslist": "> 0.25%, not dead",
   "main": "index.js",
   "browser": "dist/botscripten.umd.js",
   "scripts": {
@@ -19,15 +20,15 @@
     "ci": "pretty-quick --check && yarn build && jest",
     "release": "semantic-release",
     "____________________": "echo \"The following sub-commands are used to serve the main commands above\"",
-    "build:twine": "rollup -c -m inline && node scripts/createTwine",
+    "build:twine": "rollup -c && node scripts/createTwine",
     "build:node": "rm -rf dist/node/* && babel src/node --out-dir dist/npm/node && babel src/common --out-dir dist/npm/common",
     "clean:dist": "rm -rf dist/",
     "dev:watch": "nodemon -L --ignore dist/ --exec yarn buildAll",
-    "dev:serve": "nodemon -L --watch build/ --watch scripts/ --exec node scripts/serve",
+    "dev:serve": "nodemon -L --ignore dist/ --exec node scripts/serve",
     "examples": "concurrently -r \"npm:examples:*\"",
     "examples:sample": "yarn tweego -f Botscripten -o ./examples/sample.html ./examples/sample.twee",
     "format:prettier": "pretty-quick --staged",
-    "husky:precommit": "concurrently \"npm:format:*\" && yarn build && git add dist/ && jest",
+    "husky:precommit": "concurrently \"npm:format:*\" && yarn build && git add dist/",
     "commit:cz": "exec < /dev/tty && git-cz --hook || true"
   },
   "keywords": [
@@ -41,9 +42,10 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.7.7",
+    "cheerio": "^1.0.0-rc.3",
+    "cz-emoji": "^1.2.1",
     "html-entities": "^1.2.1",
     "jest": "^24.9.0",
-    "jsdom": "^16.1.0",
     "lodash.escape": "^4.0.1",
     "lodash.template": "^4.5.0",
     "lodash.unescape": "^4.0.1"
@@ -55,14 +57,19 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "7.8.4",
+    "@semantic-release/changelog": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "clean-css": "^4.2.3",
     "commitizen": "^4.0.3",
     "concurrently": "^5.0.2",
     "conventional-changelog-conventionalcommits": "^4.2.3",
-    "emoji-cz": "^0.3.0",
+    "conventional-commits-parser": "^3.0.8",
     "extwee": "^1.5.0",
     "fs-extra": "^8.1.0",
+    "html-minifier": "^4.0.0",
     "husky": "^4.2.1",
     "nodemon": "^2.0.2",
+    "outdent": "^0.7.0",
     "prettier": "1.19.1",
     "pretty-quick": "^2.0.0",
     "rollup": "^1.27.14",
@@ -70,20 +77,9 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-uglify": "^6.0.4",
     "semantic-release": "^17.0.2",
     "static-server": "^2.2.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "husky": {
     "hooks": {

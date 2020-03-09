@@ -8,8 +8,8 @@ const selectJs = '*[type="text/twine-javascript"]';
 const selectActiveLink = "#user-response-panel a[data-passage]";
 const selectActiveButton = "#user-response-panel button[data-passage]";
 const selectActiveInput = "#user-response-panel input";
-const selectActive = ".chat-panel .active";
-const selectHistory = ".chat-panel .history";
+const selectActive = "#active-passage";
+const selectHistory = "#history";
 const selectResponses = "#user-response-panel";
 const typingIndicator = "#animation-container";
 
@@ -25,9 +25,11 @@ const isNumeric = d => IS_NUMERIC.test(d);
  * Format a user passage (such as a response)
  */
 const USER_PASSAGE_TMPL = ({ id, text }) => `
-  <div class="chat-passage-wrapper" data-speaker="you">
-    <div class="chat-passage phistory" data-speaker="you" data-upassage="${id}">
-      ${text}
+  <div class="chat-passage-reset">
+    <div class="chat-passage-wrapper" data-speaker="you">
+      <div class="chat-passage" data-speaker="you" data-upassage="${id}">
+        ${text}
+      </div>
     </div>
   </div>
 `;
@@ -36,9 +38,13 @@ const USER_PASSAGE_TMPL = ({ id, text }) => `
  * Format a message from a non-user
  */
 const OTHER_PASSAGE_TMPL = ({ speaker, tags, text }) => `
-  <div data-speaker="${speaker}" class="chat-passage-wrapper ${tags.join(" ")}">
-    <div data-speaker="${speaker}" class="chat-passage">
-      ${text}
+  <div class="chat-passage-reset">
+    <div data-speaker="${speaker}" class="chat-passage-wrapper ${tags.join(
+  " "
+)}">
+      <div data-speaker="${speaker}" class="chat-passage">
+        ${text}
+      </div>
     </div>
   </div>
 `;
@@ -119,7 +125,6 @@ class Story {
     });
 
     find(this.document, "title").innerHTML = this.name;
-    find(this.document, "#ptitle").innerHTML = this.name;
 
     this.userScripts = (findAll(this.document, selectJs) || []).map(
       el => el.innerHTML
@@ -240,7 +245,7 @@ class Story {
   renderUserMessage = async (pid, text, renderer) => {
     await renderer(
       USER_PASSAGE_TMPL({
-        pid,
+        id: pid,
         text,
       })
     );
@@ -303,7 +308,7 @@ class Story {
    * Scrolls the document as far as possible (based on history container's height)
    */
   scrollToBottom = () => {
-    const hist = find(this.document, "#phistory");
+    const hist = find(this.document, selectHistory);
     document.scrollingElement.scrollTop = hist.offsetHeight;
   };
 

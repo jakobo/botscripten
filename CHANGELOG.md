@@ -1,3 +1,30 @@
+### [1.2.1-beta.1](https://github.com/aibexhq/botscripten/compare/v1.2.0...v1.2.1-beta.1) (2020-03-04)
+
+
+### 🐛 Bug Fixes
+
+* Adds beta release channel to circleci ([61174b9](https://github.com/aibexhq/botscripten/commit/61174b9090e7e3f55f0b341d067b084fcbc5c0a3))
+
+## [1.2.0](https://github.com/aibexhq/botscripten/compare/v1.1.0...v1.2.0) (2020-03-04)
+
+
+### ✨ Features
+
+* Runs botscripten offline ([580a0a0](https://github.com/aibexhq/botscripten/commit/580a0a087145e0f95f697d0e6d8ee4596354576f))
+
+## [1.1.0](https://github.com/aibexhq/botscripten/compare/v1.0.0...v1.1.0) (2020-03-04)
+
+
+### 🐛 Bug Fixes
+
+* Fixes semantic-release to work with our release style ([1d278df](https://github.com/aibexhq/botscripten/commit/1d278df0381d6e4eac3ac4f49d122c1a7c9b966c))
+
+
+### ✨ Features
+
+* Completes the removal of botscriptenviewer ([bf5ef99](https://github.com/aibexhq/botscripten/commit/bf5ef998f683761f00ffc5f23002081eb0efbec8))
+* Enables semantic-release by disabling --dry-run ([6973f61](https://github.com/aibexhq/botscripten/commit/6973f61db73bd4d97ea7911dddc84c12cba746a1))
+
 # Changelog
 
 # v1.0.0
