@@ -1,3 +1,11 @@
+### [1.2.2](https://github.com/aibexhq/botscripten/compare/v1.2.1...v1.2.2) (2020-03-27)
+
+
+### 🐛 Bug Fixes
+
+* Adds beta release channel to circleci ([61174b9](https://github.com/aibexhq/botscripten/commit/61174b9090e7e3f55f0b341d067b084fcbc5c0a3))
+* Adds suport for prettier-ignore ([#130](https://github.com/aibexhq/botscripten/issues/130)) ([2badc22](https://github.com/aibexhq/botscripten/commit/2badc228266aa006b00a69a9c412cf98e232176e))
+
 ### [1.2.1](https://github.com/aibexhq/botscripten/compare/v1.2.0...v1.2.1) (2020-03-09)
 
 ### 🐛 Bug Fixes
