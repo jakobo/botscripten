@@ -26,7 +26,7 @@ const build = (name, description, outDir, { template, js, css }) => {
   const minStory = htmlMin(storyFile, {
     collapseInlineTagWhitespace: true,
     collapseWhitespace: true,
-    removeComments: true,
+    removeComments: false,
     useShortDoctype: true,
   });
 
