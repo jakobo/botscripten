@@ -13,22 +13,22 @@
   "browser": "dist/botscripten.umd.js",
   "scripts": {
     "dev": "NODE_ENV=development concurrently -r \"npm:dev:*\"",
-    "test": "yarn build && jest",
-    "build": "yarn clean:dist && concurrently \"npm:build:*\"",
-    "buildAll": "yarn clean:dist && concurrently \"npm:build:*\" && yarn examples",
+    "test": "npm run build && jest",
+    "build": "npm run clean:dist && concurrently \"npm:build:*\"",
+    "buildAll": "npm run clean:dist && concurrently \"npm:build:*\" && npm run examples",
     "tweego": "TWEEGO_PATH=./dist/Twine2 tweego",
-    "ci": "pretty-quick --check && yarn build && jest",
+    "ci": "pretty-quick --check && npm run build && jest",
     "release": "semantic-release",
     "____________________": "echo \"The following sub-commands are used to serve the main commands above\"",
     "build:twine": "rollup -c && node scripts/createTwine",
     "build:node": "rm -rf dist/node/* && babel src/node --out-dir dist/npm/node && babel src/common --out-dir dist/npm/common",
     "clean:dist": "rm -rf dist/",
-    "dev:watch": "nodemon -L --ignore dist/ --exec yarn buildAll",
+    "dev:watch": "nodemon -L --ignore dist/ --exec npm run buildAll",
     "dev:serve": "nodemon -L --ignore dist/ --exec node scripts/serve",
     "examples": "concurrently -r \"npm:examples:*\"",
-    "examples:sample": "yarn tweego -f Botscripten -o ./examples/sample.html ./examples/sample.twee",
+    "examples:sample": "npm run tweego -f Botscripten -o ./examples/sample.html ./examples/sample.twee",
     "format:prettier": "pretty-quick --staged",
-    "husky:precommit": "concurrently \"npm:format:*\" && yarn build && git add dist/",
+    "husky:precommit": "concurrently \"npm:format:*\" && npm run build && git add dist/",
     "commit:cz": "exec < /dev/tty && git-cz --hook || true"
   },
   "keywords": [
@@ -56,7 +56,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
     "@babel/plugin-transform-runtime": "^7.7.6",
-    "@babel/preset-env": "7.8.4",
+    "@babel/preset-env": "^7.9.5",
     "@semantic-release/changelog": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
     "clean-css": "^4.2.3",
@@ -83,8 +83,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run husky:precommit",
-      "prepare-commit-msg": "if [ -t 1 ] ; then yarn run commit:cz; fi"
+      "pre-commit": "npm run husky:precommit",
+      "prepare-commit-msg": "if [ -t 1 ] ; then npm run commit:cz; fi"
     }
   },
   "publishConfig": {

@@ -29,8 +29,8 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: yarn install
-      - run: yarn ci
+      - run: npm install
+      - run: npm run ci
   release:
     docker:
       - image: "circleci/node:latest"
@@ -38,8 +38,8 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: yarn install
-      - run: yarn build
+      - run: npm install
+      - run: npm run build
       - run:
           name: performing semantic-release
-          command: yarn run release || true
+          command: npm run release || true
