@@ -1,3 +1,18 @@
+### [1.2.3](https://github.com/aibexhq/botscripten/compare/v1.2.2...v1.2.3) (2020-06-01)
+
+
+### ⬆️ Dependency Changes
+
+* [Security] Bump acorn from 5.7.3 to 5.7.4 ([14cdfb4](https://github.com/aibexhq/botscripten/commit/14cdfb4239e3eaba15feeb69646a6eedec30ed15))
+* Upgrades all dependencies ([#131](https://github.com/aibexhq/botscripten/issues/131)) ([3ef398f](https://github.com/aibexhq/botscripten/commit/3ef398f417ad6c134a06cfb79ee204478743e8b4))
+
+
+### 🐛 Bug Fixes
+
+* Adds suport for prettier-ignore ([#130](https://github.com/aibexhq/botscripten/issues/130)) ([2badc22](https://github.com/aibexhq/botscripten/commit/2badc228266aa006b00a69a9c412cf98e232176e))
+* Fixes release pipeline by adding tokens ([7237ee8](https://github.com/aibexhq/botscripten/commit/7237ee831b743013b9781fe81661893f2b8f3031))
+* Merges next into master and removes extra complexity ([2e84680](https://github.com/aibexhq/botscripten/commit/2e846805b4f67c76664134e9bc5a3ed07de5a227))
+
 ### [1.2.2](https://github.com/aibexhq/botscripten/compare/v1.2.1...v1.2.2) (2020-05-05)
 
 ### 🐛 Bug Fixes
