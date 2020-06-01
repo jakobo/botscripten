@@ -71,7 +71,7 @@ const parse = str => {
     content = linkData.updated;
     content = content.trim();
     const pid = $pg.attr("pid");
-    passages[pid] = _objectSpread({}, passageDefaults, {
+    passages[pid] = _objectSpread(_objectSpread({}, passageDefaults), {}, {
       pid: $pg.attr("pid"),
       name: (0, _lodash.default)($pg.attr("name") || ""),
       tags: ($pg.attr("tags") || "").split(/[\s]+/g),
@@ -86,12 +86,12 @@ const parse = str => {
   });
   $("tw-tag").each((index, tg) => {
     const $tg = $(tg);
-    tags.push(_objectSpread({}, tagDefaults, {
+    tags.push(_objectSpread(_objectSpread({}, tagDefaults), {}, {
       name: $tg.attr("name") || "",
       color: $tg.attr("color") || ""
     }));
   });
-  return _objectSpread({}, storyDefaults, {
+  return _objectSpread(_objectSpread({}, storyDefaults), {}, {
     startId,
     name: (0, _lodash.default)($s.attr("name") || ""),
     start: (0, _lodash.default)(passages[startId].name),

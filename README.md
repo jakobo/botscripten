@@ -161,7 +161,7 @@ Conditional branching can then be implemented as a [Directive](#%22special%22-co
 If you absolutely want to handle Directives in Botscripten, you can do so by selecting `Edit Story JavaScript` in Twine, and registering a handler for your directive. For example, this logs all `@log` directives' content to the developer tools console.
 
 ```js
-story.directive("@log", function(info, rendered, passage, story) {
+story.directive("@log", function (info, rendered, passage, story) {
   console.log("LOG data from " + passage.id);
   console.log("Directive contained: " + info);
   return rendered; // return the original (or altered) output
@@ -241,7 +241,7 @@ First off, every Twine format I've worked with is amazing and super thougtful. I
 
 - **Zero `story.*` Calls** To be as portable as possible, No template tags may be used. That means your code cannot contain the `<% ... %>` blocks seen in Trialogue/Paloma. These tags are incredibly difficult to parse/lex, because they assume a JavaScript environmemt at runtime. And since you don't know where your Twine file is going to run, you must decouple the programming from the data.
 - **Tags drive behavior** Because of that first restriction, we need a way to perform actions within Botscripten. Thankfully, Twine's Tag system is up to the task. **We strive to keep the tag count low to minimize the number of reserved tags in the system.**
-- **Dev Experience** Iterating on Twine templates is hard. A lot of time was spent to make the dev experience as simple as (1) put [tweego](https://www.motoslave.net/tweego/) in your executable path, and (2) type `yarn dev`.
+- **Dev Experience** Iterating on Twine templates is hard. A lot of time was spent to make the dev experience as simple as (1) put [tweego](https://www.motoslave.net/tweego/) in your executable path, and (2) type `npm run dev`.
 - **Multiple Formats** Botscripten provides two syncrhonized formats from the same repository. Features in the proofing / html5-min version will also show up simultaneously in the Interactive one.
 
 # Developing on Botscripten
@@ -250,16 +250,16 @@ First off, every Twine format I've worked with is amazing and super thougtful. I
 
 1. Acquire [tweego](https://www.motoslave.net/tweego/) and place it in your development path.
 2. Check out this repository
-3. run `yarn install` to install your dependencies
-4. run `yarn dev` to start developing using the twee files in the `examples` folder
+3. run `npm install` to install your dependencies
+4. run `npm run dev` to start developing using the twee files in the `examples` folder
 
 - Examples are available under `http://localhost:3000`
 - TEST_Botscripten can be installed in Twine from `http://localhost:3001/Botscripten`
 - When you are done developing/testing, be sure to remove the TEST_Botscripten format. If you forget, just restart the dev server so Twine doesn't complain every time you start it up
 
-For local testing convienence, we have a `yarn tweego` command. It ensures that Botscripten is in the `tweego` path before performing a build.
+For local testing convienence, we have a `npm run tweego` command. It ensures that Botscripten is in the `tweego` path before performing a build.
 
-As an example, the sample document was converted from Twine to Twee using the command `yarn tweego -d ./stories/sample.html -o ./examples/sample.twee`. (You may need to manually edit the html file to set the format to "Botscripten")
+As an example, the sample document was converted from Twine to Twee using the command `npm run tweego -- -d ./stories/sample.html -o ./examples/sample.twee`. (You may need to manually edit the html file to set the format to "Botscripten")
 
 # Acknowledgements
 
