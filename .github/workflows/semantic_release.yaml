@@ -24,3 +24,6 @@ jobs:
         run: npm run ci
       - name: Releasing
         run: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }} #required for writing CHANGELOG to protected branch
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
