@@ -41,7 +41,6 @@ Botscripten comes with two distinct flavors: **An Interactive Output** for testi
 - [⚠️ Why would you use Botscripten over (Insert Twine Format)?](#️-why-would-you-use-botscripten-over-insert-twine-format)
 - [Developing on Botscripten](#developing-on-botscripten)
   - [Local Development](#local-development)
-  - [Building for Release](#building-for-release)
 - [Acknowledgements](#acknowledgements)
 
 # 🚀 Setup and Your First "Chat"
@@ -261,13 +260,6 @@ First off, every Twine format I've worked with is amazing and super thougtful. I
 For local testing convienence, we have a `yarn tweego` command. It ensures that Botscripten is in the `tweego` path before performing a build.
 
 As an example, the sample document was converted from Twine to Twee using the command `yarn tweego -d ./stories/sample.html -o ./examples/sample.twee`. (You may need to manually edit the html file to set the format to "Botscripten")
-
-## Building for Release
-
-1. Be current on `master`
-2. `yarn install` and `yarn build`
-3. Commit all files
-4. `npm run-script release` (yarn isn't reliable with this)
 
 # Acknowledgements
 
