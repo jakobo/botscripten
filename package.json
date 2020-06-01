@@ -70,7 +70,7 @@
     "husky": "^4.2.1",
     "nodemon": "^2.0.2",
     "outdent": "^0.7.0",
-    "prettier": "2.0.2",
+    "prettier": "2.0.5",
     "pretty-quick": "^2.0.0",
     "rollup": "^2.2.0",
     "rollup-plugin-babel": "^4.2.0",
