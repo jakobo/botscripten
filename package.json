@@ -61,7 +61,7 @@
     "@semantic-release/git": "^9.0.0",
     "clean-css": "^4.2.3",
     "commitizen": "^4.0.3",
-    "concurrently": "^5.0.2",
+    "concurrently": "^6.0.1",
     "conventional-changelog-conventionalcommits": "^4.2.3",
     "conventional-commits-parser": "^3.0.8",
     "extwee": "^1.5.0",
