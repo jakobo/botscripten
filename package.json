@@ -65,7 +65,7 @@
     "conventional-changelog-conventionalcommits": "^4.2.3",
     "conventional-commits-parser": "^3.0.8",
     "extwee": "^1.5.0",
-    "fs-extra": "^9.0.0",
+    "fs-extra": "^10.0.0",
     "html-minifier": "^4.0.0",
     "husky": "^4.2.1",
     "nodemon": "^2.0.2",
