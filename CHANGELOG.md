@@ -1,3 +1,11 @@
+### [1.2.4](https://github.com/aibexhq/botscripten/compare/v1.2.3...v1.2.4) (2021-08-02)
+
+
+### ⬆️ Dependency Changes
+
+* Bump @babel/cli from 7.8.4 to 7.14.8 ([14466c6](https://github.com/aibexhq/botscripten/commit/14466c69220d647ba1437cc163f7ac5c350f27e6))
+* Bump rollup from 2.12.0 to 2.55.1 ([9a71bc4](https://github.com/aibexhq/botscripten/commit/9a71bc4855fe65bb9f2cecba3a630b173a6b0ab2))
+
 ### [1.2.3](https://github.com/aibexhq/botscripten/compare/v1.2.2...v1.2.3) (2020-06-01)
 
 
