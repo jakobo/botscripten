@@ -1,9 +1,9 @@
 {
-  "name": "@aibex/botscripten",
+  "name": "botscripten",
   "version": "1.2.4",
   "description": "Craft rich bot conversations using the Twine/Twee format",
   "repository": "github:aibexhq/botscripten",
-  "author": "Aibex, Inc <oss@aibex.com>",
+  "author": "Jakob Heuser <jakob@codedrift.com>",
   "license": "Apache-2.0",
   "engines": {
     "node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
@@ -29,7 +29,7 @@
     "examples:sample": "npm run tweego -f Botscripten -o ./examples/sample.html ./examples/sample.twee",
     "format:prettier": "pretty-quick --staged",
     "husky:precommit": "concurrently \"npm:format:*\" && npm run build && git add dist/",
-    "commit:cz": "exec < /dev/tty && git-cz --hook || true"
+    "commit:lint": "commitlint --edit \"$1\""
   },
   "keywords": [
     "twine",
@@ -43,7 +43,6 @@
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "cheerio": "^1.0.0-rc.3",
-    "cz-emoji": "^1.2.1",
     "html-entities": "^1.2.1",
     "jest": "^25.2.3",
     "lodash.escape": "^4.0.1",
@@ -57,13 +56,12 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.9.5",
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
     "@semantic-release/changelog": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
     "clean-css": "^4.2.3",
-    "commitizen": "^4.0.3",
     "concurrently": "^5.0.2",
-    "conventional-changelog-conventionalcommits": "^4.2.3",
-    "conventional-commits-parser": "^3.0.8",
     "extwee": "^1.5.0",
     "fs-extra": "^9.0.0",
     "html-minifier": "^4.0.0",
@@ -84,7 +82,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run husky:precommit",
-      "prepare-commit-msg": "if [ -t 1 ] ; then npm run commit:cz; fi"
+      "commit-msg": "if [ -t 1 ] ; then npm run commit:lint; fi"
     }
   },
   "publishConfig": {

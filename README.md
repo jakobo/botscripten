@@ -1,20 +1,21 @@
 # Botscripten
 
+> :warning: Botscripten is currently in _maintenance mode_ and is not receiving any new updates at this time, though PRs to fix bugs are welcome.
+
 **A modified Trialogue/Twine engine specifically for Building, Testing, and Exporting conversations as Minimal HTML5**
 
 ![Botscripten logo](dist/Twine2/Botscripten/icon.svg)
 
 [![Story Format Version](https://img.shields.io/badge/StoryFormat-1.0.0-blue)](/dist/Twine2)
-[![npm](https://img.shields.io/npm/v/@aibex/botscripten)](https://www.npmjs.com/package/@aibex/botscripten)
+[![npm](https://img.shields.io/npm/v/botscripten)](https://www.npmjs.com/package/botscripten)
 [![Twine Version](https://img.shields.io/badge/Twine-2.2.0+-blueviolet)](http://twinery.org/)
-[![CircleCI](https://circleci.com/gh/aibexhq/botscripten/tree/master.svg?style=shield)](https://circleci.com/gh/aibexhq/botscripten/tree/master)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=aibexhq/botscripten)](https://dependabot.com)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=jakobo/botscripten)](https://dependabot.com)
 
 **Upgrading? Check the [Changelog](/CHANGELOG.md)**
 
 Botscripten is a chat-style [Twine](http://twinery.org) Story Fromat based on [Trialogue](https://github.com/phivk/trialogue) and its predecessors. Unlike other Twine sources, Botscripten is optimized for **an external runtime**. That is, while you can use Botscripten for Interactive Fiction, that's not this story format's intent.
 
-Botscripten is also available as an npm parser, able to handle Passage-specific features found in the Botscripten format. It's available via `npm install @aibex/botscripten` or `yarn add @aibex/botscripten`.
+Botscripten is also available as an npm parser, able to handle Passage-specific features found in the Botscripten format. It's available via `npm install botscripten` or `yarn add botscripten`.
 
 ✅ You want to use [Twine](http://twinery.org) to author complex branching dialogue <br>
 ✅ You want a conversation format (think chatbot) <br>
@@ -23,7 +24,7 @@ Botscripten is also available as an npm parser, able to handle Passage-specific 
 
 If "yes", then Botscripten is worth looking into.
 
-🔮 [A Sample Conversation](http://htmlpreview.github.io/?https://github.com/aibexhq/botscripten/blob/master/examples/sample.html)
+🔮 [A Sample Conversation](http://htmlpreview.github.io/?https://github.com/jakobo/botscripten/blob/master/examples/sample.html)
 
 Botscripten comes with two distinct flavors: **An Interactive Output** for testing and stepping through conversations in a pseudo chat interface based on the Trialogue code, and built in proofing version. External JavaScript keeps the output file small, making it easy to use the pure HTML in other systems.
 
@@ -51,14 +52,14 @@ Botscripten comes with two distinct flavors: **An Interactive Output** for testi
 
 1. From the Twine menu, select `Formats`
 2. Then, select the `Add a New Format` tab
-3. Paste `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@master/dist/Twine2/Botscripten/format.js`
+3. Paste `https://cdn.jsdelivr.net/gh/jakobo/botscripten@master/dist/Twine2/Botscripten/format.js`
 4. Click `Add`
 
 Once you've done this, you will have access to the Botscripten story format in Twine. If you're migrating, be sure to check the [Changelog](CHANGELOG.md) for a migration guide.
 
 Upgrading is as simple as removing your old Botscripten and adding the new URL above. Any stories you publish will automatically work in the new format.
 
-_(If you are interested in the `next` version of botscripten, you may use `https://cdn.jsdelivr.net/gh/aibexhq/botscripten@next/dist/Twine2/Botscripten/format.js` as your story format URL)_
+_(If you are interested in the `next` version of botscripten, you may use `https://cdn.jsdelivr.net/gh/jakobo/botscripten@next/dist/Twine2/Botscripten/format.js` as your story format URL)_
 
 ## Create your first chat story
 
@@ -175,7 +176,7 @@ Directives are evaluated after the Passage is parsed, but before any tag behavio
 Most individuals are interested in writing for the Botscripten format, not consuming it. If you are looking to read Botscripten's Twine HTML files, and are also in a node.js environment, you can install Botscripten over npm/yarn and access the parser. Parsing a valid Botscripten HTML file will yield the following:
 
 ```js
-import botscripten from "@aibex/botscripten";
+import botscripten from "botscripten";
 import fs from "fs";
 
 const story = botscripten(fs.readFileSync("your/file.html").toString());
@@ -264,5 +265,3 @@ As an example, the sample document was converted from Twine to Twee using the co
 # Acknowledgements
 
 Botscripten would not be possible without the amazing work of [Philo van Kemenade](https://github.com/phivk) for imagining Twine as a conversational tool, [M. C. DeMarco](http://mcdemarco.net/tools/scree/paloma/) who reimagined the original "Jonah" format for Twine 2, and [Chris Klimas](https://www.patreon.com/klembot/) creator and current maintainer of Twine.
-
-Botscripten is sponsored by [Aibex](https://www.aibex.com). Love your career.
